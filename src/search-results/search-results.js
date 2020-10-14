@@ -1,11 +1,9 @@
 import React from 'react';
 //import { Link } from 'react-router-dom';
 //import PropTypes from 'prop-types';
-import { getVideos } from '../utility';
 
 export default function SearchResults(responseJson) {
-    {getVideos(bmr, caloricDeficit)}
-    $('#results-list').empty();
+  return (
     for (let i = 0; i < responseJson.items.length; i++){
       $('#results-list').append(
         `<li><h4>${responseJson.items[i].snippet.title}</h4>
@@ -18,7 +16,7 @@ export default function SearchResults(responseJson) {
         </li>
         `
       )};
-    $('#results').removeClass('hidden');
+  )
 }
 
 
