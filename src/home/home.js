@@ -1,9 +1,8 @@
 import React from 'react';
-//import { NavLink } from 'react-router-dom';
-//import PropTypes from 'prop-types';
+//import { Link } from 'react-router-dom';
 import './home.css';
 
-export default function Home(props) {
+export default function HomePage() {
     return (
         <div>
             <p>Enter your gender, height, weight, and age to yield your BMR, or
@@ -17,5 +16,3 @@ export default function Home(props) {
         </div>
   )
 }
-
-//Home.propTypes = {}

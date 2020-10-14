@@ -5,24 +5,25 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-
+    foods: [],
+    results: []
   }
 
   componentDidMount() {
     /*componentDidMount() {
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/notes`),
-      fetch(`${config.API_ENDPOINT}/folders`),
+      fetch(`${config.FOOD_API_ENDPOINT}`),
+      fetch(`${config.VIDEO_API_ENDPOINT}`),
     ])
-      .then(([notesRes, foldersRes]) => {
-        if (!notesRes.ok) return notesRes.json().then(e => Promise.reject(e))
-        if (!foldersRes.ok)
-          return foldersRes.json().then(e => Promise.reject(e))
+      .then(([foodsRes, videosRes]) => {
+        if (!foodsRes.ok) return foodsRes.json().then(e => Promise.reject(e))
+        if (!videosRes.ok)
+          return videosRes.json().then(e => Promise.reject(e))
 
-        return Promise.all([notesRes.json(), foldersRes.json()])
+        return Promise.all([foodsRes.json(), videosRes.json()])
       })
-      .then(([notes, folders]) => {
-        this.setState({ notes, folders })
+      .then(([foods, videos]) => {
+        this.setState({ foods, videos })
       })
       .catch(error => {
         console.error({ error })
@@ -33,7 +34,7 @@ class App extends React.Component {
   renderNavRoutes() {
     /*return (
       <>
-        <Route path="/note/:noteId" component={NotePageNav} />
+        <Route path="/user/:" component={ResultsPage} />
         <Route path="/add-folder" component={NotePageNav} />
         <Route path="/add-note" component={NotePageNav} />
         {['/', '/folder/:folderId'].map(path => (
@@ -46,9 +47,10 @@ class App extends React.Component {
   renderMainRoutes() {
     /*return (
       <>
-        <Route path="/note/:noteId" component={NotePageMain} />
-        <Route path="/add-folder" component={AddFolder} />
-        <Route path="/add-note" component={AddNote} />
+        <Route path="/" component={HomePage} />
+        <Route path="/profile" component={ProfilePage} />
+        <Route path="/user" component={EntryPage} />
+        <Route path="/results" component={ResultsPage} />
         {['/', '/folder/:folderId'].map(path => (
           <Route exact key={path} path={path} component={NoteListMain} />
         ))}
