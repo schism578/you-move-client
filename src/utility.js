@@ -18,6 +18,7 @@ export const formatQueryParams = (params) => {
     return queryItems.join('&');
 }
 
+//
 export const getVideos = (maxResults=3) => {
   const bmr = calculateBMR();
   const searchBmr = ((bmr/100).toFixed()*100)
