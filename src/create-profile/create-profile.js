@@ -10,7 +10,7 @@ export default class CreateProfile extends React.Component {
                 <header role='banner'>
                     <h1>Create a Profile</h1>
                 </header>
-                <form class='signup-form'>
+                <form className='signup-form'>
                     <fieldset>
                         <ul>
                             <li>

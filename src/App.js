@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import ErrorBoundary from './error-boundary';
 import config from './config';
-import { formatQueryParams, calculateBMR } from '../utility';
-import HomePage from './home-page/home-page';
+import { calculateBMR } from './utility';
+import HomePage from './home/home';
 import ProfilePage from './profile-page/profile-page';
 import EntryPage from './entry-page/entry-page';
 import ResultsPage from './entry-page/entry-page';
@@ -11,6 +11,13 @@ import './App.css';
 
 class App extends React.Component {
   state = {
+    user: {
+      gender: '',
+      height: '',
+      weight: '',
+      age: '',
+      calories: '',
+    },
     foods: [],
     results: []
   }
@@ -43,7 +50,7 @@ class App extends React.Component {
 
   getVideos(maxResults=3) {
     const bmr = calculateBMR();
-    const searchBmr = ((bmr/100).toFixed()*100);
+    //const searchBmr = ((bmr/100).toFixed()*100);
     const calorieQuery = (document.getElementsByClassName('calorie-query')).value
     const caloricDeficit =  calorieQuery - bmr;
     const searchCalories = ((caloricDeficit/100).toFixed()*100);
@@ -56,8 +63,8 @@ class App extends React.Component {
       list: `{${caloricDeficit} > 0 ? 'exercise' : 'cooking'}`
     }
   
-    const queryString = formatQueryParams(params)
-    const videoURL = `${config.VIDEO_API_ENDPOINT}` + '?' + queryString
+    const queryString = this.formatQueryParams(params)
+    const videoURL = `${config.VIDEO_API_ENDPOINT} + '?' + ${queryString}`
   
     return fetch(videoURL)
       .then(response => {
@@ -67,8 +74,8 @@ class App extends React.Component {
         throw new Error(response.statusText);
       })
       .then(responseJson => {
-        displayInfo(searchBmr, searchCalories)
-        displayVideoResults(responseJson)
+        //displayInfo(searchBmr, searchCalories)
+        //displayVideoResults(responseJson)
       })
       
       .catch(err => {
@@ -87,7 +94,9 @@ class App extends React.Component {
         ))}
       </>
     )
-  }*/
+  }
+            <nav className="App__nav">{this.renderNavRoutes()}</nav>
+*/
 
 renderMainRoutes() {
     return (
@@ -96,7 +105,7 @@ renderMainRoutes() {
         <Route path="/profile" component={ProfilePage} />
         <Route path="/user" component={EntryPage} />
         <Route path="/results" component={ResultsPage} />
-        {['/', '/folder/:folderId'].map(path => (
+        {['/', '/results/:userId'].map(path => (
           <Route exact key={path} path={path} component={HomePage} />
         ))}
       </>
@@ -107,7 +116,6 @@ renderMainRoutes() {
     return (
         <div className="App">
           <ErrorBoundary>
-          <nav className="App__nav">{this.renderNavRoutes()}</nav>
           <header className="App__header">
             <h1>
               <Link to="/">YouMove</Link>{' '}
