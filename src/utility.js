@@ -18,37 +18,3 @@ export const formatQueryParams = (params) => {
     return queryItems.join('&');
 }
 
-//
-export const getVideos = (maxResults=3) => {
-  const bmr = calculateBMR();
-  const searchBmr = ((bmr/100).toFixed()*100)
-  const caloricDeficit = $('.calorie-query').val() - bmr;
-  const searchCalories = ((caloricDeficit/100).toFixed()*100);
-  const params = {
-    key: googleApiKey,
-    q: `${searchCalories} calorie ${caloricDeficit > 0 ? 'workout' : 'recipe'}`,
-    part: 'snippet',
-    maxResults,
-    type: 'video',
-    list: `${caloricDeficit > 0 ? 'exercise' : 'cooking'}`
-  }
-
-  const queryString = formatQueryParams(params)
-  const videoURL = videoSearchURL + '?' + queryString
-
-  return fetch(videoURL)
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error(response.statusText);
-    })
-    .then(responseJson => {
-      displayInfo(searchBmr, searchCalories)
-      displayVideoResults(responseJson)
-    })
-    
-    .catch(err => {
-      $('#error-message').text(`Something went wrong with YouTube: ${err.message}`);
-    });
-}

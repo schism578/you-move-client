@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 export default class CalorieInput extends React.Component {
 
-
     render() {
         return (
             <div>
@@ -12,7 +11,7 @@ export default class CalorieInput extends React.Component {
                     <legend>Or Just Enter Your Daily Calories:</legend>
                         <input 
                             type='number' 
-                            class='calorie-query' 
+                            className='calorie-query' 
                             placeholder='2000' 
                             min="1" 
                             step="1" 
@@ -25,6 +24,4 @@ export default class CalorieInput extends React.Component {
     }
 }
 
-CalorieInput.propTypes = {
-
-}
+//CalorieInput.propTypes = {}

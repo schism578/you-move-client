@@ -14,5 +14,5 @@ export default function HomePage() {
                 links below them to try something different!</p>
             <button type="button" class="start-button">Get Started!</button>
         </div>
-  )
+    )
 }

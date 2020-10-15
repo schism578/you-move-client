@@ -1,8 +1,9 @@
 import React from 'react';
 //import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 export default class UserForm extends React.Component {
+    
     render() {
         return (
             <div>
@@ -55,6 +56,4 @@ export default class UserForm extends React.Component {
     }
 }
 
-UserForm.propTypes = {
-
-}
+//UserForm.propTypes = {}
