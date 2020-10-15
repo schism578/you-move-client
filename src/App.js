@@ -35,22 +35,29 @@ class App extends React.Component {
       })
   }*/
 
+  formatQueryParams(params) {
+    const queryItems = Object.keys(params)
+        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+    return queryItems.join('&');
+  }
+
   getVideos(maxResults=3) {
     const bmr = calculateBMR();
-    const searchBmr = ((bmr/100).toFixed()*100)
-    const caloricDeficit = $('.calorie-query').val() - bmr;
+    const searchBmr = ((bmr/100).toFixed()*100);
+    const calorieQuery = (document.getElementsByClassName('calorie-query')).value
+    const caloricDeficit =  calorieQuery - bmr;
     const searchCalories = ((caloricDeficit/100).toFixed()*100);
     const params = {
-      key: googleApiKey,
-      q: `{'${searchCalories}' calorie '${caloricDeficit}' > 0 ? 'workout' : 'recipe'}`,
+      key: `${config.VIDEO_API_KEY}`,
+      q: `{${searchCalories} calorie ${caloricDeficit} > 0 ? 'workout' : 'recipe'}`,
       part: 'snippet',
       maxResults,
       type: 'video',
-      list: `{'${caloricDeficit}' > 0 ? 'exercise' : 'cooking'}`
+      list: `{${caloricDeficit} > 0 ? 'exercise' : 'cooking'}`
     }
   
     const queryString = formatQueryParams(params)
-    const videoURL = videoSearchURL + '?' + queryString
+    const videoURL = `${config.VIDEO_API_ENDPOINT}` + '?' + queryString
   
     return fetch(videoURL)
       .then(response => {
@@ -65,7 +72,7 @@ class App extends React.Component {
       })
       
       .catch(err => {
-        $('#error-message').text(`Something went wrong with YouTube: ${err.message}`);
+        document.getElementById('error-message').text(`Something went wrong with YouTube: ${err.message}`);
       });
 }
 
