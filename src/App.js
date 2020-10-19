@@ -34,25 +34,21 @@ class App extends React.Component {
   }
 
   handleUserEntry(e) {
-    console.log('UserEntry handler')
     e.preventDefault()
     this.props.history.push('/results')
   }
 
   handleUserForm(e) {
-    console.log('UserForm handler')
     e.preventDefault()
     this.props.history.push('/results')
   }
 
   handleFoodForm(e) {
-    console.log('FoodForm handler')
     e.preventDefault()
     this.props.history.push('/results')
   }
 
   handleCalorieInput(e) {
-    console.log('CalorieInput handler')
     e.preventDefault()
     this.props.history.push('/results')
   }
@@ -139,7 +135,7 @@ renderMainRoutes() {
           <HomePage />
         </Route>
         <Route path="/profile"> 
-          <ProfilePage handleProfileCreate={this.handleCreateProfile.bind(this)}
+          <ProfilePage handleCreateProfile={this.handleCreateProfile.bind(this)}
                        handleLogin={this.handleLogin.bind(this)}
           />
         </Route>
