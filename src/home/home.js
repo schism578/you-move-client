@@ -1,5 +1,5 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './home.css';
 
 export default function HomePage() {
@@ -12,7 +12,7 @@ export default function HomePage() {
                 based against your BMR.</p>
             <p>Workout videos or healthy recipes you can do at home will display or follow one of the 
                 links below them to try something different!</p>
-            <button type='button' className='start-button'>Get Started!</button>
+            <Link to='/profile' type='button' className='start-button'>Get Started!</Link>
         </div>
     )
 }

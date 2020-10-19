@@ -6,14 +6,14 @@ import FoodForm from '../food-form/food-form';
 import CalorieInput from '../calorie-input/calorie-input';
 import ResultsVariety from '../results-variety/results-variety';
 
-export default function EntryPage() {
+export default function EntryPage(props) {
     
         return (
-            <div>
-                <UserForm />
-                <FoodForm />
-                <CalorieInput />
-                <ResultsVariety />
-            </div>
+            <>
+                <UserForm handleUserForm={props.handleUserForm}/>
+                <FoodForm handleFoodForm={props.handleFoodForm}/>
+                <CalorieInput handleCalorieInput={props.handleCalorieInput}/>
+                <ResultsVariety handleUserEntry={props.handleUserEntry}/>
+            </>
         )
     }

@@ -7,10 +7,10 @@ import Links from '../links/links';
 
 export default function ResultsPage(props) {
     return (
-        <div>
-            <UserResultsInfo />
-            <SearchResults />
-            <Links />
-        </div>
+        <>
+            <UserResultsInfo handleUserResultsInfo={props.handleUserResultsInfo}/>
+            <SearchResults handleSearchResults={props.handleSearchResults}/>
+            <Links handleLinks={props.handleLinks}/>
+        </>
     )
 }

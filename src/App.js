@@ -1,8 +1,8 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 import ErrorBoundary from './error-boundary';
-import config from './config';
-import { calculateBMR } from './utility';
+//import config from './config';
+//import { calculateBMR } from './utility';
 import HomePage from './home/home';
 import ProfilePage from './profile-page/profile-page';
 import EntryPage from './entry-page/entry-page';
@@ -17,11 +17,45 @@ class App extends React.Component {
       weight: '',
       age: '',
       calories: '',
+      hasError: false,
     },
     foods: [],
-    results: []
+    results: [],
   }
 
+  handleCreateProfile(e) {
+    e.preventDefault() 
+    this.props.history.push('/user')
+  }
+
+  handleLogin(e) {
+    e.preventDefault()
+    this.props.history.push('/user')
+  }
+
+  handleUserEntry(e) {
+    console.log('UserEntry handler')
+    e.preventDefault()
+    this.props.history.push('/results')
+  }
+
+  handleUserForm(e) {
+    console.log('UserForm handler')
+    e.preventDefault()
+    this.props.history.push('/results')
+  }
+
+  handleFoodForm(e) {
+    console.log('FoodForm handler')
+    e.preventDefault()
+    this.props.history.push('/results')
+  }
+
+  handleCalorieInput(e) {
+    console.log('CalorieInput handler')
+    e.preventDefault()
+    this.props.history.push('/results')
+  }
   /*componentDidMount() {
     Promise.all([
       fetch(`${config.FOOD_API_ENDPOINT}`),
@@ -42,7 +76,7 @@ class App extends React.Component {
       })
   }*/
 
-  formatQueryParams(params) {
+  /*formatQueryParams(params) {
     const queryItems = Object.keys(params)
         .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
     return queryItems.join('&');
@@ -81,7 +115,7 @@ class App extends React.Component {
       .catch(err => {
         document.getElementById('error-message').text(`Something went wrong with YouTube: ${err.message}`);
       });
-}
+}*/
 
   /*renderNavRoutes() {
     return (
@@ -101,13 +135,24 @@ class App extends React.Component {
 renderMainRoutes() {
     return (
       <>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/profile" component={ProfilePage} />
-        <Route path="/user" component={EntryPage} />
-        <Route path="/results" component={ResultsPage} />
-        {['/', '/results/:userId'].map(path => (
-          <Route exact key={path} path={path} component={HomePage} />
-        ))}
+        <Route exact path="/"> 
+          <HomePage />
+        </Route>
+        <Route path="/profile"> 
+          <ProfilePage handleProfileCreate={this.handleCreateProfile.bind(this)}
+                       handleLogin={this.handleLogin.bind(this)}
+          />
+        </Route>
+        <Route path="/user">
+          <EntryPage handleUserEntry={this.handleUserEntry.bind(this)}
+                     handleUserForm={this.handleUserForm.bind(this)}
+                     handleFoodForm={this.handleFoodForm.bind(this)}
+                     handleCalorieInput={this.handleCalorieInput.bind(this)}
+          />
+        </Route>
+        <Route path="/results"> 
+          <ResultsPage />
+        </Route>
       </>
     )
   }
@@ -116,16 +161,19 @@ renderMainRoutes() {
     return (
         <div className="App">
           <ErrorBoundary>
+          <>
           <header className="App__header">
             <h1>
               <Link to="/">YouMove</Link>{' '}
             </h1>
           </header>
           <main className="App__main">{this.renderMainRoutes()}</main>
+          </>
           </ErrorBoundary>
         </div>
     );
   }
 }
 
-export default App;
+
+export default withRouter(App);

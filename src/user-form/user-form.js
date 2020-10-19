@@ -3,16 +3,15 @@ import React from 'react';
 //import PropTypes from 'prop-types';
 
 export default class UserForm extends React.Component {
-    
     render() {
         return (
             <div>
-                <form className='user-form'>
+                <form className='user-form' onSubmit={this.props.handleUserForm}>
                     <fieldset>
                     <legend>Enter Your Info:</legend>
                         <ul>
                             <li>
-                                <label for='gender'>Gender:</label>
+                                <label htmlFor='gender'>Gender:</label>
                                 <select name='gender' id='gender'>
                                 <option value='female'>female</option>
                                 <option value='male'>male</option>

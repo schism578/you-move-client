@@ -10,41 +10,41 @@ export default class CreateProfile extends React.Component {
                 <header role='banner'>
                     <h1>Create a Profile</h1>
                 </header>
-                <form className='signup-form'>
+                <form className='signup-form' onSubmit={this.props.handleCreateProfile}>
                     <fieldset>
                         <ul>
                             <li>
-                                <label for='first-name'>First name</label>
+                                <label htmlFor='first-name'>First name</label>
                                 <input  
                                     type='text' 
-                                    name='first-name' 
-                                    id='first-name'
+                                    name='create-first-name' 
+                                    id='create-first-name'
                                     placeholder='First Name' 
                                 />
                             </li>
                             <li>
-                                <label for='last-name'>Last name</label>
+                                <label htmlFor='last-name'>Last name</label>
                                 <input 
                                     type='text' 
-                                    name='last-name' 
-                                    id='last-name' 
+                                    name='create-last-name' 
+                                    id='create-last-name' 
                                     placeholder='Last Name' 
                                 />
                             </li>
                             <li>
-                                <label for='username'>Email</label>
+                                <label htmlFor='username'>Email</label>
                                 <input 
                                     type='text' 
-                                    name='username' 
-                                    id='username' 
+                                    name='create-username' 
+                                    id='create-username' 
                                 />
                             </li>
                             <li>
-                                <label for='password'>Password</label>
+                                <label htmlFor='password'>Password</label>
                                 <input 
                                     type='password' 
-                                    name='password' 
-                                    id='password' 
+                                    name='create-password' 
+                                    id='create-password' 
                                 />
                             </li>
                         </ul>

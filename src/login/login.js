@@ -7,22 +7,22 @@ export default class Login extends React.Component {
         return (
             <div>
                 <h2>Log In</h2>
-                <form class='login-form'>
+                <form className='login-form' onSubmit={this.props.handleLogin}>
                     <ul>
                         <li>
-                            <label for='username'>Email</label>
+                            <label htmlFor='username'>Email</label>
                             <input 
                                 type='text' 
-                                name='username' 
-                                id='username' 
+                                name='login-username' 
+                                id='login-username' 
                             />
                         </li>
                         <li>
-                            <label for='password'>Password</label>
+                            <label htmlFor='password'>Password</label>
                             <input 
                                 type='password' 
-                                name='password' 
-                                id='password' 
+                                name='login-password' 
+                                id='login-password' 
                             />
                         </li>
                     </ul>

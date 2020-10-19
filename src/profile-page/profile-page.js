@@ -7,8 +7,8 @@ import Login from '../login/login';
 export default function ProfilePage(props) {
     return (
         <>
-            <CreateProfile />
-            <Login />
+            <CreateProfile handleProfileCreate={props.handleCreateProfile}/>
+            <Login handleLogin={props.handleLogin}/>
         </>
     )
 }

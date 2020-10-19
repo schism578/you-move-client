@@ -3,11 +3,10 @@ import React from 'react';
 //import PropTypes from 'prop-types';
 
 export default class FoodForm extends React.Component {
-    
     render() {
         return (
             <div>
-                <form className='food-form'>
+                <form className='food-form' onSubmit={this.props.handleFoodForm}>
                     <fieldset>
                         <legend>Enter Your Food:</legend>
                             <ul>
