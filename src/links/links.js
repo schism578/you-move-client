@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 export default function Links() {
     return (
         <div>
+            <h3>Try Something Different:</h3>
             <Link to="https://www.meetup.com/topics/outdoor-yoga/us/" target="_blank">Outdoor Yoga</Link>
             <Link to="https://www.meetup.com/topics/cycling/us/" target="_blank">Cycling Groups</Link>
             <Link to="https://www.meetup.com/topics/running/us/" target="_blank">Running Groups</Link>

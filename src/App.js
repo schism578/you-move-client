@@ -6,7 +6,7 @@ import ErrorBoundary from './error-boundary';
 import HomePage from './home/home';
 import ProfilePage from './profile-page/profile-page';
 import EntryPage from './entry-page/entry-page';
-import ResultsPage from './entry-page/entry-page';
+import ResultsPage from './results-page/results-page';
 import './App.css';
 
 class App extends React.Component {
@@ -80,7 +80,7 @@ class App extends React.Component {
 
   getVideos(maxResults=3) {
     const bmr = calculateBMR();
-    //const searchBmr = ((bmr/100).toFixed()*100);
+    const searchBmr = ((bmr/100).toFixed()*100);
     const calorieQuery = (document.getElementsByClassName('calorie-query')).value
     const caloricDeficit =  calorieQuery - bmr;
     const searchCalories = ((caloricDeficit/100).toFixed()*100);
@@ -131,24 +131,22 @@ class App extends React.Component {
 renderMainRoutes() {
     return (
       <>
-        <Route exact path="/"> 
+        <Route exact path='/'> 
           <HomePage />
         </Route>
-        <Route path="/profile"> 
+        <Route path='/profile'> 
           <ProfilePage handleCreateProfile={this.handleCreateProfile.bind(this)}
                        handleLogin={this.handleLogin.bind(this)}
           />
         </Route>
-        <Route path="/user">
+        <Route path='/user'>
           <EntryPage handleUserEntry={this.handleUserEntry.bind(this)}
                      handleUserForm={this.handleUserForm.bind(this)}
                      handleFoodForm={this.handleFoodForm.bind(this)}
                      handleCalorieInput={this.handleCalorieInput.bind(this)}
           />
         </Route>
-        <Route path="/results"> 
-          <ResultsPage />
-        </Route>
+        <Route path='/results' component={ResultsPage} /> 
       </>
     )
   }

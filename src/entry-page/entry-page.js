@@ -7,7 +7,6 @@ import CalorieInput from '../calorie-input/calorie-input';
 import ResultsVariety from '../results-variety/results-variety';
 
 export default function EntryPage(props) {
-    
         return (
             <>
                 <UserForm handleUserForm={props.handleUserForm}/>

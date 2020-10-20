@@ -13,3 +13,8 @@ export const calculateBMR = () => {
     return (weight * 0.453592) * 10 + (height * 2.54) * 6.25 - age * 5 + 161
   }
 }
+
+export const caloricDeficit =  calorieQuery - calculateBMR;
+
+export const calorieQuery = (document.getElementsByClassName('calorie-query')).value
+
