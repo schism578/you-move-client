@@ -1,5 +1,5 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //import PropTypes from 'prop-types';
 
 export default class CalorieInput extends React.Component {
@@ -13,10 +13,11 @@ export default class CalorieInput extends React.Component {
                                 type='number' 
                                 className='calorie-query' 
                                 placeholder='2000' 
-                                min="1" 
-                                step="1" 
+                                min='1' 
+                                step='1' 
                                 required
                             />
+                            <Link to='/'>View Your History</Link>
                     </fieldset>
                 </form>
             </div>

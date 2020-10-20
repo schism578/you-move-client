@@ -146,22 +146,24 @@ renderMainRoutes() {
                      handleCalorieInput={this.handleCalorieInput.bind(this)}
           />
         </Route>
-        <Route path='/results' component={ResultsPage} /> 
+        <Route path='/results'>
+          <ResultsPage />
+        </Route> 
       </>
     )
   }
 
   render() {
     return (
-        <div className="App">
+        <div className='App'>
           <ErrorBoundary>
           <>
-          <header className="App__header">
+          <header className='App__header'>
             <h1>
-              <Link to="/">YouMove</Link>{' '}
+              <Link to='/'>YouMove</Link>{' '}
             </h1>
           </header>
-          <main className="App__main">{this.renderMainRoutes()}</main>
+          <main className='App__main'>{this.renderMainRoutes()}</main>
           </>
           </ErrorBoundary>
         </div>
