@@ -11,16 +11,151 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    user: {
+    userProfile: {
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
       gender: '',
       height: '',
       weight: '',
       age: '',
       calories: '',
+      bmr: '',
       hasError: false,
     },
     foods: [],
-    results: [],
+    videos: [],
+    newUser: {
+      first_name: {
+        touched: false,
+        value: '',
+      },
+      last_name: {
+        touched: false,
+        value: '',
+      },
+      email: {
+        touched: false,
+        value: '',
+      },
+      password: {
+        touched: false,
+        value: '',
+      },
+      gender: {
+        touched: false,
+        value: '',
+      },
+      height: {
+        touched: false,
+        value: '',
+      },
+      weight: {
+        touched: false,
+        value: '',
+      },
+      age: {
+        touched: false,
+        value: '',
+      },
+      bmr: {
+        touched: false,
+        value: '',
+      },
+    },
+  }
+
+  setUserProfile = profile => {
+    this.setState({
+      profile,
+      error: null,
+    })
+  }
+
+  setFoods = foods => {
+    this.setState({
+      foods,
+      error: null,
+    })
+  }
+
+  setVideos = videos => {
+    this.setState({
+      videos,
+      error: null,
+    })
+  }
+
+  deleteUser = userId => {
+    const newUsers = this.state.userProfile.filter(up =>
+      up.id !== userId
+    )
+    this.setState({
+      user: newUsers
+    })
+  }
+
+  componentDidMount() {
+    fetch(config.USER_API_ENDPOINT, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${config.USER_API_KEY}`,
+        'content-type': 'application/json',
+      }
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(res.status)
+        }
+        return res.json()
+      })
+      .then(data => this.setUserProfile(data))
+      .catch(error => this.setState({ error }))
+
+    fetch(config.FOOD_API_ENDPOINT, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${config.FOOD_API_KEY}`,
+        'content-type': 'application/json',
+      }
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(res.status)
+        }
+        return res.json()
+      })
+      .then(data => this.setFoods(data))
+      .catch(error => this.setState({ error }))
+
+    fetch(config.VIDEO_API_ENDPOINT, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${config.VIDEO_API_KEY}`,
+        'content-type': 'application/json',
+      }
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(res.status)
+        }
+        return res.json()
+      })
+      .then(data => this.setVideos(data))
+      .catch(error => this.setState({ error }))
+  }
+
+  updateNewUserData = (input, value) => {
+    this.setState({
+      newUser: {
+          ...this.state.newUser,
+        [input]: {
+          touched: true,
+          value: value,
+        },
+      },
+    })
   }
 
   handleCreateProfile(e) {
