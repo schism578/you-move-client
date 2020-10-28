@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 //import PropTypes from 'prop-types';
 
 export default class CalorieInput extends React.Component {
+    //props or context needs to live here
     render() {
         return (
             <div>

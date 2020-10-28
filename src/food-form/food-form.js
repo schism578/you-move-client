@@ -3,6 +3,7 @@ import React from 'react';
 //import PropTypes from 'prop-types';
 
 export default class FoodForm extends React.Component {
+    //props or context needs to live here
     render() {
         return (
             <div>

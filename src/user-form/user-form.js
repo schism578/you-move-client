@@ -3,6 +3,7 @@ import React from 'react';
 //import PropTypes from 'prop-types';
 
 export default class UserForm extends React.Component {
+    //props or context needs to live here
     render() {
         return (
             <div>

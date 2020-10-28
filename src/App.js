@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Link, withRouter } from 'react-router-dom';
 import ErrorBoundary from './error-boundary';
-//import config from './config';
+import config from './config';
 //import { calculateBMR } from './utility';
 import HomePage from './home/home';
 import ProfilePage from './profile-page/profile-page';

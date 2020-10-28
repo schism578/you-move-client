@@ -3,6 +3,7 @@ import React from 'react';
 //import { calculateBMR, caloricDeficit } from '../utility';
 
 export default class UserResultsInfo extends React.Component {
+    //props or context needs to live here
     render() {
         return (
             <div>
