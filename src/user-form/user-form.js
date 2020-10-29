@@ -1,6 +1,6 @@
 import React from 'react';
 import config from '../config';
-import { calculateBMR } from './utility';
+//import { calculateBMR } from '../utility';
 //import PropTypes from 'prop-types';
 
 export default class UserForm extends React.Component {
