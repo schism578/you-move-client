@@ -1,5 +1,5 @@
 import React from 'react';
-import config from './config';
+import config from '../config';
 import { calculateBMR } from './utility';
 //import PropTypes from 'prop-types';
 

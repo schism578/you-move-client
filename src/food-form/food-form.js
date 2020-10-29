@@ -1,5 +1,5 @@
 import React from 'react';
-import config from './config';
+import config from '../config';
 //import PropTypes from 'prop-types';
 
 export default class FoodForm extends React.Component {
