@@ -5,6 +5,7 @@ import config from './config';
 //import { calculateBMR } from './utility';
 import HomePage from './home/home';
 import ProfilePage from './profile-page/profile-page';
+import UserPage from './user-page/user-page';
 import EntryPage from './entry-page/entry-page';
 import ResultsPage from './results-page/results-page';
 import './App.css';
@@ -113,22 +114,6 @@ class App extends React.Component {
       .then(data => this.setUserProfile(data))
       .catch(error => this.setState({ error }))
 
-    fetch(config.FOOD_API_ENDPOINT, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${config.FOOD_API_KEY}`,
-        'content-type': 'application/json',
-      }
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(res.status)
-        }
-        return res.json()
-      })
-      .then(data => this.setFoods(data))
-      .catch(error => this.setState({ error }))
-
     fetch(config.VIDEO_API_ENDPOINT, {
       method: 'GET',
       headers: {
@@ -168,12 +153,12 @@ class App extends React.Component {
     this.props.history.push('/user')
   }
 
-  handleUserEntry(e) {
+  handleUserForm(e) {
     e.preventDefault()
-    this.props.history.push('/results')
+    this.props.history.push('/log')
   }
 
-  handleUserForm(e) {
+  handleResultsVariety(e) {
     e.preventDefault()
     this.props.history.push('/results')
   }
@@ -187,25 +172,6 @@ class App extends React.Component {
     e.preventDefault()
     this.props.history.push('/results')
   }
-  /*componentDidMount() {
-    Promise.all([
-      fetch(`${config.FOOD_API_ENDPOINT}`),
-      fetch(`${config.VIDEO_API_ENDPOINT}`),
-    ])
-      .then(([foodsRes, videosRes]) => {
-        if (!foodsRes.ok) return foodsRes.json().then(e => Promise.reject(e))
-        if (!videosRes.ok)
-          return videosRes.json().then(e => Promise.reject(e))
-
-        return Promise.all([foodsRes.json(), videosRes.json()])
-      })
-      .then(([foods, videos]) => {
-        this.setState({ foods, videos })
-      })
-      .catch(error => {
-        console.error({ error })
-      })
-  }*/
 
   /*formatQueryParams(params) {
     const queryItems = Object.keys(params)
@@ -248,22 +214,7 @@ class App extends React.Component {
       });
 }*/
 
-  /*renderNavRoutes() {
-    return (
-      <>
-        <Route path="/user/:" component={ResultsPage} />
-        <Route path="/add-folder" component={NotePageNav} />
-        <Route path="/add-note" component={NotePageNav} />
-        {['/', '/folder/:folderId'].map(path => (
-          <Route exact key={path} path={path} component={NoteListNav} />
-        ))}
-      </>
-    )
-  }
-            <nav className="App__nav">{this.renderNavRoutes()}</nav>
-*/
-
-renderMainRoutes() {
+renderRoutes() {
     return (
       <>
         <Route exact path='/'> 
@@ -275,12 +226,14 @@ renderMainRoutes() {
           />
         </Route>
         <Route path='/user'>
-          <EntryPage handleUserEntry={this.handleUserEntry.bind(this)}
-                     handleUserForm={this.handleUserForm.bind(this)}
+          <UserPage handleUserForm={this.handleUserForm.bind(this)} />
+        </Route>
+        <Route path='/log'>
+          <EntryPage handleResultsVariety={this.handleResultsVariety.bind(this)}
                      handleFoodForm={this.handleFoodForm.bind(this)}
                      handleCalorieInput={this.handleCalorieInput.bind(this)}
           />
-        </Route>
+        </Route> 
         <Route path='/results'>
           <ResultsPage />
         </Route> 
@@ -298,7 +251,7 @@ renderMainRoutes() {
               <Link to='/'>YouMove</Link>{' '}
             </h1>
           </header>
-          <main className='App__main'>{this.renderMainRoutes()}</main>
+          <main className='App__main'>{this.renderRoutes()}</main>
           </>
           </ErrorBoundary>
         </div>

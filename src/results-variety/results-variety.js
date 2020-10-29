@@ -7,7 +7,7 @@ export default class ResultsVariety extends React.Component {
     render() {
         return (
             <div>
-                <form className='results-variety-form' onSubmit={this.props.handleUserEntry}>
+                <form className='results-variety-form' onSubmit={this.props.handleResultsVariety}>
                     <fieldset>
                         <legend className='results-variety'>Select a Type of Workout:</legend>
                             <input

@@ -1,9 +1,27 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import config from './config';
 //import PropTypes from 'prop-types';
 
 export default class FoodForm extends React.Component {
     //props or context needs to live here
+    addFood = food => {
+        fetch(config.FOOD_API_ENDPOINT, {
+            method: 'GET',
+            headers: {
+            'Authorization': `Bearer ${config.FOOD_API_KEY}`,
+            'content-type': 'application/json',
+            }
+        })
+            .then(res => {
+            if (!res.ok) {
+                throw new Error(res.status)
+            }
+            return res.json()
+            })
+            .then(data => this.setFoods(data))
+            .catch(error => this.setState({ error }))
+        }
+
     render() {
         return (
             <div>
