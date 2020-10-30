@@ -99,7 +99,7 @@ class App extends React.Component {
     e.preventDefault()
     this.props.history.push('/log')
   }
-  
+
   handleUserForm(e) {
     e.preventDefault()
     this.props.history.push('/log')
@@ -211,7 +211,7 @@ renderRoutes() {
       handleResultsVariety: this.handleResultsVariety
     }
     return (
-      <ApiContext.Provider value={value}>
+      <Context.Provider value={value}>
         <div className='App'>
           <ErrorBoundary>
           <>
@@ -224,7 +224,7 @@ renderRoutes() {
           </>
           </ErrorBoundary>
         </div>
-      </ApiContext.Provider>
+      </Context.Provider>
     );
   }
 }
