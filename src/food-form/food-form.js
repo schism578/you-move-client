@@ -7,6 +7,19 @@ import CalorieInput from '../calorie-input/calorie-input';
 export default class FoodForm extends React.Component {
     //props or context needs to live here
     static contextType = Context;
+
+    updateAddFood = (input, value) => {
+        this.setState({
+            addFood: {
+              ...this.state.addFood,
+            [input]: {
+              touched: true,
+              value: value,
+            },
+          },
+        })
+    }
+
     addFood = food => {
         fetch(config.FOOD_API_ENDPOINT, {
             method: 'GET',
@@ -32,25 +45,24 @@ export default class FoodForm extends React.Component {
                     <fieldset>
                         <legend>Enter Your Food:</legend>
                             <ul>
-                                <li>Food Item:</li>
+                                <label htmlFor='food-item'>Food Item:</label>
                                     <input 
                                         type='text' 
                                         id='food-item' 
                                         name='food-item' 
                                         placeholder='fat free yogurt'
+                                        onChange={(e) => this.updateAddFood('food-item', e.target.value)}
                                     />
-                                <li>Quantity:</li>
+                                <label htmlFor='quantity'>Quantity:</label>
                                     <input
                                         type='text'
                                         id='quantity'
                                         name='quantity'
                                         placeholder='2/3 cup'
+                                        onChange={(e) => this.updateAddFood('quantity', e.target.value)}
                                     />
                             </ul>
-                            <button 
-                                type='submit' 
-                                onClick={(e) => this.addFood(e)}
-                                >Add Item</button>
+                            <button type='submit'>Add Item</button>
                     </fieldset>
                 </form>
                 <CalorieInput 

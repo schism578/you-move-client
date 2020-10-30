@@ -11,38 +11,37 @@ export default class CreateProfile extends React.Component {
     state = {
         newUser: {
         first_name: {
-          touched: false,
-          value: '',
+            touched: false,
+            value: '',
         },
         last_name: {
-          touched: false,
-          value: '',
+            touched: false,
+            value: '',
         },
         email: {
-          touched: false,
-          value: '',
+            touched: false,
+            value: '',
         },
         password: {
-          touched: false,
-          value: '',
+            touched: false,
+            value: '',
         },
       },
     }
 
     updateNewUserData = (input, value) => {
         this.setState({
-          newUser: {
-              ...this.state.newUser,
-            [input]: {
-              touched: true,
-              value: value,
+            newUser: {
+                ...this.state.newUser,
+                [input]: {
+                    touched: true,
+                    value: value,
+                },
             },
-          },
         })
     }
     
     addNewUser = user => {
-
         fetch(`${config.USER_API_ENDPOINT}`, {
         method: 'POST',
         headers: {
