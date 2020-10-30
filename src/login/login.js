@@ -1,4 +1,5 @@
 import React from 'react';
+import config from '../config';
 import Context from '../context';
 //import PropTypes from 'prop-types';
 
