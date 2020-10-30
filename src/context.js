@@ -6,8 +6,8 @@ const Context = React.createContext({
     userProfile: {},
     newUser: {},
     addUser: () => {},
-    addNote: () => {},
-    deleteNote: () => {},
+    addFood: () => {},
+    deleteUser: () => {},
 })
 
 export default Context;

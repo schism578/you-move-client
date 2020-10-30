@@ -8,6 +8,7 @@ import ProfilePage from './profile-page/profile-page';
 import UserPage from './user-page/user-page';
 import EntryPage from './entry-page/entry-page';
 import ResultsPage from './results-page/results-page';
+import Context from './context';
 import './App.css';
 
 class App extends React.Component {
@@ -27,44 +28,6 @@ class App extends React.Component {
     },
     foods: [],
     videos: [],
-    newUser: {
-      first_name: {
-        touched: false,
-        value: '',
-      },
-      last_name: {
-        touched: false,
-        value: '',
-      },
-      email: {
-        touched: false,
-        value: '',
-      },
-      password: {
-        touched: false,
-        value: '',
-      },
-      gender: {
-        touched: false,
-        value: '',
-      },
-      height: {
-        touched: false,
-        value: '',
-      },
-      weight: {
-        touched: false,
-        value: '',
-      },
-      age: {
-        touched: false,
-        value: '',
-      },
-      bmr: {
-        touched: false,
-        value: '',
-      },
-    },
   }
 
   setUserProfile = profile => {
@@ -85,15 +48,6 @@ class App extends React.Component {
     this.setState({
       videos,
       error: null,
-    })
-  }
-
-  deleteUser = userId => {
-    const newUsers = this.state.userProfile.filter(up =>
-      up.id !== userId
-    )
-    this.setState({
-      user: newUsers
     })
   }
 
@@ -131,18 +85,6 @@ class App extends React.Component {
       .catch(error => this.setState({ error }))
   }
 
-  updateNewUserData = (input, value) => {
-    this.setState({
-      newUser: {
-          ...this.state.newUser,
-        [input]: {
-          touched: true,
-          value: value,
-        },
-      },
-    })
-  }
-
   handleCreateProfile(e) {
     e.preventDefault() 
     this.props.history.push('/user')
@@ -153,6 +95,11 @@ class App extends React.Component {
     this.props.history.push('/user')
   }
 
+  handleAddUser(e) {
+    e.preventDefault()
+    this.props.history.push('/log')
+  }
+  
   handleUserForm(e) {
     e.preventDefault()
     this.props.history.push('/log')
@@ -171,6 +118,13 @@ class App extends React.Component {
   handleCalorieInput(e) {
     e.preventDefault()
     this.props.history.push('/results')
+  }
+
+  handleDeleteUser = userId => {
+    const newUsers = this.state.userProfile.filter(up => up.id !== userId);
+    this.setState({
+      user: newUsers
+    })
   }
 
   /*formatQueryParams(params) {
@@ -242,7 +196,22 @@ renderRoutes() {
   }
 
   render() {
+    const value = {
+      userProfile: this.state.userProfile,
+      foods: this.state.foods,
+      videos: this.state.videos,
+      newUser: this.state.newUser,
+      deleteUser: this.handleDeleteUser,
+      updateNewUserData: this.updateNewUserData,
+      handleCreateProfile: this.handleCreateProfile,
+      handleLogin: this.handleLogin,
+      handleUserForm: this.handleUserForm,
+      handleFoodForm: this.handleFoodForm,
+      handleCalorieInput: this.handleCalorieInput,
+      handleResultsVariety: this.handleResultsVariety
+    }
     return (
+      <ApiContext.Provider value={value}>
         <div className='App'>
           <ErrorBoundary>
           <>
@@ -255,6 +224,7 @@ renderRoutes() {
           </>
           </ErrorBoundary>
         </div>
+      </ApiContext.Provider>
     );
   }
 }

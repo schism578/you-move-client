@@ -1,8 +1,10 @@
 import React from 'react';
+import Context from '../context';
 //import PropTypes from 'prop-types';
 
 export default class ResultsVariety extends React.Component {
     //props or context needs to live here
+    static contextType = Context;
     render() {
         return (
             <div>

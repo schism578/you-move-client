@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './home.css';
 
-export default function HomePage() {
+export default function HomePage() {    
     return (
         <div>
             <p>Enter your gender, height, weight, and age to yield your BMR, or

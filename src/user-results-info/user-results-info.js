@@ -1,9 +1,11 @@
 import React from 'react';
+import Context from '../context';
 //import PropTypes from 'prop-types';
 //import { calculateBMR, caloricDeficit } from '../utility';
 
 export default class UserResultsInfo extends React.Component {
     //props or context needs to live here
+    static contextType = Context;
     render() {
         return (
             <div>

@@ -1,9 +1,12 @@
 import React from 'react';
 import config from '../config';
+import Context from '../context';
+import CalorieInput from '../calorie-input/calorie-input';
 //import PropTypes from 'prop-types';
 
 export default class FoodForm extends React.Component {
     //props or context needs to live here
+    static contextType = Context;
     addFood = food => {
         fetch(config.FOOD_API_ENDPOINT, {
             method: 'GET',
@@ -44,9 +47,15 @@ export default class FoodForm extends React.Component {
                                         placeholder='2/3 cup'
                                     />
                             </ul>
-                            <button type='submit'>Add Item</button>
+                            <button 
+                                type='submit' 
+                                onClick={(e) => this.addFood(e)}
+                                >Add Item</button>
                     </fieldset>
                 </form>
+                <CalorieInput 
+                    sumCalories={this.sumCalories}
+                />
             </div>
         )
     }

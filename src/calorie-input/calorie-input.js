@@ -1,9 +1,11 @@
 import React from 'react';
+import Context from '../context';
 import { Link } from 'react-router-dom';
 //import PropTypes from 'prop-types';
 
 export default class CalorieInput extends React.Component {
     //props or context needs to live here
+    static contextType = Context;
     render() {
         return (
             <div>
@@ -18,7 +20,7 @@ export default class CalorieInput extends React.Component {
                                 step='1' 
                                 required
                             />
-                            <Link to='/'>View Your History</Link>
+                            <Link to='/history/:user_id'>View Your History</Link>
                     </fieldset>
                 </form>
             </div>

@@ -1,10 +1,11 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import Context from '../context';
 //import PropTypes from 'prop-types';
 
 export default class Login extends React.Component {
     //props or context needs to live here
-    
+    static contextType = Context;
+
     render() {
         return (
             <div>

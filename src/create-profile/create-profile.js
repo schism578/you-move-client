@@ -1,11 +1,45 @@
 import React from 'react';
 import config from '../config';
-//import { Link } from 'react-router-dom';
+import Context from '../context';
 //import PropTypes from 'prop-types';
 
 
 export default class CreateProfile extends React.Component {
     //either props or context needs to live here
+    static contextType = Context;
+
+    state = {
+        newUser: {
+        first_name: {
+          touched: false,
+          value: '',
+        },
+        last_name: {
+          touched: false,
+          value: '',
+        },
+        email: {
+          touched: false,
+          value: '',
+        },
+        password: {
+          touched: false,
+          value: '',
+        },
+      },
+    }
+
+    updateNewUserData = (input, value) => {
+        this.setState({
+          newUser: {
+              ...this.state.newUser,
+            [input]: {
+              touched: true,
+              value: value,
+            },
+          },
+        })
+    }
     
     addNewUser = user => {
 
@@ -67,37 +101,42 @@ export default class CreateProfile extends React.Component {
                     <fieldset>
                         <ul>
                             <li>
-                                <label htmlFor='first-name'>First name</label>
+                                <label htmlFor='create-first-name'>First name</label>
                                 <input  
                                     type='text' 
                                     name='create-first-name' 
                                     id='create-first-name'
-                                    placeholder='First Name' 
+                                    placeholder='First Name'
+                                    onChange={(e) => this.updateNewUserData('first_name', e.target.value)} 
                                 />
                             </li>
                             <li>
-                                <label htmlFor='last-name'>Last name</label>
+                                <label htmlFor='create-last-name'>Last name</label>
                                 <input 
                                     type='text' 
                                     name='create-last-name' 
                                     id='create-last-name' 
-                                    placeholder='Last Name' 
+                                    placeholder='Last Name'
+                                    onChange={(e) => this.updateNewUserData('last_name', e.target.value)} 
                                 />
                             </li>
                             <li>
-                                <label htmlFor='username'>Email</label>
+                                <label htmlFor='create-username'>Email</label>
                                 <input 
                                     type='text' 
                                     name='create-username' 
-                                    id='create-username' 
+                                    id='create-username'
+                                    placeholder='Email' 
+                                    onChange={(e) => this.updateNewUserData('email', e.target.value)}
                                 />
                             </li>
                             <li>
-                                <label htmlFor='password'>Password</label>
+                                <label htmlFor='create-password'>Password</label>
                                 <input 
                                     type='password' 
                                     name='create-password' 
                                     id='create-password' 
+                                    onChange={(e) => this.updateNewUserData('password', e.target.value)}
                                 />
                             </li>
                         </ul>

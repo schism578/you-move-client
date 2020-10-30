@@ -1,10 +1,48 @@
 import React from 'react';
 import config from '../config';
+import Context from '../context';
 //import { calculateBMR } from '../utility';
 //import PropTypes from 'prop-types';
 
 export default class UserForm extends React.Component {
     //props or context needs to live here
+    static contextType = Context;
+
+    state = {
+        newInfo: {
+            gender: {
+                touched: false,
+                value: '',
+              },
+              height: {
+                touched: false,
+                value: '',
+              },
+              weight: {
+                touched: false,
+                value: '',
+              },
+              age: {
+                touched: false,
+                value: '',
+              },
+              bmr: {
+                value: '',
+              },
+        }
+    }
+
+    updateNewUserInfo = (input, value) => {
+        this.setState({
+          newInfo: {
+              ...this.state.newInfo,
+            [input]: {
+              touched: true,
+              value: value,
+            },
+          },
+        })
+    }
 
     addUserInfo = info => {
 
@@ -66,12 +104,16 @@ export default class UserForm extends React.Component {
                         <ul>
                             <li>
                                 <label htmlFor='gender'>Gender:</label>
-                                <select name='gender' id='gender'>
+                                <select 
+                                    name='gender' 
+                                    id='gender' 
+                                    onChange={(e) => this.updateNewUserInfo('gender', e.target.value)}
+                                >
                                 <option value='female'>female</option>
                                 <option value='male'>male</option>
                                 </select>
                             </li>
-                            <li>Height:</li>
+                            <label htmlFor='height'>Height:</label>
                                 <input 
                                     type='number' 
                                     id='height' 
@@ -79,6 +121,7 @@ export default class UserForm extends React.Component {
                                     placeholder='70 (inches)' 
                                     min='1' 
                                     step='1' 
+                                    onChange={(e) => this.updateNewUserInfo('height', e.target.value)}
                                     required
                                 />
                             <li>Weight:</li>
@@ -88,7 +131,8 @@ export default class UserForm extends React.Component {
                                     name='weight' 
                                     placeholder='170 (pounds)' 
                                     min='1' 
-                                    step='1' 
+                                    step='1'
+                                    onChange={(e) => this.updateNewUserInfo('weight', e.target.value)} 
                                     required
                                 />
                             <li>Age:</li>
@@ -98,7 +142,8 @@ export default class UserForm extends React.Component {
                                     name='age' 
                                     placeholder='23 (years)' 
                                     min='1' 
-                                    step='1' 
+                                    step='1'
+                                    onChange={(e) => this.updateNewUserInfo('age', e.target.value)} 
                                     required
                                 />
                         </ul>
