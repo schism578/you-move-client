@@ -34,10 +34,10 @@ export default class Login extends React.Component {
 
     loginUser = user => {
         fetch(`${config.USER_API_ENDPOINT}`, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${config.USER_API_KEY}`,
-            'Content-Type': 'application/json',
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${config.USER_API_KEY}`,
+                'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
         })

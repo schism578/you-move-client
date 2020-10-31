@@ -45,12 +45,11 @@ export default class UserForm extends React.Component {
     }
 
     addUserInfo = info => {
-
         fetch(`${config.USER_API_ENDPOINT}`, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${config.USER_API_KEY}`,
-            'Content-Type': 'application/json',
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${config.USER_API_KEY}`,
+                'Content-Type': 'application/json',
         },
         body: JSON.stringify(info),
         })
