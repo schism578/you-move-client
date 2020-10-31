@@ -124,7 +124,7 @@ export default class FoodForm extends React.Component {
                             </ul>
                             <button 
                                 type='submit' 
-                                onClick={(e) => this.getCalories()}>
+                                onClick={(e) => this.getCalories(this.updateAddFood)}>
                                 Add Item
                             </button>
                     </fieldset>
