@@ -17,9 +17,9 @@ export default class FoodForm extends React.Component {
                 touched: false,
                 value: '',
             },
-            calories: {
-                value: '',
-            },
+        },
+        calories: {
+            value: '',
         }
     }
 
