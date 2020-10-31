@@ -1,7 +1,6 @@
 import React from 'react';
 import config from '../config';
 import Context from '../context';
-import CalorieInput from '../calorie-input/calorie-input';
 //import PropTypes from 'prop-types';
 
 export default class FoodForm extends React.Component {
@@ -68,7 +67,6 @@ export default class FoodForm extends React.Component {
             })
             .then(data => this.updateAddFood(data))
             .catch(error => this.setState({ error }))
-
 
         let calories = [];
         for (let i = 0; i < responseJson.foods.length; i++) {
