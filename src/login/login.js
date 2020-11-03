@@ -34,7 +34,7 @@ class Login extends React.Component {
     }
 
     loginUser = user => {
-        fetch(`${config.USER_API_ENDPOINT}/user`, {
+        fetch(`${config.USER_API_ENDPOINT}/user/:user_id`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${config.USER_API_KEY}`,

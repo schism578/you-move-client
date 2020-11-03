@@ -76,12 +76,10 @@ class App extends React.Component {
   }
 
   handleLogin(e) {
-    e.preventDefault()
     this.props.history.push('/log')
   }
 
   handleFoodForm(e) {
-    e.preventDefault()
     this.props.history.push('/log')
   }
 
