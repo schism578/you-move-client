@@ -34,7 +34,7 @@ class Login extends React.Component {
     }
 
     loginUser = user => {
-        fetch(`${config.USER_API_ENDPOINT}/user/:user_id`, {
+        fetch(`${config.USER_API_ENDPOINT}/user`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${config.USER_API_KEY}`,
@@ -52,8 +52,8 @@ class Login extends React.Component {
     handleFormSubmit = e => {
         e.preventDefault(e)
         const logUser = {
-        email: e.target.email.value,
-        password: e.target.password.value,
+        email: this.state.logUser.email.value,
+        password: this.state.logUser.password.value,
         }
         if (logUser.email === '0') {
             this.setState({
@@ -66,7 +66,7 @@ class Login extends React.Component {
             })
         } else {
         this.loginUser(logUser)
-        this.props.history.push('/user');
+        this.props.history.push('/log');
         }
     }
 
@@ -74,7 +74,7 @@ class Login extends React.Component {
         return (
             <div>
                 <h2>Log In</h2>
-                <form className='login-form' onSubmit={this.props.handleLogin}>
+                <form className='login-form' onSubmit={this.handleFormSubmit}>
                     <ul>
                         <li>
                             <label htmlFor='login-username'>Email</label>

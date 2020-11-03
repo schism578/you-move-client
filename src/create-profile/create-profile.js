@@ -11,42 +11,42 @@ class CreateProfile extends React.Component {
 
     state = {
         newUser: {
-        first_name: {
-            touched: false,
-            value: '',
+            first_name: {
+                touched: false,
+                value: '',
+            },
+            last_name: {
+                touched: false,
+                value: '',
+            },
+            email: {
+                touched: false,
+                value: '',
+            },
+            password: {
+                touched: false,
+                value: '',
+            },
+            gender: {
+                touched: false,
+                value: '',
+            },
+            height: {
+                touched: false,
+                value: '',
+            },
+            weight: {
+                touched: false,
+                value: '',
+            },
+            age: {
+                touched: false,
+                value: '',
+            },
+            bmr: {
+                value: '',
+            },
         },
-        last_name: {
-            touched: false,
-            value: '',
-        },
-        email: {
-            touched: false,
-            value: '',
-        },
-        password: {
-            touched: false,
-            value: '',
-        },
-        gender: {
-            touched: false,
-            value: '',
-          },
-          height: {
-            touched: false,
-            value: '',
-          },
-          weight: {
-            touched: false,
-            value: '',
-          },
-          age: {
-            touched: false,
-            value: '',
-          },
-          bmr: {
-            value: '',
-          },
-      },
     }
 
     updateNewUserData = (input, value) => {

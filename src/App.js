@@ -5,7 +5,6 @@ import config from './config';
 //import { calculateBMR } from './utility';
 import HomePage from './home/home';
 import ProfilePage from './profile-page/profile-page';
-import UserPage from './user-page/user-page';
 import EntryPage from './entry-page/entry-page';
 import UserHistory from './user-history/user-history';
 import UpdateProfile from './update-profile/update-profile';
@@ -78,10 +77,6 @@ class App extends React.Component {
 
   handleLogin(e) {
     e.preventDefault()
-    this.props.history.push('/log')
-  }
-
-  handleUserForm() {
     this.props.history.push('/log')
   }
 
@@ -169,29 +164,32 @@ renderRoutes() {
         <Route exact path='/'> 
           <HomePage />
         </Route>
+
         <Route path='/login'> 
           <ProfilePage handleCreateProfile={this.handleCreateProfile.bind(this)}
                        handleLogin={this.handleLogin.bind(this)}
           />
         </Route>
-        <Route path='/user'>
-          <UserPage handleUserForm={this.handleUserForm.bind(this)} />
-        </Route>
+
         <Route path='/log'>
           <EntryPage handleResultsVariety={this.handleResultsVariety.bind(this)}
                      handleFoodForm={this.handleFoodForm.bind(this)}
                      handleCalorieInput={this.handleCalorieInput.bind(this)}
           />
         </Route>
+
         <Route path='/profile'>
           <UserHistory handleUserHistory={this.handleUserHistory.bind(this)} />
         </Route>
+
         <Route path='/update-profile'>
           <UpdateProfile handleUpdateProfile={this.handleUpdateProfile.bind(this)} />
         </Route>
+
         <Route path='/update-info'>
           <UpdateInfo handleUpdateInfo={this.handleUpdateInfo.bind(this)} />
         </Route>
+
         <Route path='/results'>
           <ResultsPage />
         </Route> 
