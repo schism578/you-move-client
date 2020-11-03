@@ -1,10 +1,11 @@
 import React from 'react';
 import config from '../config';
 import Context from '../context';
+import { withRouter } from 'react-router-dom';
 //import PropTypes from 'prop-types';
 
 
-export default class CreateProfile extends React.Component {
+class CreateProfile extends React.Component {
     //either props or context needs to live here
     static contextType = Context;
 
@@ -26,6 +27,25 @@ export default class CreateProfile extends React.Component {
             touched: false,
             value: '',
         },
+        gender: {
+            touched: false,
+            value: '',
+          },
+          height: {
+            touched: false,
+            value: '',
+          },
+          weight: {
+            touched: false,
+            value: '',
+          },
+          age: {
+            touched: false,
+            value: '',
+          },
+          bmr: {
+            value: '',
+          },
       },
     }
 
@@ -42,10 +62,9 @@ export default class CreateProfile extends React.Component {
     }
     
     addNewUser = user => {
-        fetch(`${config.USER_API_ENDPOINT}`, {
+        fetch(`${config.USER_API_ENDPOINT}/user`, {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${config.USER_API_KEY}`,
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
@@ -54,16 +73,20 @@ export default class CreateProfile extends React.Component {
             console.log(JSON.stringify(user))
             return res.json()
         })
-        .then(resJSON => this.props.handleAddUser(resJSON))
+        .then(resJSON => this.props.handleCreateProfile(resJSON))
     }
 
     handleFormSubmit = e => {
         e.preventDefault(e)
         const newUser = {
-        first_name: e.target.first_name.value,
-        last_name: e.target.last_name.value,
-        email: e.target.email.value,
-        password: e.target.password.value,
+        first_name: this.state.newUser.first_name.value,
+        last_name: this.state.newUser.last_name.value,
+        email: this.state.newUser.email.value,
+        password: this.state.newUser.password.value,
+        gender: this.state.newUser.gender.value,
+        height: this.state.newUser.height.value,
+        weight: this.state.newUser.weight.value,
+        age: this.state.newUser.age.value,
         }
         if (newUser.first_name === '0') {
             this.setState({
@@ -84,9 +107,45 @@ export default class CreateProfile extends React.Component {
             this.setState({
                 error: 'Please enter password'
             })
+        }
+        if (newUser.gender === '0') {
+            this.setState({
+                error: 'Please select gender'
+            })
+        }
+        if (newUser.height === '0') {
+            this.setState({
+                error: 'Please enter height'
+            })
+        }
+        if (newUser.weight === '0') {
+            this.setState({
+                error: 'Please enter weight'
+            })
+        }
+        if (newUser.age === '0') {
+            this.setState({
+                error: 'Please enter age'
+            })
         } else {
+        newUser.bmr = ((this.calculateBMR()/100).toFixed()*100);
         this.addNewUser(newUser)
-        this.props.history.push('/user');
+        this.props.history.push('/log');
+        }
+    }
+
+    calculateBMR = () => {
+        const weightValue = this.state.newUser.weight.value;
+        const heightValue = this.state.newUser.height.value;
+        const ageValue = this.state.newUser.age.value;
+        const weight = parseInt( weightValue );
+        const height = parseInt( heightValue );
+        const age = parseInt( ageValue );
+      
+        if (this.state.newUser.gender.value === 'male') {
+          return (weight * 0.453592) * 10 + (height * 2.54) * 6.25 - age * 5 + 5
+        } else {
+          return (weight * 0.453592) * 10 + (height * 2.54) * 6.25 - age * 5 + 161
         }
     }
 
@@ -96,11 +155,12 @@ export default class CreateProfile extends React.Component {
                 <header role='banner'>
                     <h1>Create a Profile</h1>
                 </header>
-                <form className='signup-form' onSubmit={this.props.handleCreateProfile}>
+                <form className='signup-form' onSubmit={this.handleFormSubmit}>
                     <fieldset>
+                    <legend>Enter Your Info:</legend>
                         <ul>
                             <li>
-                                <label htmlFor='create-first-name'>First name</label>
+                                <label htmlFor='create-first-name'>First Name:</label>
                                 <input  
                                     type='text' 
                                     name='create-first-name' 
@@ -110,7 +170,7 @@ export default class CreateProfile extends React.Component {
                                 />
                             </li>
                             <li>
-                                <label htmlFor='create-last-name'>Last name</label>
+                                <label htmlFor='create-last-name'>Last Name:</label>
                                 <input 
                                     type='text' 
                                     name='create-last-name' 
@@ -120,7 +180,7 @@ export default class CreateProfile extends React.Component {
                                 />
                             </li>
                             <li>
-                                <label htmlFor='create-username'>Email</label>
+                                <label htmlFor='create-username'>Email:</label>
                                 <input 
                                     type='text' 
                                     name='create-username' 
@@ -130,12 +190,62 @@ export default class CreateProfile extends React.Component {
                                 />
                             </li>
                             <li>
-                                <label htmlFor='create-password'>Password</label>
+                                <label htmlFor='create-password'>Password:</label>
                                 <input 
                                     type='password' 
                                     name='create-password' 
                                     id='create-password' 
                                     onChange={(e) => this.updateNewUserData('password', e.target.value)}
+                                />
+                            </li>
+                            <li>
+                                <label htmlFor='gender'>Gender:</label>
+                                <select 
+                                    name='gender' 
+                                    id='gender' 
+                                    onChange={(e) => this.updateNewUserData('gender', e.target.value)}
+                                >
+                                    <option value='female'>female</option>
+                                    <option value='male'>male</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label htmlFor='height'>Height:</label>
+                                <input 
+                                    type='number' 
+                                    id='height' 
+                                    name='height' 
+                                    placeholder='70 (inches)' 
+                                    min='1' 
+                                    step='1' 
+                                    onChange={(e) => this.updateNewUserData('height', e.target.value)}
+                                    required
+                                />
+                            </li>
+                            <li>
+                                <label htmlFor='weight'>Weight:</label>
+                                <input 
+                                    type='number' 
+                                    id='weight' 
+                                    name='weight' 
+                                    placeholder='170 (pounds)' 
+                                    min='1' 
+                                    step='1'
+                                    onChange={(e) => this.updateNewUserData('weight', e.target.value)} 
+                                    required
+                                />
+                            </li>
+                            <li>
+                                <label htmlFor='age'>Age:</label>
+                                <input 
+                                    type='number' 
+                                    id='age' 
+                                    name='age' 
+                                    placeholder='23 (years)' 
+                                    min='1' 
+                                    step='1'
+                                    onChange={(e) => this.updateNewUserData('age', e.target.value)} 
+                                    required
                                 />
                             </li>
                         </ul>
@@ -146,3 +256,5 @@ export default class CreateProfile extends React.Component {
         )
     }
 }
+
+export default withRouter(CreateProfile);

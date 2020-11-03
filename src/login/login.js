@@ -1,9 +1,10 @@
 import React from 'react';
 import config from '../config';
 import Context from '../context';
+import { withRouter } from 'react-router-dom';
 //import PropTypes from 'prop-types';
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     //props or context needs to live here
     static contextType = Context;
 
@@ -33,7 +34,7 @@ export default class Login extends React.Component {
     }
 
     loginUser = user => {
-        fetch(`${config.USER_API_ENDPOINT}`, {
+        fetch(`${config.USER_API_ENDPOINT}/user/:user_id`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${config.USER_API_KEY}`,
@@ -100,3 +101,5 @@ export default class Login extends React.Component {
         )
     }
 }
+
+export default withRouter(Login);

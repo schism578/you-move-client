@@ -1,8 +1,9 @@
 import React from 'react';
 import Context from '../context';
+import { withRouter } from 'react-router-dom';
 //import PropTypes from 'prop-types';
 
-export default class ResultsVariety extends React.Component {
+class ResultsVariety extends React.Component {
     //props or context needs to live here
     static contextType = Context;
     render() {
@@ -46,3 +47,5 @@ export default class ResultsVariety extends React.Component {
         )
     }
 }
+
+export default withRouter(ResultsVariety);

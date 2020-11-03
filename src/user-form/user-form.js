@@ -1,10 +1,10 @@
 import React from 'react';
 import config from '../config';
 import Context from '../context';
-//import { calculateBMR } from '../utility';
+import { withRouter } from 'react-router-dom';
 //import PropTypes from 'prop-types';
 
-export default class UserForm extends React.Component {
+class UserForm extends React.Component {
     //props or context needs to live here
     static contextType = Context;
 
@@ -44,8 +44,23 @@ export default class UserForm extends React.Component {
         })
     }
 
+    calculateBMR = () => {
+        const weightValue = (document.getElementById('weight')).value;
+        const heightValue = (document.getElementById('height')).value;
+        const ageValue = (document.getElementById('age')).value;
+        const weight = parseInt( weightValue );
+        const height = parseInt( heightValue );
+        const age = parseInt( ageValue );
+      
+        if ((document.getElementById('gender')).value === 'male') {
+          return (weight * 0.453592) * 10 + (height * 2.54) * 6.25 - age * 5 + 5
+        } else {
+          return (weight * 0.453592) * 10 + (height * 2.54) * 6.25 - age * 5 + 161
+        }
+    }
+
     addUserInfo = info => {
-        fetch(`${config.USER_API_ENDPOINT}`, {
+        fetch(`${config.USER_API_ENDPOINT}/user/:user_id`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${config.USER_API_KEY}`,
@@ -99,59 +114,14 @@ export default class UserForm extends React.Component {
             <div>
                 <form className='user-form' onSubmit={this.handleFormSubmit}>
                     <fieldset>
-                    <legend>Enter Your Info:</legend>
-                        <ul>
-                            <li>
-                                <label htmlFor='gender'>Gender:</label>
-                                <select 
-                                    name='gender' 
-                                    id='gender' 
-                                    onChange={(e) => this.updateNewUserInfo('gender', e.target.value)}
-                                >
-                                <option value='female'>female</option>
-                                <option value='male'>male</option>
-                                </select>
-                            </li>
-                            <label htmlFor='height'>Height:</label>
-                                <input 
-                                    type='number' 
-                                    id='height' 
-                                    name='height' 
-                                    placeholder='70 (inches)' 
-                                    min='1' 
-                                    step='1' 
-                                    onChange={(e) => this.updateNewUserInfo('height', e.target.value)}
-                                    required
-                                />
-                            <li>Weight:</li>
-                                <input 
-                                    type='number' 
-                                    id='weight' 
-                                    name='weight' 
-                                    placeholder='170 (pounds)' 
-                                    min='1' 
-                                    step='1'
-                                    onChange={(e) => this.updateNewUserInfo('weight', e.target.value)} 
-                                    required
-                                />
-                            <li>Age:</li>
-                                <input 
-                                    type='number' 
-                                    id='age' 
-                                    name='age' 
-                                    placeholder='23 (years)' 
-                                    min='1' 
-                                    step='1'
-                                    onChange={(e) => this.updateNewUserInfo('age', e.target.value)} 
-                                    required
-                                />
-                        </ul>
+                        
                     </fieldset>
-                    <button type='submit'>Submit</button>
+                        <button type='submit'>Submit</button>
                 </form>
             </div>
         )
     }
 }
 
+export default withRouter(UserForm);
 //UserForm.propTypes = {}

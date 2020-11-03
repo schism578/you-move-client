@@ -36,7 +36,7 @@ export default class FoodForm extends React.Component {
     }
 
     addNewFood = food => {
-        fetch(`${config.USER_API_ENDPOINT}`, {
+        fetch(`${config.USER_API_ENDPOINT}/food/:user_id`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${config.USER_API_KEY}`,
@@ -51,7 +51,7 @@ export default class FoodForm extends React.Component {
         .then(resJSON => this.props.handleFoodForm(resJSON))
     }
 
-    getCalories = (responseJson) => {
+    getCalories = (res) => {
         fetch(config.FOOD_API_ENDPOINT, {
             method: 'GET',
             headers: {
@@ -69,12 +69,12 @@ export default class FoodForm extends React.Component {
             .catch(error => this.setState({ error }))
 
         let calories = [];
-        for (let i = 0; i < responseJson.foods.length; i++) {
-            for (let j = 0; j < responseJson.foods[i].foodNutrients.length; j++) {
-                if (responseJson.foods[i].foodNutrients[j].nutrientName == 'Energy')
+        for (let i = 0; i < res.json.foods.length; i++) {
+            for (let j = 0; j < res.json.foods[i].foodNutrients.length; j++) {
+                if (res.json.foods[i].foodNutrients[j].nutrientName === 'Energy')
                     {calories.push({
-                        name: responseJson.foods[i].description, 
-                        nutrientValue: responseJson.foods[i].foodNutrients[j].value
+                        name: res.json.foods[i].description, 
+                        nutrientValue: res.json.foods[i].foodNutrients[j].value
                         })
                     }
                 return calories;
@@ -82,7 +82,7 @@ export default class FoodForm extends React.Component {
         }
     }
 
-    displayResults = (responseJson) => {
+    /*displayResults = (responseJson) => {
         const nutrients = getCalories(responseJson);
         
         document.getElementsByClassName('results-list').empty();
@@ -96,7 +96,7 @@ export default class FoodForm extends React.Component {
                     </ul>
                 );
             }
-    }
+    }*/
 
     render() {
         return (
@@ -124,7 +124,7 @@ export default class FoodForm extends React.Component {
                             </ul>
                             <button 
                                 type='submit' 
-                                onClick={(e) => this.getCalories(responseJson.foods[i])}>
+                                onClick={(e) => this.getCalories(document.getElementById('food-item').value)}>
                                 Add Item
                             </button>
                     </fieldset>

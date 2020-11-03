@@ -5,6 +5,7 @@ import Context from '../context';
 export default class SearchResults extends React.Component {
   //props or context needs to live here
   static contextType = Context;
+  
   render() {
     return (
       <div>

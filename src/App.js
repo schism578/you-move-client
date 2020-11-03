@@ -7,6 +7,9 @@ import HomePage from './home/home';
 import ProfilePage from './profile-page/profile-page';
 import UserPage from './user-page/user-page';
 import EntryPage from './entry-page/entry-page';
+import UserHistory from './user-history/user-history';
+import UpdateProfile from './update-profile/update-profile';
+import UpdateInfo from './update-info/update-info';
 import ResultsPage from './results-page/results-page';
 import Context from './context';
 import './App.css';
@@ -67,50 +70,42 @@ class App extends React.Component {
       })
       .then(data => this.setUserProfile(data))
       .catch(error => this.setState({ error }))
-
-    fetch(config.VIDEO_API_ENDPOINT, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${config.VIDEO_API_KEY}`,
-        'content-type': 'application/json',
-      }
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(res.status)
-        }
-        return res.json()
-      })
-      .then(data => this.setVideos(data))
-      .catch(error => this.setState({ error }))
   }
 
   handleCreateProfile(e) {
-    e.preventDefault() 
-    this.props.history.push('/user')
+    this.props.history.push('/log')
   }
 
   handleLogin(e) {
     e.preventDefault()
-    this.props.history.push('/user')
-  }
-
-  handleAddUser(e) {
-    e.preventDefault()
     this.props.history.push('/log')
   }
 
-  handleUserForm(e) {
-    e.preventDefault()
+  handleUserForm() {
     this.props.history.push('/log')
-  }
-
-  handleResultsVariety(e) {
-    e.preventDefault()
-    this.props.history.push('/results')
   }
 
   handleFoodForm(e) {
+    e.preventDefault()
+    this.props.history.push('/log')
+  }
+
+  handleUserHistory(e) {
+    e.preventDefault()
+    this.props.history.push('/log')
+  }
+
+  handleUpdateProfile(e) {
+    e.preventDefault()
+    this.props.history.push('/profile')
+  }
+
+  handleUpdateInfo(e) {
+    e.preventDefault()
+    this.props.history.push('/profile')
+  }
+
+  handleResultsVariety(e) {
     e.preventDefault()
     this.props.history.push('/results')
   }
@@ -174,7 +169,7 @@ renderRoutes() {
         <Route exact path='/'> 
           <HomePage />
         </Route>
-        <Route path='/profile'> 
+        <Route path='/login'> 
           <ProfilePage handleCreateProfile={this.handleCreateProfile.bind(this)}
                        handleLogin={this.handleLogin.bind(this)}
           />
@@ -187,7 +182,16 @@ renderRoutes() {
                      handleFoodForm={this.handleFoodForm.bind(this)}
                      handleCalorieInput={this.handleCalorieInput.bind(this)}
           />
-        </Route> 
+        </Route>
+        <Route path='/profile'>
+          <UserHistory handleUserHistory={this.handleUserHistory.bind(this)} />
+        </Route>
+        <Route path='/update-profile'>
+          <UpdateProfile handleUpdateProfile={this.handleUpdateProfile.bind(this)} />
+        </Route>
+        <Route path='/update-info'>
+          <UpdateInfo handleUpdateInfo={this.handleUpdateInfo.bind(this)} />
+        </Route>
         <Route path='/results'>
           <ResultsPage />
         </Route> 
@@ -207,6 +211,7 @@ renderRoutes() {
       handleLogin: this.handleLogin,
       handleUserForm: this.handleUserForm,
       handleFoodForm: this.handleFoodForm,
+      handleUserHistory: this.handleUserHistory,
       handleCalorieInput: this.handleCalorieInput,
       handleResultsVariety: this.handleResultsVariety
     }

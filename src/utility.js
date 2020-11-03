@@ -14,7 +14,7 @@ export const calculateBMR = () => {
   }
 }
 
-export const caloricDeficit =  calorieQuery - calculateBMR;
+//export const caloricDeficit =  calorieQuery - calculateBMR;
 
-export const calorieQuery = (document.getElementsByClassName('calorie-query')).value
+//export const calorieQuery = (document.getElementsByClassName('calorie-query')).value
 

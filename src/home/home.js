@@ -12,7 +12,7 @@ export default function HomePage() {
                 based against your BMR.</p>
             <p>Workout videos or healthy recipes you can do at home will display or follow one of the 
                 links below them to try something different!</p>
-            <Link to='/profile' type='button' className='start-button'>Get Started!</Link>
+            <Link to='/login' type='button' className='start-button'>Get Started!</Link>
         </div>
     )
 }
