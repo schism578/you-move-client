@@ -39,7 +39,7 @@ export default class FoodForm extends React.Component {
         fetch(`${config.USER_API_ENDPOINT}/food/:user_id`, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${config.USER_API_KEY}`,
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`,
                 'Content-Type': 'application/json',
         },
         body: JSON.stringify(food),

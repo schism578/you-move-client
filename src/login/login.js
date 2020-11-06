@@ -2,6 +2,9 @@ import React from 'react';
 import config from '../config';
 import Context from '../context';
 import { withRouter } from 'react-router-dom';
+import TokenService from '../../services/token-service'
+import AuthApiService from '../../services/auth-api-service'
+import { Button, Input } from '../Utils/Utils'
 //import PropTypes from 'prop-types';
 
 class Login extends React.Component {
@@ -18,7 +21,8 @@ class Login extends React.Component {
                 touched: false,
                 value: '',
             },
-        }
+        },
+        error: null
     }
 
     initiateUserLogin = (input, value) => {
@@ -37,7 +41,7 @@ class Login extends React.Component {
         fetch(`${config.USER_API_ENDPOINT}/user/:user_id`, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${config.USER_API_KEY}`,
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`,
                 'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
