@@ -2,9 +2,9 @@ import React from 'react';
 import config from '../config';
 import Context from '../context';
 import { withRouter } from 'react-router-dom';
-import TokenService from '../../services/token-service'
-import AuthApiService from '../../services/auth-api-service'
-import { Button, Input } from '../Utils/Utils'
+import TokenService from '../services/token-service'
+import AuthApiService from '../services/auth-api-service'
+//import { Button, Input } from '../Utils/Utils'
 //import PropTypes from 'prop-types';
 
 class Login extends React.Component {
@@ -25,6 +25,26 @@ class Login extends React.Component {
         error: null
     }
 
+    handleSubmitJwtAuth = e => {
+        e.preventDefault()
+        //this.setState({ error: null })
+        const { email, password } = e.target;
+    
+        AuthApiService.postLogin({
+            email: email.value,
+            password: password.value,
+        })
+            .then(res => {
+                email.value = ''
+                password.value = ''
+                TokenService.saveAuthToken(res.authToken)
+                this.props.onLoginSuccess()
+            })
+            .catch(res => {
+                this.setState({ error: res.error })
+            })
+    }
+
     initiateUserLogin = (input, value) => {
         this.setState({
             logUser: {
@@ -38,7 +58,7 @@ class Login extends React.Component {
     }
 
     loginUser = user => {
-        fetch(`${config.USER_API_ENDPOINT}/user/:user_id`, {
+        fetch(`${config.USER_API_ENDPOINT}/auth/login`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${TokenService.getAuthToken()}`,

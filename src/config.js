@@ -5,5 +5,6 @@ export default {
     VIDEO_API_KEY: process.env.VIDEO_API_KEY,
     FOOD_API_KEY: process.env.FOOD_API_KEY,
     USER_API_KEY: process.env.USER_API_KEY,
+    TOKEN_KEY: 'you-move-client-auth-token',
 }
 

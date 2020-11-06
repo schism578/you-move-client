@@ -1,6 +1,7 @@
 import React from 'react';
 import config from '../config';
 import Context from '../context';
+import TokenService from '../services/token-service';
 //import PropTypes from 'prop-types';
 
 export default class FoodForm extends React.Component {
