@@ -115,47 +115,6 @@ class App extends React.Component {
     })
   }
 
-  /*formatQueryParams(params) {
-    const queryItems = Object.keys(params)
-        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-    return queryItems.join('&');
-  }
-
-  getVideos(maxResults=3) {
-    const bmr = calculateBMR();
-    const searchBmr = ((bmr/100).toFixed()*100);
-    const calorieQuery = (document.getElementsByClassName('calorie-query')).value
-    const caloricDeficit =  calorieQuery - bmr;
-    const searchCalories = ((caloricDeficit/100).toFixed()*100);
-    const params = {
-      key: `${config.VIDEO_API_KEY}`,
-      q: `{${searchCalories} calorie ${caloricDeficit} > 0 ? 'workout' : 'recipe'}`,
-      part: 'snippet',
-      maxResults,
-      type: 'video',
-      list: `{${caloricDeficit} > 0 ? 'exercise' : 'cooking'}`
-    }
-  
-    const queryString = this.formatQueryParams(params)
-    const videoURL = `${config.VIDEO_API_ENDPOINT} + '?' + ${queryString}`
-  
-    return fetch(videoURL)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(response.statusText);
-      })
-      .then(responseJson => {
-        //displayInfo(searchBmr, searchCalories)
-        //displayVideoResults(responseJson)
-      })
-      
-      .catch(err => {
-        document.getElementById('error-message').text(`Something went wrong with YouTube: ${err.message}`);
-      });
-}*/
-
 renderRoutes() {
     return (
       <>
@@ -217,8 +176,9 @@ renderRoutes() {
           <ErrorBoundary>
           <>
           <header className='App__header'>
+            <img src={require('./images/youmove_icon.png')} alt='you move icon' id='app_icon'/>
             <h1>
-              <Link to='/'>YouMove</Link>{' '}
+              <Link to='/' style={{color: 'white'}}>YouMove</Link>{' '}
             </h1>
           </header>
           <main className='App__main'>{this.renderRoutes()}</main>

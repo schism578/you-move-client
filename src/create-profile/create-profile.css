@@ -1,0 +1,43 @@
+h2, legend, label, li {
+    font-family: 'Stardos Stencil', cursive;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+legend, label, li {
+    font-size: 18px;
+}
+
+fieldset {
+    text-align: center;
+}
+
+ul { 
+	display: inline-block; 
+	text-align: left; 
+}
+
+button {
+    margin: 10px auto;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: white;
+    background-color: rgb(192, 17, 17);
+}
+
+button:focus {
+    background: rgb(167, 162, 162);
+}
+
+button:hover {
+    background: lightgray;
+    color: black;
+    cursor: pointer;
+}
+
+button:visited {
+    background-color: gb(192, 17, 17);
+    color: black;
+}

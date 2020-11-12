@@ -1,0 +1,13 @@
+.calorie-query {
+    margin: 10px;
+}
+
+.nav_link {
+    color: white;
+}
+
+.nav_link:hover {
+    cursor: pointer;
+    color: red;
+}
+  

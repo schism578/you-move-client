@@ -1,0 +1,29 @@
+p {
+    font-family: 'Monda', sans-serif;
+    max-width: 60%;
+    margin: 20px auto;
+    color: white;
+}
+
+.start-button {
+        margin: 10px auto;
+        padding: 2px 8px;
+        border: 2px solid gray;
+        border-radius: 4px;
+        color: white;
+        background-color: rgb(192, 17, 17);
+}
+
+.start-button:focus {
+    background: rgb(167, 162, 162);
+}
+
+.start-button:hover {
+    background: lightgray;
+    color: black;
+    cursor: pointer;
+}
+
+.start-button:visited {
+    background-color: gb(192, 17, 17);
+}

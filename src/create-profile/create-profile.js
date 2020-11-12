@@ -2,6 +2,7 @@ import React from 'react';
 import config from '../config';
 import Context from '../context';
 import { withRouter } from 'react-router-dom';
+import './create-profile.css'
 //import PropTypes from 'prop-types';
 
 
@@ -153,14 +154,14 @@ class CreateProfile extends React.Component {
         return (
             <div>
                 <header role='banner'>
-                    <h1>Create a Profile</h1>
+                    <h2>Create a Profile</h2>
                 </header>
                 <form className='signup-form' onSubmit={this.handleFormSubmit}>
                     <fieldset>
-                    <legend>Enter Your Info:</legend>
+                    <legend>Enter Your Info:  </legend>
                         <ul>
                             <li>
-                                <label htmlFor='create-first-name'>First Name:</label>
+                                <label htmlFor='create-first-name'>First Name:  </label>
                                 <input  
                                     type='text' 
                                     name='create-first-name' 
@@ -170,7 +171,7 @@ class CreateProfile extends React.Component {
                                 />
                             </li>
                             <li>
-                                <label htmlFor='create-last-name'>Last Name:</label>
+                                <label htmlFor='create-last-name'>Last Name:  </label>
                                 <input 
                                     type='text' 
                                     name='create-last-name' 
@@ -180,7 +181,7 @@ class CreateProfile extends React.Component {
                                 />
                             </li>
                             <li>
-                                <label htmlFor='create-username'>Email:</label>
+                                <label htmlFor='create-username'>Email:  </label>
                                 <input 
                                     type='text' 
                                     name='create-username' 
@@ -190,7 +191,7 @@ class CreateProfile extends React.Component {
                                 />
                             </li>
                             <li>
-                                <label htmlFor='create-password'>Password:</label>
+                                <label htmlFor='create-password'>Password:  </label>
                                 <input 
                                     type='password' 
                                     name='create-password' 
@@ -199,7 +200,7 @@ class CreateProfile extends React.Component {
                                 />
                             </li>
                             <li>
-                                <label htmlFor='gender'>Gender:</label>
+                                <label htmlFor='gender'>Gender:  </label>
                                 <select 
                                     name='gender' 
                                     id='gender' 
@@ -210,7 +211,7 @@ class CreateProfile extends React.Component {
                                 </select>
                             </li>
                             <li>
-                                <label htmlFor='height'>Height:</label>
+                                <label htmlFor='height'>Height:  </label>
                                 <input 
                                     type='number' 
                                     id='height' 
@@ -223,7 +224,7 @@ class CreateProfile extends React.Component {
                                 />
                             </li>
                             <li>
-                                <label htmlFor='weight'>Weight:</label>
+                                <label htmlFor='weight'>Weight:  </label>
                                 <input 
                                     type='number' 
                                     id='weight' 
@@ -236,7 +237,7 @@ class CreateProfile extends React.Component {
                                 />
                             </li>
                             <li>
-                                <label htmlFor='age'>Age:</label>
+                                <label htmlFor='age'>Age:  </label>
                                 <input 
                                     type='number' 
                                     id='age' 
@@ -249,6 +250,7 @@ class CreateProfile extends React.Component {
                                 />
                             </li>
                         </ul>
+                        <br></br>
                         <button type='submit'>Sign Up</button>
                     </fieldset>
                 </form>

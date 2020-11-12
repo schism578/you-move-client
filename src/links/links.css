@@ -1,0 +1,14 @@
+#other-links {
+    margin: 0 5px;
+    font-size: 16px;
+    color: white;
+}
+
+#other-links:hover {
+    cursor: pointer;
+    color: red;
+}
+
+#links-title {
+    color: rgb(199, 24, 24);
+}

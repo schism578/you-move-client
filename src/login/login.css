@@ -1,0 +1,13 @@
+h2 {
+    color: rgb(199, 24, 24);
+    font-size: 24px;
+}
+
+fieldset {
+    text-align: center;
+}
+
+ul { 
+	display: inline-block; 
+	text-align: left; 
+}

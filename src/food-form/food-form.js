@@ -2,6 +2,7 @@ import React from 'react';
 import config from '../config';
 import Context from '../context';
 import TokenService from '../services/token-service';
+import './food-form.css';
 //import PropTypes from 'prop-types';
 
 export default class FoodForm extends React.Component {
@@ -106,23 +107,28 @@ export default class FoodForm extends React.Component {
                     <fieldset>
                         <legend>Enter Your Food:</legend>
                             <ul>
-                                <label htmlFor='food-item'>Food Item:</label>
-                                    <input 
-                                        type='text' 
-                                        id='food-item' 
-                                        name='food-item' 
-                                        placeholder='fat free yogurt'
-                                        onChange={(e) => this.updateAddFood('food-item', e.target.value)}
-                                    />
-                                <label htmlFor='quantity'>Quantity:</label>
-                                    <input
-                                        type='text'
-                                        id='quantity'
-                                        name='quantity'
-                                        placeholder='2/3 cup'
-                                        onChange={(e) => this.updateAddFood('quantity', e.target.value)}
-                                    />
+                                <li>
+                                    <label htmlFor='food-item'>Food Item:  </label>
+                                        <input 
+                                            type='text' 
+                                            id='food-item' 
+                                            name='food-item' 
+                                            placeholder='fat free yogurt'
+                                            onChange={(e) => this.updateAddFood('food-item', e.target.value)}
+                                        />
+                                </li>
+                                <li>
+                                    <label htmlFor='quantity'>Quantity:  </label>
+                                        <input
+                                            type='text'
+                                            id='quantity'
+                                            name='quantity'
+                                            placeholder='2/3 cup'
+                                            onChange={(e) => this.updateAddFood('quantity', e.target.value)}
+                                        />
+                                </li>
                             </ul>
+                            <br></br>
                             <button 
                                 type='submit' 
                                 onClick={(e) => this.getCalories(document.getElementById('food-item').value)}>

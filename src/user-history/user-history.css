@@ -1,3 +1,29 @@
 ul {
     list-style-type: none;
 }
+
+h2 {
+    color: rgb(199, 24, 24);
+    font-size: 24px;
+}
+
+.profile_nav, .profile_return {
+    font-size: 16px;
+    color: white;
+}
+
+.profile_nav:hover, .profile_return:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.react-calendar__navigation__label, .react-calendar__navigation__arrow {
+    color: black;
+    background-color: lightgray;
+}
+
+.react-calendar__tile {
+    height: 4em;
+    color: black;
+    background-color: lightgray;
+}

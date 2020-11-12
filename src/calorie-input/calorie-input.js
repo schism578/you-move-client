@@ -1,6 +1,7 @@
 import React from 'react';
 import Context from '../context';
 import { NavLink, withRouter } from 'react-router-dom';
+import './calorie-input.css';
 //import PropTypes from 'prop-types';
 
 class CalorieInput extends React.Component {
@@ -12,7 +13,7 @@ class CalorieInput extends React.Component {
             <div>
                 <form className='calorie-input' onSubmit={this.props.handleCalorieInput}>
                     <fieldset>
-                        <legend>Or Just Enter Your Daily Calories:</legend>
+                        <legend>Or Just Enter Your Daily Calories</legend>
                             <input 
                                 type='number' 
                                 className='calorie-query' 
@@ -22,7 +23,7 @@ class CalorieInput extends React.Component {
                                 required
                             />
                             <br></br>
-                            <NavLink to='/profile'>View Your History</NavLink>
+                            <NavLink to='/profile' className='nav_link'>View Your History</NavLink>
                     </fieldset>
                 </form>
             </div>
