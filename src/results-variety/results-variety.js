@@ -9,18 +9,9 @@ class ResultsVariety extends React.Component {
     //props or context needs to live here
     static contextType = Context;
 
-    calculateBMR() {
-        const weightValue = this.state.newUser.weight.value;
-        const heightValue = this.state.newUser.height.value;
-        const ageValue = this.state.newUser.age.value;
-        const weight = parseInt( weightValue );
-        const height = parseInt( heightValue );
-        const age = parseInt( ageValue );
-      
-        if (this.state.newUser.gender.value === 'male') {
-          return (weight * 0.453592) * 10 + (height * 2.54) * 6.25 - age * 5 + 5
-        } else {
-          return (weight * 0.453592) * 10 + (height * 2.54) * 6.25 - age * 5 + 161
+    state = {
+        currentUser: {
+            ...userProfile
         }
     }
 
@@ -31,7 +22,7 @@ class ResultsVariety extends React.Component {
       }
     
       getVideos(maxResults=3) {
-        const bmr = calculateBMR();
+        const bmr = `${this.props.userProfile.bmr}`;
         const searchBmr = ((bmr/100).toFixed()*100);
         const calorieQuery = (document.getElementsByClassName('calorie-query')).value
         const caloricDeficit =  calorieQuery - bmr;
@@ -58,12 +49,30 @@ class ResultsVariety extends React.Component {
           .then(responseJson => {
             displayInfo(searchBmr, searchCalories)
             displayVideoResults(responseJson)
+            this.props.history.push('/results');
           })
           
           .catch(err => {
             document.getElementById('error-message').text(`Something went wrong with YouTube: ${err.message}`);
           });
     }
+
+    displayVideoResults(responseJson) {
+        //$('#results-list').empty();
+        for (let i = 0; i < responseJson.items.length; i++){
+          $('#results-list').append(
+            `<li><h4>${responseJson.items[i].snippet.title}</h4>
+            <p>${responseJson.items[i].snippet.description}</p>
+            <div class="videoWrapper">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}" 
+            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen></iframe>
+            </div>
+            </li>
+            `
+          )};
+        $('#results').removeClass('hidden');
+      }
 
     render() {
         return (
