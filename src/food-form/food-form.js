@@ -37,22 +37,6 @@ export default class FoodForm extends React.Component {
         })
     }
 
-    addNewFood = food => {
-        fetch(`${config.USER_API_ENDPOINT}/food/:user_id`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${TokenService.getAuthToken()}`,
-                'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(food),
-        })
-        .then(res => {
-            console.log(JSON.stringify(food))
-            return res.json()
-        })
-        .then(resJSON => this.props.handleFoodForm(resJSON))
-    }
-
     getCalories = (res) => {
         fetch(config.FOOD_API_ENDPOINT, {
             method: 'GET',
@@ -82,6 +66,7 @@ export default class FoodForm extends React.Component {
                 return calories;
             }
         }
+        this.context.handleAddCalories(calories)
     }
 
     /*displayResults = (responseJson) => {

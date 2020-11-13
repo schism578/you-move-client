@@ -29,6 +29,9 @@ class App extends React.Component {
       hasError: false,
     },
     foods: [],
+    calories: {
+      value: '',
+    },
     videos: [],
   }
 
@@ -80,6 +83,10 @@ class App extends React.Component {
   }
 
   handleFoodForm(e) {
+    this.props.history.push('/log')
+  }
+
+  handleAddCalories(e) {
     this.props.history.push('/log')
   }
 
@@ -166,6 +173,7 @@ renderRoutes() {
       handleLogin: this.handleLogin,
       handleUserForm: this.handleUserForm,
       handleFoodForm: this.handleFoodForm,
+      handleAddCalories: this.handleAddCalories,
       handleUserHistory: this.handleUserHistory,
       handleCalorieInput: this.handleCalorieInput,
       handleResultsVariety: this.handleResultsVariety

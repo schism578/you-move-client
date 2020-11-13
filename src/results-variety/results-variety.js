@@ -9,11 +9,11 @@ class ResultsVariety extends React.Component {
     //props or context needs to live here
     static contextType = Context;
 
-    state = {
+    /*state = {
         currentUser: {
             ...userProfile
         }
-    }
+    }*/
 
     formatQueryParams(params) {
         const queryItems = Object.keys(params)
@@ -24,7 +24,7 @@ class ResultsVariety extends React.Component {
       getVideos(maxResults=3) {
         const bmr = `${this.props.userProfile.bmr}`;
         const searchBmr = ((bmr/100).toFixed()*100);
-        const calorieQuery = (document.getElementsByClassName('calorie-query')).value
+        const calorieQuery = this.context.calories.value
         const caloricDeficit =  calorieQuery - bmr;
         const searchCalories = ((caloricDeficit/100).toFixed()*100);
         const params = {
@@ -47,8 +47,8 @@ class ResultsVariety extends React.Component {
             throw new Error(response.statusText);
           })
           .then(responseJson => {
-            displayInfo(searchBmr, searchCalories)
-            displayVideoResults(responseJson)
+            //displayInfo(searchBmr, searchCalories)
+            //displayVideoResults(responseJson)
             this.props.history.push('/results');
           })
           
@@ -57,7 +57,7 @@ class ResultsVariety extends React.Component {
           });
     }
 
-    displayVideoResults(responseJson) {
+    /*displayVideoResults(responseJson) {
         //$('#results-list').empty();
         for (let i = 0; i < responseJson.items.length; i++){
           $('#results-list').append(
@@ -72,7 +72,7 @@ class ResultsVariety extends React.Component {
             `
           )};
         $('#results').removeClass('hidden');
-      }
+      }*/
 
     render() {
         return (
