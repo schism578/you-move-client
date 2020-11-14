@@ -7,6 +7,7 @@ const Context = React.createContext({
     newUser: {},
     addUser: () => {},
     addFood: () => {},
+    handleAddCalories: () => {},
     deleteUser: () => {},
 })
 

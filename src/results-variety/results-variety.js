@@ -22,8 +22,8 @@ class ResultsVariety extends React.Component {
       }
     
       getVideos(maxResults=3) {
-        const bmr = `${this.props.userProfile.bmr}`;
-        const searchBmr = ((bmr/100).toFixed()*100);
+        const bmr = `${this.context.userProfile.bmr}`;
+        //const searchBmr = ((bmr/100).toFixed()*100);
         const calorieQuery = this.context.calories.value
         const caloricDeficit =  calorieQuery - bmr;
         const searchCalories = ((caloricDeficit/100).toFixed()*100);

@@ -86,7 +86,7 @@ class App extends React.Component {
     this.props.history.push('/log')
   }
 
-  handleAddCalories(e) {
+  handleAddCalories = (e) => {
     this.props.history.push('/log')
   }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import config from '../config';
 import Context from '../context';
-import TokenService from '../services/token-service';
+//import TokenService from '../services/token-service';
 import './food-form.css';
 //import PropTypes from 'prop-types';
 
@@ -51,22 +51,22 @@ export default class FoodForm extends React.Component {
               }
               return res.json()
             })
-            .then(data => this.updateAddFood(data))
-            .catch(error => this.setState({ error }))
-
-        let calories = [];
-        for (let i = 0; i < res.json.foods.length; i++) {
-            for (let j = 0; j < res.json.foods[i].foodNutrients.length; j++) {
-                if (res.json.foods[i].foodNutrients[j].nutrientName === 'Energy')
-                    {calories.push({
-                        name: res.json.foods[i].description, 
-                        nutrientValue: res.json.foods[i].foodNutrients[j].value
-                        })
+            .then(data => {
+                let calories = [];
+                for (let i = 0; i < data.foods.length; i++) {
+                    for (let j = 0; j < data.foods[i].foodNutrients.length; j++) {
+                        if (data.foods[i].foodNutrients[j].nutrientName === 'Energy')
+                            {calories.push({
+                                name: data.foods[i].description, 
+                                nutrientValue: data.foods[i].foodNutrients[j].value
+                                })
+                            }
                     }
+                }
                 return calories;
-            }
-        }
-        this.context.handleAddCalories(calories)
+            })
+            .catch(error => this.setState({ error }))
+            this.context.handleAddCalories()
     }
 
     /*displayResults = (responseJson) => {
@@ -116,7 +116,7 @@ export default class FoodForm extends React.Component {
                             <br></br>
                             <button 
                                 type='submit' 
-                                onClick={(e) => this.getCalories(document.getElementById('food-item').value)}>
+                                onClick={(e) => this.getCalories(newFood)}>
                                 Add Item
                             </button>
                     </fieldset>
