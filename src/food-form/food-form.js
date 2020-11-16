@@ -20,8 +20,11 @@ export default class FoodForm extends React.Component {
                 value: '',
             },
         },
+        /*fdcId: {
+            value: ''
+        },*/
         calories: {
-            value: '',
+            value: ''
         }
     }
 
@@ -37,8 +40,8 @@ export default class FoodForm extends React.Component {
         })
     }
 
-    getCalories = (res) => {
-        fetch(config.FOOD_API_ENDPOINT, {
+    getFoodItem = (res) => {
+        fetch(`${config.FOOD_API_ENDPOINT}/${query}`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${config.FOOD_API_KEY}`,
@@ -46,27 +49,49 @@ export default class FoodForm extends React.Component {
             }
           })
             .then(res => {
-              if (!res.ok) {
-                throw new Error(res.status)
-              }
-              return res.json()
+                if (!res.ok) {
+                    throw new Error(res.status)
+                }
+                console.log(res.json)
+                return res.json()
+            })
+            .then(res => {
+                return `${res.foods[0].fdcId}`
+            })
+            .catch(error => this.setState({ error }))
+    }
+
+    getCalories = (res) => {
+        fetch(`${config.CALORIE_API_ENDPOINT}/${fdcId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${config.FOOD_API_KEY}`,
+                'content-type': 'application/json',
+            }
+        })
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(res.status)
+                }
+                return res.json()
             })
             .then(data => {
                 let calories = [];
-                for (let i = 0; i < data.foods.length; i++) {
-                    for (let j = 0; j < data.foods[i].foodNutrients.length; j++) {
-                        if (data.foods[i].foodNutrients[j].nutrientName === 'Energy')
+                let servingSize = [];
+                    for (let i = 0; i < data.foods[i].foodNutrients.length; i++) {
+                        if (data.foods[i].foodNutrients[i].nutrientName === 'Energy')
                             {calories.push({
                                 name: data.foods[i].description, 
-                                nutrientValue: data.foods[i].foodNutrients[j].value
+                                nutrientValue: data.foods[i].foodNutrients[i].value,
                                 })
                             }
                     }
-                }
+                    {servingSize.push({
+                        servingSize: data.foods.servingSize.value,
+                    })}
                 this.context.handleAddCalories(calories)
-                console.log(this.calories)
+                console.log(this.calories, this.servingSize)
             })
-            .catch(error => this.setState({ error }))
     }
 
     /*displayResults = (responseJson) => {
@@ -102,6 +127,12 @@ export default class FoodForm extends React.Component {
                                             onChange={(e) => this.updateAddFood('query', e.target.value)}
                                         />
                                 </li>
+                                <br></br>
+                                <button 
+                                    type='submit' 
+                                    onClick={(e) => this.getFoodItem()}>
+                                    Add Item
+                                </button>
                                 <li>
                                     <label htmlFor='quantity'>Quantity:  </label>
                                         <input
@@ -112,13 +143,13 @@ export default class FoodForm extends React.Component {
                                             onChange={(e) => this.updateAddFood('quantity', e.target.value)}
                                         />
                                 </li>
+                                <br></br>
+                                <button 
+                                    type='submit' 
+                                    onClick={(e) => this.getCalories()}>
+                                    Add Serving
+                                </button>
                             </ul>
-                            <br></br>
-                            <button 
-                                type='submit' 
-                                onClick={(e) => this.getCalories()}>
-                                Add Item
-                            </button>
                     </fieldset>
                 </form>
             </div>

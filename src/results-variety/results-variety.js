@@ -51,10 +51,7 @@ class ResultsVariety extends React.Component {
             //displayVideoResults(responseJson)
             this.props.history.push('/results');
           })
-          
-          .catch(err => {
-            document.getElementById('error-message').text(`Something went wrong with YouTube: ${err.message}`);
-          });
+          .catch(error => this.setState({ error }))
     }
 
     /*displayVideoResults(responseJson) {
