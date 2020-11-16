@@ -63,10 +63,10 @@ export default class FoodForm extends React.Component {
                             }
                     }
                 }
-                return calories;
+                this.context.handleAddCalories(calories)
+                console.log(this.calories)
             })
             .catch(error => this.setState({ error }))
-            this.context.handleAddCalories()
     }
 
     /*displayResults = (responseJson) => {
@@ -93,13 +93,13 @@ export default class FoodForm extends React.Component {
                         <legend>Enter Your Food:</legend>
                             <ul>
                                 <li>
-                                    <label htmlFor='food-item'>Food Item:  </label>
+                                    <label htmlFor='query'>Food Item:  </label>
                                         <input 
                                             type='text' 
-                                            id='food-item' 
-                                            name='food-item' 
+                                            id='query' 
+                                            name='query' 
                                             placeholder='fat free yogurt'
-                                            onChange={(e) => this.updateAddFood('food-item', e.target.value)}
+                                            onChange={(e) => this.updateAddFood('query', e.target.value)}
                                         />
                                 </li>
                                 <li>
@@ -116,7 +116,7 @@ export default class FoodForm extends React.Component {
                             <br></br>
                             <button 
                                 type='submit' 
-                                onClick={(e) => this.getCalories(newFood)}>
+                                onClick={(e) => this.getCalories()}>
                                 Add Item
                             </button>
                     </fieldset>
