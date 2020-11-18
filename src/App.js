@@ -28,8 +28,12 @@ class App extends React.Component {
       bmr: '',
       hasError: false,
     },
-    foods: [],
     calories: {
+      value: '',
+    },
+    newCalories: {
+      hasError: false,
+      touched: false,
       value: '',
     },
     videos: [],
@@ -38,13 +42,6 @@ class App extends React.Component {
   setUserProfile = profile => {
     this.setState({
       profile,
-      error: null,
-    })
-  }
-
-  setFoods = foods => {
-    this.setState({
-      foods,
       error: null,
     })
   }
@@ -82,7 +79,8 @@ class App extends React.Component {
     this.props.history.push('/log')
   }
 
-  handleFoodForm(e) {
+  handleFoodForm = newCalories => {
+    this.handleAddCalories(newCalories)
     this.props.history.push('/log')
   }
 

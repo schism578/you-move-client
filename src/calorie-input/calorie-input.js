@@ -17,7 +17,7 @@ class CalorieInput extends React.Component {
                             <input 
                                 type='number' 
                                 className='calorie-query' 
-                                placeholder='2000' 
+                                placeholder={`${this.context.handleFoodForm} ? ${this.context.handleAddCalories} : '2000'`} 
                                 min='1' 
                                 step='1' 
                                 required

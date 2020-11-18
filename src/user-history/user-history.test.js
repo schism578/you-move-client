@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import UserHistory from './user-history';
+import { BrowserRouter } from 'react-router-dom';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<UserHistory />, div);
+  ReactDOM.render(
+  <BrowserRouter>
+    <UserHistory />
+  </BrowserRouter>, 
+  div);
   ReactDOM.unmountComponentAtNode(div);
 });
