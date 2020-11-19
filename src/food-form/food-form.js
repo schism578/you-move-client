@@ -41,53 +41,65 @@ export default class FoodForm extends React.Component {
         })
     }
 
-    getFoodItem = (res) => {
-        fetch(`${config.FOOD_API_ENDPOINT}/${this.state.newFood.query.value}`, {
+    formatQueryParams(params) {
+        const queryItems = Object.keys(params)
+            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+        return queryItems.join('&');
+    }
+
+    getFoodItem = () => {
+        const params = {
+            api_key: `${config.FOOD_API_KEY}`,
+            query: `${this.state.newFood.query.value}`,
+        };
+        const queryString = this.formatQueryParams(params);
+        const foodURL = `${config.FOOD_API_ENDPOINT}?${queryString}`;
+
+        fetch(foodURL, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${config.FOOD_API_KEY}`,
               'content-type': 'application/json',
             }
-          })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(res.status)
+        })
+            .then(resJson => {
+                if (!resJson.ok) {
+                    throw new Error(resJson.status)
                 }
-                console.log(res.json)
-                return res.json()
+                return resJson()
             })
-            .then(res => {
-                return res.foods[0].fdcId;
-            })
-            .then(fdcId => {
-                fetch(`${config.CALORIE_API_ENDPOINT}/${fdcId}`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${config.FOOD_API_KEY}`,
-                        'content-type': 'application/json',
-                    }
+            .then(resJson => {
+                    return resJson.foods[0].fdcId;
                 })
-                    .then(res => {
-                        if (!res.ok) {
-                            throw new Error(res.status)
+                .then(fdcId => {
+                    fetch(`${config.CALORIE_API_ENDPOINT}/${fdcId}?${config.FOOD_API_KEY}`, {
+                        method: 'GET',
+                        headers: {
+                          'Authorization': `Bearer ${config.FOOD_API_KEY}`,
+                          'content-type': 'application/json',
                         }
-                        return res.json()
                     })
-                    .then(data => {
-                        let calories = data.labelNutrients.calories.value;
-                        let servingSize = data.servingSize;
-                        let itemCalories = (this.state.newFood.serving * 28.35)/servingSize * calories;
-                        this.context.handleAddCalories(itemCalories)
-                        console.log(itemCalories)
-                    })
-            })
-            .catch(error => this.setState({ error }))
+                        .then(resJson => {
+                            if (!resJson.ok) {
+                                throw new Error(resJson.status)
+                            }
+                            return resJson()
+                        })
+                        .then(data => {
+                            let calories = data.labelNutrients.calories.value;
+                            let servingSize = data.servingSize;
+                            let itemCalories = (this.state.newFood.serving * 28.35)/servingSize * calories;
+                            this.context.handleAddCalories(itemCalories)
+                            console.log(itemCalories)
+                        })
+                })
+                .catch(error => this.setState({ error }))
     }
 
     render() {
         return (
             <div>
-                <form className='food-form' onSubmit={this.props.handleFoodForm}>
+                <form className='food-form' onSubmit={this.getFoodItem}>
                     <fieldset>
                         <legend>Enter Your Food:</legend>
                             <ul>
@@ -113,11 +125,7 @@ export default class FoodForm extends React.Component {
                                 </li>
                             </ul>
                             <br></br>
-                            <button 
-                                type='submit' 
-                                onClick={(res) => {this.getFoodItem(res)}}>
-                                Add Serving
-                            </button>
+                            <button type='submit'>Add Serving</button>
                     </fieldset>
                 </form>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Link, withRouter } from 'react-router-dom';
 import ErrorBoundary from './error-boundary';
-import config from './config';
+//import config from './config';
 //import { calculateBMR } from './utility';
 import HomePage from './home/home';
 import ProfilePage from './profile-page/profile-page';
@@ -53,7 +53,7 @@ class App extends React.Component {
     })
   }
 
-  componentDidMount() {
+  /*componentDidMount() {
     fetch(config.USER_API_ENDPOINT, {
       method: 'GET',
       headers: {
@@ -69,7 +69,7 @@ class App extends React.Component {
       })
       .then(data => this.setUserProfile(data))
       .catch(error => this.setState({ error }))
-  }
+  }*/
 
   handleCreateProfile(e) {
     this.props.history.push('/log')
