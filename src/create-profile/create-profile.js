@@ -2,12 +2,15 @@ import React from 'react';
 import config from '../config';
 import Context from '../context';
 import { withRouter } from 'react-router-dom';
+import AuthApiService from '../services/auth-api-service';
 import './create-profile.css'
 //import PropTypes from 'prop-types';
 
 
 class CreateProfile extends React.Component {
-    //either props or context needs to live here
+    static defaultProps = {
+        onRegistrationSuccess: () => {}
+      }    
     static contextType = Context;
 
     state = {
@@ -89,6 +92,9 @@ class CreateProfile extends React.Component {
         weight: this.state.newUser.weight.value,
         age: this.state.newUser.age.value,
         }
+        this.setState({ error: null })
+            AuthApiService.postUser(newUser)
+        .then(() => {
         if (newUser.first_name === '0') {
             this.setState({
                 error: 'Please enter first name'
@@ -129,10 +135,12 @@ class CreateProfile extends React.Component {
                 error: 'Please enter age'
             })
         } else {
+        this.props.onRegistrationSuccess()
         newUser.bmr = ((this.calculateBMR()/100).toFixed()*100);
         this.addNewUser(newUser)
-        this.props.history.push('/log');
+        this.props.history.push('/log')
         }
+        })
     }
 
     calculateBMR = () => {

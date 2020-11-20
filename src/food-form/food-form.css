@@ -6,3 +6,7 @@ ul {
 	display: inline-block; 
 	text-align: left; 
 }
+
+#serving {
+	width: 16em;
+}

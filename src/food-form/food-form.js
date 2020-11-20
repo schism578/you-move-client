@@ -6,7 +6,7 @@ import './food-form.css';
 //import PropTypes from 'prop-types';
 
 export default class FoodForm extends React.Component {
-    static contextType = Context;
+    /*static contextType = Context;
 
     state = {
         newFood: {
@@ -47,7 +47,8 @@ export default class FoodForm extends React.Component {
         return queryItems.join('&');
     }
 
-    getFoodItem = () => {
+    getFoodItem = (e) => {
+        e.preventDefault()
         const params = {
             api_key: `${config.FOOD_API_KEY}`,
             query: `${this.state.newFood.query.value}`,
@@ -66,13 +67,21 @@ export default class FoodForm extends React.Component {
                 if (!resJson.ok) {
                     throw new Error(resJson.status)
                 }
-                return resJson()
+                return resJson.json()
             })
             .then(resJson => {
-                    return resJson.foods[0].fdcId;
-                })
+                console.log(resJson)
+                let usdaCalories = (resJson.json).find(
+                    (nutrientId) => {
+                        if (nutrientId === '1008') {
+                        return resJson.foods.foodNutrients.value.push(this.context.calories)
+                        }
+                    } 
+                )
+                return usdaCalories              
+            })
                 .then(fdcId => {
-                    fetch(`${config.CALORIE_API_ENDPOINT}/${fdcId}?${config.FOOD_API_KEY}`, {
+                    fetch(`${config.CALORIE_API_ENDPOINT}/${fdcId}?api_key=${config.FOOD_API_KEY}`, {
                         method: 'GET',
                         headers: {
                           'Authorization': `Bearer ${config.FOOD_API_KEY}`,
@@ -83,18 +92,17 @@ export default class FoodForm extends React.Component {
                             if (!resJson.ok) {
                                 throw new Error(resJson.status)
                             }
-                            return resJson()
+                            console.log(resJson)
+                            return resJson.json()
                         })
-                        .then(data => {
-                            let calories = data.labelNutrients.calories.value;
-                            let servingSize = data.servingSize;
-                            let itemCalories = (this.state.newFood.serving * 28.35)/servingSize * calories;
-                            this.context.handleAddCalories(itemCalories)
-                            console.log(itemCalories)
-                        })
-                })
-                .catch(error => this.setState({ error }))
-    }
+                            
+                            if (data.foods[0].foodNutrients.nutrientId === 1008) {
+                                return data.foods[0].foodNutrients.nutrientName.value
+                            }
+                            //let servingSize = data.servingSize;
+                            //let itemCalories = (this.state.newFood.serving * 28.35)/servingSize * calories;
+                            //this.context.handleAddCalories(itemCalories)
+                .catch(error => this.setState({ error }))}*/
 
     render() {
         return (
@@ -119,7 +127,7 @@ export default class FoodForm extends React.Component {
                                             type='text'
                                             id='serving'
                                             name='serving'
-                                            placeholder='2 (ounces)'
+                                            placeholder='1 or 0.5(based on nutrition label)'
                                             onChange={(e) => this.updateAddFood('serving', e.target.value)}
                                         />
                                 </li>
