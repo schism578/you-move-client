@@ -9,13 +9,16 @@ class ResultsVariety extends React.Component {
     //props or context needs to live here
     static contextType = Context;
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-          name: 'React'
+            selectedOption: '',
+            calories: {
+                error: null,
+            }
         };
         this.onValueChange = this.onValueChange.bind(this);
-        this.formSubmit = this.resultsVarietyFormSubmit.bind(this);
+        this.resultsVarietyFormSubmit = this.resultsVarietyFormSubmit.bind(this);
       } 
 
     onValueChange(e) {
@@ -26,7 +29,6 @@ class ResultsVariety extends React.Component {
     
     resultsVarietyFormSubmit(e) {
         e.preventDefault();
-        console.log(this.state.selectedOption)
     }
 
     handleFormSubmit = e => {
@@ -58,7 +60,7 @@ class ResultsVariety extends React.Component {
         })
     }
 
-    displayVideoResults = (responseJson) => {
+    /*displayVideoResults = (responseJson) => {
         for (let i = 0; i < responseJson.items.length; i++){
             return `${<li>
                 <h4>${responseJson.items[i].snippet.title}</h4>
@@ -70,7 +72,7 @@ class ResultsVariety extends React.Component {
                         </div>
             </li>}`
         };
-    }
+    }*/
 
     formatQueryParams(params) {
         const queryItems = Object.keys(params)
@@ -90,7 +92,7 @@ class ResultsVariety extends React.Component {
             part: 'snippet',
             maxResults,
             type: 'video',
-            list: `{${caloricDeficit} > 0 ? 'exercise' : 'cooking'}`
+            list: `{${caloricDeficit} > 0 ? ${this.state.selectedOption} : 'cooking'}`
         }
       
         const queryString = this.formatQueryParams(params)
@@ -105,7 +107,18 @@ class ResultsVariety extends React.Component {
             })
             .then(responseJson => {
                 //displayInfo(searchBmr, searchCalories)
-                displayVideoResults(responseJson)
+                //displayVideoResults(responseJson)
+                for (let i = 0; i < responseJson.items.length; i++){
+                    return `${<li>
+                        <h4>${responseJson.items[i].snippet.title}</h4>
+                            <p>${responseJson.items[i].snippet.description}</p>
+                                <div class="videoWrapper">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}" 
+                                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                                </div>
+                    </li>}`
+                }
                 this.props.history.push('/results');
             })
             .catch(error => this.setState({ error }))
