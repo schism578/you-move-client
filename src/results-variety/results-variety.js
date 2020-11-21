@@ -9,10 +9,40 @@ class ResultsVariety extends React.Component {
     //props or context needs to live here
     static contextType = Context;
 
-    state = {
-        calories: {
-            value: ''
-        },
+    constructor() {
+        super();
+        this.state = {
+          name: 'React'
+        };
+        this.onValueChange = this.onValueChange.bind(this);
+        this.formSubmit = this.resultsVarietyFormSubmit.bind(this);
+      } 
+
+    onValueChange(e) {
+        this.setState({
+          selectedOption: e.target.value
+        });
+    }
+    
+    resultsVarietyFormSubmit(e) {
+        e.preventDefault();
+        console.log(this.state.selectedOption)
+    }
+
+    handleFormSubmit = e => {
+        e.preventDefault(e)
+        const searchCalories = {
+            calories: this.state.calories.value,
+        }
+        if (searchCalories.calories === '0') {
+            this.setState({
+                error: 'Please enter your daily calories'
+            })
+        } else {
+            this.context.handleAddCalories()
+            this.getVideos(this.state.calories)
+            this.props.history.push('/results')
+        }
     }
 
     updateUserCalories = (input, value) => {
@@ -28,45 +58,6 @@ class ResultsVariety extends React.Component {
         })
     }
 
-    formatQueryParams(params) {
-        const queryItems = Object.keys(params)
-            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-        return queryItems.join('&');
-      }
-    
-    getVideos(maxResults=3) {
-        const bmr = `${this.context.userProfile.bmr}`;
-        //const searchBmr = ((bmr/100).toFixed()*100);
-        const calorieQuery = this.state.calories.value
-        const caloricDeficit =  calorieQuery - bmr;
-        const searchCalories = ((caloricDeficit/100).toFixed()*100);
-        const params = {
-          key: `${config.VIDEO_API_KEY}`,
-          q: `{${searchCalories} calorie ${caloricDeficit} > 0 ? 'workout' : 'recipe'}`,
-          part: 'snippet',
-          maxResults,
-          type: 'video',
-          list: `{${caloricDeficit} > 0 ? 'exercise' : 'cooking'}`
-        }
-      
-        const queryString = this.formatQueryParams(params)
-        const videoURL = `${config.VIDEO_API_ENDPOINT} + '?' + ${queryString}`
-      
-        return fetch(videoURL)
-          .then(response => {
-            if (response.ok) {
-              return response.json();
-            }
-            throw new Error(response.statusText);
-          })
-          .then(responseJson => {
-            //displayInfo(searchBmr, searchCalories)
-            displayVideoResults(responseJson)
-            this.props.history.push('/results');
-          })
-          .catch(error => this.setState({ error }))
-    }
-
     displayVideoResults = (responseJson) => {
         for (let i = 0; i < responseJson.items.length; i++){
             return `${<li>
@@ -78,23 +69,46 @@ class ResultsVariety extends React.Component {
                         allowfullscreen></iframe>
                         </div>
             </li>}`
-          };
-      }
+        };
+    }
 
-      handleFormSubmit = e => {
-        e.preventDefault(e)
-        const searchCalories = {
-            calories: this.state.calories.value,
+    formatQueryParams(params) {
+        const queryItems = Object.keys(params)
+            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+        return queryItems.join('&');
+    }
+    
+    getVideos(maxResults=3) {
+        const bmr = `${this.context.userProfile.bmr}`;
+        //const searchBmr = ((bmr/100).toFixed()*100);
+        const calorieQuery = this.state.calories.value
+        const caloricDeficit =  calorieQuery - bmr;
+        const searchCalories = ((caloricDeficit/100).toFixed()*100);
+        const params = {
+            key: `${config.VIDEO_API_KEY}`,
+            q: `{${searchCalories} calorie ${caloricDeficit} > 0 ? ${this.state.selectedOption} : 'recipe'}`,
+            part: 'snippet',
+            maxResults,
+            type: 'video',
+            list: `{${caloricDeficit} > 0 ? 'exercise' : 'cooking'}`
         }
-        if (searchCalories.calories === '0') {
-            this.setState({
-                error: 'Please enter your daily calories'
+      
+        const queryString = this.formatQueryParams(params)
+        const videoURL = `${config.VIDEO_API_ENDPOINT} + '?' + ${queryString}`
+      
+        return fetch(videoURL)
+            .then(response => {
+                if (response.ok) {
+                return response.json();
+                }
+                throw new Error(response.statusText);
             })
-        } else {
-            this.context.handleAddCalories()
-            this.getVideos(this.state.calories)
-            this.props.history.push('/results')
-        }
+            .then(responseJson => {
+                //displayInfo(searchBmr, searchCalories)
+                displayVideoResults(responseJson)
+                this.props.history.push('/results');
+            })
+            .catch(error => this.setState({ error }))
     }
 
     render() {
@@ -118,7 +132,7 @@ class ResultsVariety extends React.Component {
                             <NavLink to='/profile' className='nav_link'>View Your History</NavLink>
                     </fieldset>
                 </form>
-                <form className='results-variety-form' onSubmit={this.getVideos}>
+                <form className='results-variety-form' onSubmit={this.resultsVarietyFormSubmit}>
                     <fieldset>
                         <legend className='results-variety'>Select a Type of Workout:</legend>
                             <input
@@ -127,6 +141,8 @@ class ResultsVariety extends React.Component {
                                 id='workout-type'
                                 value='weights'
                                 required='required'
+                                checked={this.state.selectedOption === 'weights'}
+                                onChange={this.onValueChange}
                             />
                                 <label htmlFor='weights'>Weights</label>
                             <input
@@ -134,6 +150,8 @@ class ResultsVariety extends React.Component {
                                 name='workout-type'
                                 id='workout-type'
                                 value='cardio'
+                                checked={this.state.selectedOption === 'cardio'}
+                                onChange={this.onValueChange}
                             />               
                                 <label htmlFor='cardio'>Cardio</label>
                             <input
@@ -141,6 +159,8 @@ class ResultsVariety extends React.Component {
                                 name='workout-type'
                                 id='workout-type'
                                 value='crossfit'
+                                checked={this.state.selectedOption === 'crossfit'}
+                                onChange={this.onValueChange}
                             />               
                                 <label htmlFor='crossfit'>Crossfit</label>
                             <input
@@ -148,6 +168,8 @@ class ResultsVariety extends React.Component {
                                 name='workout-type'
                                 id='workout-type'
                                 value='all'
+                                checked={this.state.selectedOption === 'weights' && 'cardio' && 'crossfit'}
+                                onChange={this.onValueChange}
                             />               
                                 <label htmlFor='all'>All</label>
                     </fieldset>
