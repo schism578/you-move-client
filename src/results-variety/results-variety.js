@@ -29,6 +29,7 @@ class ResultsVariety extends React.Component {
     
     resultsVarietyFormSubmit(e) {
         e.preventDefault();
+        console.log(this.state.selectedOption)
     }
 
     handleFormSubmit = e => {
@@ -60,20 +61,6 @@ class ResultsVariety extends React.Component {
         })
     }
 
-    /*displayVideoResults = (responseJson) => {
-        for (let i = 0; i < responseJson.items.length; i++){
-            return `${<li>
-                <h4>${responseJson.items[i].snippet.title}</h4>
-                    <p>${responseJson.items[i].snippet.description}</p>
-                        <div class="videoWrapper">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}" 
-                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen></iframe>
-                        </div>
-            </li>}`
-        };
-    }*/
-
     formatQueryParams(params) {
         const queryItems = Object.keys(params)
             .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
@@ -81,7 +68,7 @@ class ResultsVariety extends React.Component {
     }
     
     getVideos(maxResults=3) {
-        const bmr = `${this.context.userProfile.bmr}`;
+        const bmr = `${this.context.userProfile}`;
         //const searchBmr = ((bmr/100).toFixed()*100);
         const calorieQuery = this.state.calories.value
         const caloricDeficit =  calorieQuery - bmr;
@@ -106,19 +93,7 @@ class ResultsVariety extends React.Component {
                 throw new Error(response.statusText);
             })
             .then(responseJson => {
-                //displayInfo(searchBmr, searchCalories)
-                //displayVideoResults(responseJson)
-                for (let i = 0; i < responseJson.items.length; i++){
-                    return `${<li>
-                        <h4>${responseJson.items[i].snippet.title}</h4>
-                            <p>${responseJson.items[i].snippet.description}</p>
-                                <div class="videoWrapper">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}" 
-                                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen></iframe>
-                                </div>
-                    </li>}`
-                }
+                this.context.handleVideoFetch(responseJson);
                 this.props.history.push('/results');
             })
             .catch(error => this.setState({ error }))
@@ -127,7 +102,7 @@ class ResultsVariety extends React.Component {
     render() {
         return (
             <div>
-                <form className='calorie-input' onSubmit={this.props.handleCalorieInput}>
+                <form className='calorie-input' onSubmit={this.props.handleUpdateCalories}>
                     <fieldset>
                         <legend>Enter Your Daily Calories</legend>
                         <label htmlFor='calorie-query'>Serving:  </label>
@@ -153,7 +128,6 @@ class ResultsVariety extends React.Component {
                                 name='workout-type'
                                 id='workout-type'
                                 value='weights'
-                                required='required'
                                 checked={this.state.selectedOption === 'weights'}
                                 onChange={this.onValueChange}
                             />
@@ -176,7 +150,7 @@ class ResultsVariety extends React.Component {
                                 onChange={this.onValueChange}
                             />               
                                 <label htmlFor='crossfit'>Crossfit</label>
-                            <input
+                            {/*<input
                                 type='radio'
                                 name='workout-type'
                                 id='workout-type'
@@ -184,9 +158,9 @@ class ResultsVariety extends React.Component {
                                 checked={this.state.selectedOption === 'weights' && 'cardio' && 'crossfit'}
                                 onChange={this.onValueChange}
                             />               
-                                <label htmlFor='all'>All</label>
+                            <label htmlFor='all'>All</label>*/}
                     </fieldset>
-                    <button type='submit'>Submit</button>
+                    <button type='submit' onClick={this.getVideos}>Submit</button>
                 </form>
             </div>
         )

@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import Context from '../context';
 import { NavLink, withRouter } from 'react-router-dom';
 import './calorie-input.css';
@@ -32,4 +32,4 @@ class CalorieInput extends React.Component {
 }
 
 export default withRouter(CalorieInput);
-//CalorieInput.propTypes = {}
+//CalorieInput.propTypes = {}*/

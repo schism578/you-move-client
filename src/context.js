@@ -2,12 +2,19 @@ import React from 'react';
 
 const Context = React.createContext({
     calories: [],
-    videos: [],
-    userProfile: {},
+    results: [],
+    userProfile: {
+        gender: '',
+        height: '',
+        weight: '',
+        age: '',
+        bmr: '',
+    },
     newUser: {},
     addUser: () => {},
     handleFoodForm: () => {},
     handleAddCalories: () => {},
+    handleVideoFetch: () => {},
     deleteUser: () => {},
 })
 

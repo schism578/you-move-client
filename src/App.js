@@ -36,7 +36,7 @@ class App extends React.Component {
       touched: false,
       value: '',
     },
-    videos: [],
+    results: [],
   }
 
   setUserProfile = profile => {
@@ -45,31 +45,6 @@ class App extends React.Component {
       error: null,
     })
   }
-
-  setVideos = videos => {
-    this.setState({
-      videos,
-      error: null,
-    })
-  }
-
-  /*componentDidMount() {
-    fetch(config.USER_API_ENDPOINT, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${config.USER_API_KEY}`,
-        'content-type': 'application/json',
-      }
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(res.status)
-        }
-        return res.json()
-      })
-      .then(data => this.setUserProfile(data))
-      .catch(error => this.setState({ error }))
-  }*/
 
   handleCreateProfile(e) {
     this.props.history.push('/log')
@@ -110,6 +85,12 @@ class App extends React.Component {
   handleResultsVariety(e) {
     e.preventDefault()
     this.props.history.push('/results')
+  }
+
+  handleVideoFetch = responseJson => {
+    this.setState({
+      results: responseJson
+    })
   }
 
   handleCalorieInput(e) {
@@ -167,7 +148,7 @@ renderRoutes() {
     const value = {
       userProfile: this.state.userProfile,
       foods: this.state.foods,
-      videos: this.state.videos,
+      results: this.state.results,
       newUser: this.state.newUser,
       deleteUser: this.handleDeleteUser,
       updateNewUserData: this.updateNewUserData,
@@ -178,6 +159,7 @@ renderRoutes() {
       handleAddCalories: this.handleAddCalories,
       handleUserHistory: this.handleUserHistory,
       handleCalorieInput: this.handleCalorieInput,
+      handleVideoFetch: this.handleVideoFetch,
       handleResultsVariety: this.handleResultsVariety
     }
     return (

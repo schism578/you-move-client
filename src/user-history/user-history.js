@@ -35,23 +35,23 @@ class UserHistory extends React.Component {
       }
 
     render() {
-        //const { first_name, last_name, email, password, gender, height, weight, age } = this.props.userProfile
+        const { first_name, last_name, email, gender, height, weight, age } = this.context.userProfile
         return (
             <>
                 <h2>Your Profile</h2>
                 <ul>
                     <NavLink to='/update-profile' className='profile_nav'>Edit</NavLink>
-                    <li>First Name:  </li>
-                    <li>Last Name:  </li>
-                    <li>Email:  </li>
+                    <li>First Name: {first_name}</li>
+                    <li>Last Name:  {last_name}</li>
+                    <li>Email:  {email}</li>
                     <li>Password:  </li>
                 </ul>
                 <ul>
                     <NavLink to='/update-info' className='profile_nav'>Edit</NavLink>
-                    <li>Gender:  </li>
-                    <li>Height:  </li>
-                    <li>Weight:  </li>
-                    <li>Age:  </li>
+                    <li>Gender:  {gender}</li>
+                    <li>Height:  {height}</li>
+                    <li>Weight:  {weight}</li>
+                    <li>Age:  {age}</li>
                 </ul>
                 <div className='user-button'>
                     <button

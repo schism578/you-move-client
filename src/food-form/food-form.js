@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import config from '../config';
 import Context from '../context';
 //import TokenService from '../services/token-service';
@@ -6,7 +6,7 @@ import './food-form.css';
 //import PropTypes from 'prop-types';
 
 export default class FoodForm extends React.Component {
-    /*static contextType = Context;
+    static contextType = Context;
 
     state = {
         newFood: {
@@ -102,7 +102,7 @@ export default class FoodForm extends React.Component {
                             //let servingSize = data.servingSize;
                             //let itemCalories = (this.state.newFood.serving * 28.35)/servingSize * calories;
                             //this.context.handleAddCalories(itemCalories)
-                .catch(error => this.setState({ error }))}*/
+                .catch(error => this.setState({ error }))}
 
     render() {
         return (
@@ -141,4 +141,4 @@ export default class FoodForm extends React.Component {
     }
 }
 
-//FoodForm.propTypes = {}
+FoodForm.propTypes = {}*/
