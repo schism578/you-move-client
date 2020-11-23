@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, Link, withRouter } from 'react-router-dom';
 import ErrorBoundary from './error-boundary';
-//import config from './config';
-//import { calculateBMR } from './utility';
 import HomePage from './home/home';
 import ProfilePage from './profile-page/profile-page';
 import EntryPage from './entry-page/entry-page';
@@ -47,10 +45,12 @@ class App extends React.Component {
   }
 
   handleCreateProfile(e) {
+    e.preventDefault()
     this.props.history.push('/log')
   }
 
   handleLogin(e) {
+    e.preventDefault()
     this.props.history.push('/log')
   }
 

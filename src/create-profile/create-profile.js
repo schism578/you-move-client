@@ -1,5 +1,5 @@
 import React from 'react';
-//import config from '../config';
+import config from '../config';
 import Context from '../context';
 import { withRouter } from 'react-router-dom';
 import AuthApiService from '../services/auth-api-service';
@@ -48,7 +48,7 @@ class CreateProfile extends React.Component {
                 value: '',
             },
             bmr: {
-                value: '',
+                value: '2000',
             },
         },
     }
@@ -65,20 +65,20 @@ class CreateProfile extends React.Component {
         })
     }
     
-    /*addNewUser = user => {
+    addNewUser = user => {
         fetch(`${config.USER_API_ENDPOINT}/user`, {
         method: 'POST',
         headers: {
+            'Authorization': `Bearer ${config.USER_API_KEY}`,
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
         })
         .then(res => {
-            console.log(JSON.stringify(user))
-            return res.JSON()
+       console.log(res)
+       return res.JSON()
         })
-        .then(resJSON => this.props.handleCreateProfile(resJSON))
-    }*/
+    }
 
     handleFormSubmit = e => {
         e.preventDefault(e)
@@ -88,11 +88,12 @@ class CreateProfile extends React.Component {
         email: this.state.newUser.email.value,
         password: this.state.newUser.password.value,
         gender: this.state.newUser.gender.value,
-        height: this.state.newUser.height.value,
-        weight: this.state.newUser.weight.value,
-        age: this.state.newUser.age.value,
-        bmr: this.state.newUser.bmr.value,
+        height: parseInt(this.state.newUser.height.value),
+        weight: parseInt(this.state.newUser.weight.value),
+        age: parseInt(this.state.newUser.age.value),
+        bmr: parseInt(this.state.newUser.bmr.value),
         }
+        console.log(newUser)
         this.setState({ error: null })
             AuthApiService.postUser(newUser)
         .then(() => {
@@ -134,7 +135,7 @@ class CreateProfile extends React.Component {
         this.props.onRegistrationSuccess()
         newUser.bmr = ((this.calculateBMR()/100).toFixed()*100);
         console.log(newUser.bmr)
-        //this.addNewUser(newUser)
+        this.addNewUser(newUser)
         this.props.history.push('/log')
         }
         })
