@@ -3,13 +3,7 @@ import React from 'react';
 const Context = React.createContext({
     calories: [],
     results: [],
-    userProfile: {
-        gender: '',
-        height: '',
-        weight: '',
-        age: '',
-        bmr: '',
-    },
+    userProfile: {},
     newUser: {},
     addUser: () => {},
     handleFoodForm: () => {},

@@ -15,7 +15,8 @@ class ResultsVariety extends React.Component {
             selectedOption: '',
             calories: {
                 error: null,
-            }
+            },
+            bmr: '',
         };
         this.onValueChange = this.onValueChange.bind(this);
         this.resultsVarietyFormSubmit = this.resultsVarietyFormSubmit.bind(this);
@@ -68,7 +69,7 @@ class ResultsVariety extends React.Component {
     }
     
     getVideos(maxResults=3) {
-        const bmr = `${this.context.userProfile}`;
+        const bmr = `${this.context.bmr}`;
         //const searchBmr = ((bmr/100).toFixed()*100);
         const calorieQuery = this.state.calories.value
         const caloricDeficit =  calorieQuery - bmr;
