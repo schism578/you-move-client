@@ -16,7 +16,6 @@ class ResultsVariety extends React.Component {
             calories: {
                 error: null,
             },
-            bmr: '',
         };
         this.onValueChange = this.onValueChange.bind(this);
         this.resultsVarietyFormSubmit = this.resultsVarietyFormSubmit.bind(this);
@@ -68,19 +67,19 @@ class ResultsVariety extends React.Component {
         return queryItems.join('&');
     }
     
-    getVideos(maxResults=3) {
-        const bmr = `${this.context.bmr}`;
+    getVideos = (maxResults=3) => {
+        const bmr = `${this.context.userProfile.bmr}`;
         //const searchBmr = ((bmr/100).toFixed()*100);
-        const calorieQuery = this.state.calories.value
+        const calorieQuery = this.state.calories.value;
         const caloricDeficit =  calorieQuery - bmr;
         const searchCalories = ((caloricDeficit/100).toFixed()*100);
         const params = {
             key: `${config.VIDEO_API_KEY}`,
-            q: `{${searchCalories} calorie ${caloricDeficit} > 0 ? ${this.state.selectedOption} : 'recipe'}`,
+            q: `${searchCalories} calorie ${caloricDeficit > 0 ? `${this.state.selectedOption}` : 'recipe'}`,
             part: 'snippet',
             maxResults,
             type: 'video',
-            list: `{${caloricDeficit} > 0 ? ${this.state.selectedOption} : 'cooking'}`
+            list: `${caloricDeficit}` > 0 ? `${this.state.selectedOption}` : 'cooking'
         }
       
         const queryString = this.formatQueryParams(params)

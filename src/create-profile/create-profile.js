@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../config';
+//import config from '../config';
 import Context from '../context';
 import { withRouter } from 'react-router-dom';
 import AuthApiService from '../services/auth-api-service';
@@ -48,7 +48,7 @@ class CreateProfile extends React.Component {
                 value: '',
             },
             bmr: {
-                value: '2000',
+                value: '',
             },
         },
     }
@@ -65,7 +65,7 @@ class CreateProfile extends React.Component {
         })
     }
     
-    addNewUser = user => {
+    /*addNewUser = user => {
         fetch(`${config.USER_API_ENDPOINT}/user`, {
         method: 'POST',
         headers: {
@@ -76,9 +76,9 @@ class CreateProfile extends React.Component {
         })
         .then(res => {
        console.log(res)
-       return res.JSON()
+       return res.json()
         })
-    }
+    }*/
 
     handleFormSubmit = e => {
         e.preventDefault(e)
@@ -93,6 +93,7 @@ class CreateProfile extends React.Component {
         age: parseInt(this.state.newUser.age.value),
         bmr: parseInt(this.state.newUser.bmr.value),
         }
+        newUser.bmr = ((this.calculateBMR()/100).toFixed()*100);
         console.log(newUser)
         this.setState({ error: null })
             AuthApiService.postUser(newUser)
@@ -133,9 +134,9 @@ class CreateProfile extends React.Component {
             })
         } else {
         this.props.onRegistrationSuccess()
-        newUser.bmr = ((this.calculateBMR()/100).toFixed()*100);
         console.log(newUser.bmr)
-        this.addNewUser(newUser)
+        this.context.setUserProfile(newUser)
+        //this.addNewUser(newUser)
         this.props.history.push('/log')
         }
         })

@@ -39,7 +39,7 @@ class App extends React.Component {
 
   setUserProfile = profile => {
     this.setState({
-      profile,
+      userProfile: profile,
       error: null,
     })
   }
@@ -147,10 +147,10 @@ renderRoutes() {
   render() {
     const value = {
       userProfile: this.state.userProfile,
-      foods: this.state.foods,
       results: this.state.results,
       newUser: this.state.newUser,
       deleteUser: this.handleDeleteUser,
+      setUserProfile: this.setUserProfile,
       updateNewUserData: this.updateNewUserData,
       handleCreateProfile: this.handleCreateProfile,
       handleLogin: this.handleLogin,
