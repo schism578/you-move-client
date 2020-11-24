@@ -29,6 +29,9 @@ class App extends React.Component {
     calories: {
       value: '',
     },
+    caloricDeficit: {
+      value: '',
+    },
     newCalories: {
       hasError: false,
       touched: false,
@@ -72,13 +75,11 @@ class App extends React.Component {
     this.props.history.push('/log')
   }
 
-  handleUpdateProfile(e) {
-    e.preventDefault()
+  handleUpdateProfile() {
     this.props.history.push('/profile')
   }
 
-  handleUpdateInfo(e) {
-    e.preventDefault()
+  handleUpdateInfo() {
     this.props.history.push('/profile')
   }
 
@@ -146,6 +147,8 @@ renderRoutes() {
 
   render() {
     const value = {
+      calories: this.state.calories,
+      caloricDeficit: this.state.caloricDeficit,
       userProfile: this.state.userProfile,
       results: this.state.results,
       newUser: this.state.newUser,

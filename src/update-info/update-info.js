@@ -102,6 +102,7 @@ class UpdateInfo extends React.Component {
                                 <select 
                                     name='gender' 
                                     id='gender' 
+                                    value={this.context.userProfile.gender}
                                     onChange={(e) => this.updateCurrentUserInfo('gender', e.target.value)}
                                 >
                                 <option value='female'>female</option>
@@ -116,6 +117,7 @@ class UpdateInfo extends React.Component {
                                     placeholder='70 (inches)' 
                                     min='1' 
                                     step='1' 
+                                    value={this.context.userProfile.height}
                                     onChange={(e) => this.updateCurrentUserInfo('height', e.target.value)}
                                     required
                                 />
@@ -127,6 +129,7 @@ class UpdateInfo extends React.Component {
                                     placeholder='170 (pounds)' 
                                     min='1' 
                                     step='1'
+                                    value={this.context.userProfile.weight}
                                     onChange={(e) => this.updateCurrentUserInfo('weight', e.target.value)} 
                                     required
                                 />
@@ -138,6 +141,7 @@ class UpdateInfo extends React.Component {
                                     placeholder='23 (years)' 
                                     min='1' 
                                     step='1'
+                                    value={this.context.userProfile.age}
                                     onChange={(e) => this.updateCurrentUserInfo('age', e.target.value)} 
                                     required
                                 />

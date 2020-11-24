@@ -68,7 +68,8 @@ class ResultsVariety extends React.Component {
     }
     
     getVideos = () => {
-        const bmr = 1800;
+        console.log(this.context.userProfile)
+        const bmr = this.context.userProfile.bmr;
         const calorieQuery = 2400;
         const caloricDeficit =  calorieQuery - bmr;
         const searchCalories = ((caloricDeficit/100).toFixed()*100);
@@ -113,6 +114,7 @@ class ResultsVariety extends React.Component {
                                 min='1' 
                                 step='1' 
                                 onChange={(e) => this.updateUserCalories('calorie-query', e.target.value)}
+                                value={this.context.calories}
                                 required
                             />
                             <br></br>

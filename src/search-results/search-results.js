@@ -9,13 +9,14 @@ export default class SearchResults extends React.Component {
   results = this.context.results;
 
   videoResults = this.results.items.map(item => (
-    <li>
+    <li key={item.id.videoId}>
         <h4>{item.snippet.title}</h4>
         <p>{item.snippet.description}</p>
-        <div class="videoWrapper">
-            <iframe width="560" height="315" title="results-video" src="https://www.youtube.com/embed/{item.id.videoId}"
-              frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen></iframe>
+        <div className="videoWrapper">
+            <iframe width="560" height="315" title="results-video" 
+              src={`https://www.youtube.com/embed/${item.id.videoId}`}
+              frameBorder="0" allow="accelerometer; autoplay; encrypted-media; 
+              gyroscope; picture-in-picture" allowFullScreen></iframe>
         </div>
     </li>
 ))

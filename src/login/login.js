@@ -50,7 +50,7 @@ class Login extends React.Component {
             .then(res => {
                 TokenService.saveAuthToken(res.authToken)
                 this.props.onLoginSuccess()
-                this.context.setUserProfile(this.state.logUser)
+                this.context.setUserProfile(res.user)
                 this.props.history.push('/log');
             })
             .catch(res => {

@@ -41,7 +41,7 @@ class UpdateProfile extends React.Component {
     
     updateCurrentUser = user => {
         fetch(`${config.USER_API_ENDPOINT}/user/:user_id`, {
-        method: 'POST',
+        method: 'PATCH',
         headers: {
             'Authorization': `Bearer ${config.USER_API_KEY}`,
             'Content-Type': 'application/json',
@@ -103,8 +103,8 @@ class UpdateProfile extends React.Component {
                                     type='text' 
                                     name='update-first-name' 
                                     id='update-first-name'
-                                    placeholder='First Name'
-                                    onChange={(e) => this.updateCurrentUserData('first_name', e.target.value)} 
+                                    value={this.context.userProfile.first_name}
+                                    onChange={(e) => this.updateCurrentUser('first_name', e.target.value)} 
                                 />
                             </li>
                             <li>
@@ -113,8 +113,8 @@ class UpdateProfile extends React.Component {
                                     type='text' 
                                     name='update-last-name' 
                                     id='update-last-name' 
-                                    placeholder='Last Name'
-                                    onChange={(e) => this.updateCurrentUserData('last_name', e.target.value)} 
+                                    value={this.context.userProfile.last_name}
+                                    onChange={(e) => this.updateCurrentUser('last_name', e.target.value)} 
                                 />
                             </li>
                             <li>
@@ -123,8 +123,8 @@ class UpdateProfile extends React.Component {
                                     type='text' 
                                     name='update-username' 
                                     id='update-username'
-                                    placeholder='Email' 
-                                    onChange={(e) => this.updateCurrentUserData('email', e.target.value)}
+                                    value={this.context.userProfile.email} 
+                                    onChange={(e) => this.updateCurrentUser('email', e.target.value)}
                                 />
                             </li>
                             <li>
@@ -133,7 +133,7 @@ class UpdateProfile extends React.Component {
                                     type='password' 
                                     name='update-password' 
                                     id='update-password' 
-                                    onChange={(e) => this.updateCurrentUserData('password', e.target.value)}
+                                    onChange={(e) => this.updateCurrentUser('password', e.target.value)}
                                 />
                             </li>
                         </ul>
