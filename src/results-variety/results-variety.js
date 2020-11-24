@@ -35,7 +35,7 @@ class ResultsVariety extends React.Component {
     handleFormSubmit = e => {
         e.preventDefault(e)
         const searchCalories = {
-            calories: this.state.calories.value,
+            calories: parseInt(this.state.calories.value),
         }
         if (searchCalories.calories === '0') {
             this.setState({
@@ -67,23 +67,22 @@ class ResultsVariety extends React.Component {
         return queryItems.join('&');
     }
     
-    getVideos = (maxResults=3) => {
-        const bmr = `${this.context.userProfile.bmr}`;
-        //const searchBmr = ((bmr/100).toFixed()*100);
-        const calorieQuery = this.state.calories.value;
+    getVideos = () => {
+        const bmr = 1800;
+        const calorieQuery = 2400;
         const caloricDeficit =  calorieQuery - bmr;
         const searchCalories = ((caloricDeficit/100).toFixed()*100);
         const params = {
             key: `${config.VIDEO_API_KEY}`,
-            q: `${searchCalories} calorie ${caloricDeficit > 0 ? `${this.state.selectedOption}` : 'recipe'}`,
+            q: `${searchCalories} calorie ${caloricDeficit > 0 ? 'workout' : 'recipe'}`,
             part: 'snippet',
-            maxResults,
+            maxResults: 3,
             type: 'video',
             list: `${caloricDeficit}` > 0 ? `${this.state.selectedOption}` : 'cooking'
         }
       
         const queryString = this.formatQueryParams(params)
-        const videoURL = `${config.VIDEO_API_ENDPOINT} + '?' + ${queryString}`
+        const videoURL = `${config.VIDEO_API_ENDPOINT}?${queryString}`
       
         return fetch(videoURL)
             .then(response => {

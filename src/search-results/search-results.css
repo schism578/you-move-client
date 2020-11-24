@@ -6,3 +6,7 @@ h2 {
     color: rgb(199, 24, 24);
     font-size: 24px;
 }
+
+li {
+    text-align: center;
+}
