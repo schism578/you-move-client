@@ -1,20 +1,32 @@
-ul {
-    list-style-type: none;
-}
-
 h2 {
     color: rgb(199, 24, 24);
     font-size: 24px;
 }
 
+fieldset {
+    text-align: center;
+}
+
+.user-history-list { 
+    list-style-type: none;
+	display: block; 
+    text-align: left; 
+    padding: 0;
+    margin: 1em 0;
+}
+
 .profile_nav, .profile_return {
-    font-size: 16px;
-    color: white;
+    font-size: 18px;
+    color: rgb(255, 225, 225);
 }
 
 .profile_nav:hover, .profile_return:hover {
     cursor: pointer;
     color: red;
+}
+
+.user_delete {
+    margin: 2em auto;
 }
 
 .react-calendar__navigation__label, .react-calendar__navigation__arrow {

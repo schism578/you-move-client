@@ -4,14 +4,13 @@ const Context = React.createContext({
     calories: [],
     caloricDeficit: [],
     results: [],
-    userProfile: {
-        bmr: '',
-    },
+    userProfile: {},
     newUser: {},
     addUser: () => {},
     setUserProfile: () => {},
     handleFoodForm: () => {},
     handleAddCalories: () => {},
+    handleCaloricDeficit: () => {},
     handleVideoFetch: () => {},
     deleteUser: () => {},
 })

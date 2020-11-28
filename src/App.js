@@ -24,13 +24,8 @@ class App extends React.Component {
       age: '',
       calories: '',
       bmr: '',
+      caloricDeficit: '',
       hasError: false,
-    },
-    calories: {
-      value: '',
-    },
-    caloricDeficit: {
-      value: '',
     },
     newCalories: {
       hasError: false,
@@ -68,6 +63,13 @@ class App extends React.Component {
       error: null,
     })
     this.props.history.push('/log')
+  }
+
+  handleCaloricDeficit = (caloricDeficit) => {
+    this.setState({
+      caloricDeficit,
+      error: null,
+    })
   }
 
   handleUserHistory(e) {
@@ -160,6 +162,7 @@ renderRoutes() {
       handleUserForm: this.handleUserForm,
       handleFoodForm: this.handleFoodForm,
       handleAddCalories: this.handleAddCalories,
+      handleCaloricDeficit: this.handleCaloricDeficit,
       handleUserHistory: this.handleUserHistory,
       handleCalorieInput: this.handleCalorieInput,
       handleVideoFetch: this.handleVideoFetch,

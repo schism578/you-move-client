@@ -1,7 +1,8 @@
 import React from 'react';
 import config from '../config';
 import Context from '../context';
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+import './update-info.css';
 
 class UpdateInfo extends React.Component {
     static contextType = Context;
@@ -11,34 +12,34 @@ class UpdateInfo extends React.Component {
             gender: {
                 touched: false,
                 value: '',
-              },
-              height: {
+            },
+            height: {
                 touched: false,
                 value: '',
-              },
-              weight: {
+            },
+            weight: {
                 touched: false,
                 value: '',
-              },
-              age: {
+            },
+            age: {
                 touched: false,
                 value: '',
-              },
-              bmr: {
+            },
+            bmr: {
                 value: '',
-              },
+            },
         }
     }
 
     updateCurrentUserInfo = (input, value) => {
         this.setState({
-          currentInfo: {
-              ...this.state.currentInfo,
-            [input]: {
-              touched: true,
-              value: value,
+            currentInfo: {
+                ...this.state.currentInfo,
+                [input]: {
+                    touched: true,
+                    value: value,
+                },
             },
-          },
         })
     }
 
@@ -48,23 +49,23 @@ class UpdateInfo extends React.Component {
             headers: {
                 'Authorization': `Bearer ${config.USER_API_KEY}`,
                 'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(info),
+            },
+            body: JSON.stringify(info),
         })
-        .then(res => {
-            console.log(JSON.stringify(info))
-            return res.json()
-        })
-        .then(resJSON => this.props.handleUpdateInfo(resJSON))
+            .then(res => {
+                console.log(JSON.stringify(info))
+                return res.json()
+            })
+            .then(resJSON => this.props.handleUpdateInfo(resJSON))
     }
 
     handleFormSubmit = e => {
         e.preventDefault(e)
         const currentInfo = {
-        gender: e.target.gender.value,
-        height: e.target.height.value,
-        weight: e.target.weight.value,
-        age: e.target.age.value,
+            gender: e.target.gender.value,
+            height: e.target.height.value,
+            weight: e.target.weight.value,
+            age: e.target.age.value,
         }
         if (currentInfo.gender === '0') {
             this.setState({
@@ -86,68 +87,75 @@ class UpdateInfo extends React.Component {
                 error: 'Please enter age'
             })
         } else {
-        this.updateUserInfo(currentInfo);
-        this.props.history.push('/profile');
+            this.updateUserInfo(currentInfo);
+            this.props.history.push('/profile');
         }
     }
     render() {
+        const { gender, height, weight, age } = this.context.userProfile
         return (
             <div>
                 <form className='update-info-form' onSubmit={this.handleFormSubmit}>
                     <fieldset>
-                    <legend>Enter Your Info:</legend>
+                        <legend>Enter Your Info:</legend>
                         <ul>
                             <li>
-                                <label htmlFor='gender'>Gender:</label>
-                                <select 
-                                    name='gender' 
-                                    id='gender' 
-                                    value={this.context.userProfile.gender}
+                                <label htmlFor='gender'>Gender:  </label>
+                                <select
+                                    name='gender'
+                                    id='gender'
+                                    value={gender}
                                     onChange={(e) => this.updateCurrentUserInfo('gender', e.target.value)}
                                 >
-                                <option value='female'>female</option>
-                                <option value='male'>male</option>
+                                    <option value='female'>female</option>
+                                    <option value='male'>male</option>
                                 </select>
                             </li>
-                            <label htmlFor='height'>Height:</label>
-                                <input 
-                                    type='number' 
-                                    id='height' 
-                                    name='height' 
-                                    placeholder='70 (inches)' 
-                                    min='1' 
-                                    step='1' 
-                                    value={this.context.userProfile.height}
+                            <li>
+                                <label htmlFor='height'>Height:  </label>
+                                <input
+                                    type='number'
+                                    id='height'
+                                    name='height'
+                                    min='1'
+                                    step='1'
+                                    value={height}
                                     onChange={(e) => this.updateCurrentUserInfo('height', e.target.value)}
                                     required
                                 />
-                            <li>Weight:</li>
-                                <input 
-                                    type='number' 
-                                    id='weight' 
-                                    name='weight' 
-                                    placeholder='170 (pounds)' 
-                                    min='1' 
+                            </li>
+                            <li>
+                                <label htmlFor='weight'>Weight:  </label>
+                                <input
+                                    type='number'
+                                    id='weight'
+                                    name='weight'
+                                    min='1'
                                     step='1'
-                                    value={this.context.userProfile.weight}
-                                    onChange={(e) => this.updateCurrentUserInfo('weight', e.target.value)} 
+                                    value={weight}
+                                    onChange={(e) => this.updateCurrentUserInfo('weight', e.target.value)}
                                     required
                                 />
-                            <li>Age:</li>
-                                <input 
-                                    type='number' 
-                                    id='age' 
-                                    name='age' 
-                                    placeholder='23 (years)' 
-                                    min='1' 
+                            </li>
+                            <li>
+                                <label htmlFor='age'>Age:  </label>
+                                <input
+                                    type='number'
+                                    id='age'
+                                    name='age'
+                                    min='1'
                                     step='1'
-                                    value={this.context.userProfile.age}
-                                    onChange={(e) => this.updateCurrentUserInfo('age', e.target.value)} 
+                                    value={age}
+                                    onChange={(e) => this.updateCurrentUserInfo('age', e.target.value)}
                                     required
                                 />
+                            </li>
                         </ul>
+                        <br></br>
+                        <button type='submit'>Submit</button>
                     </fieldset>
-                    <button type='submit'>Submit</button>
+                    <br></br>
+                    <NavLink to='/profile' className='profile_return'>Go Back</NavLink>
                 </form>
             </div>
         )

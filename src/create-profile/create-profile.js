@@ -136,7 +136,6 @@ class CreateProfile extends React.Component {
                     this.props.onRegistrationSuccess()
                     console.log(newUser.bmr)
                     this.context.setUserProfile(newUser)
-                    //this.addNewUser(newUser)
                     this.props.history.push('/log')
                 })
     }
@@ -212,8 +211,8 @@ class CreateProfile extends React.Component {
                                     id='gender'
                                     onChange={(e) => this.updateNewUserData('gender', e.target.value)}
                                 >
-                                    <option value='female'>female</option>
-                                    <option value='male'>male</option>
+                                    <option value='female'>Female</option>
+                                    <option value='male'>Male</option>
                                 </select>
                             </li>
                             <li>

@@ -35,35 +35,40 @@ class UserHistory extends React.Component {
       }
 
     render() {
-        const { first_name, last_name, email, gender, height, weight, age } = this.context.userProfile
+        const { first_name, last_name, email, gender, height, weight, age, bmr, calories } = this.context.userProfile
         return (
             <>
+              <form>
+                <fieldset>
                 <h2>Your Profile</h2>
-                <ul>
-                    <NavLink to='/update-profile' className='profile_nav'>Edit</NavLink>
+                <ul className='user-history-list'>
                     <li>First Name: {first_name}</li>
                     <li>Last Name:  {last_name}</li>
                     <li>Email:  {email}</li>
                     <li>Password:  </li>
                 </ul>
-                <ul>
-                    <NavLink to='/update-info' className='profile_nav'>Edit</NavLink>
+                <NavLink to='/update-profile' className='profile_nav'>Edit</NavLink>
+                <ul className='user-history-list'>
                     <li>Gender:  {gender}</li>
                     <li>Height:  {height}</li>
                     <li>Weight:  {weight}</li>
                     <li>Age:  {age}</li>
+                    <li>BMR: {bmr}</li>
                 </ul>
+                <NavLink to='/update-info' className='profile_nav'>Edit</NavLink>
+                </fieldset>
+                </form>
                 <div className='user-button'>
                     <button
-                      className='user__delete'
+                      className='user_delete'
                       type='button'
                       onClick={this.handleClickDelete}
-                    >Delete</button>
+                    >Delete Profile</button>
                 </div>
                 <Calendar 
                     calendarType='US'
                     defaultView='month'
-                    tileContent='<calories>'
+                    tileContent={calories}
                 />
                 <NavLink to='/log' className='profile_return'>Go Back</NavLink>
             </>

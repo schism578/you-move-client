@@ -58,49 +58,12 @@ class Login extends React.Component {
             })
     }
 
-    /*loginUser = user => {
-        fetch(`${config.USER_API_ENDPOINT}/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${TokenService.getAuthToken()}`,
-                'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-        })
-        .then(res => {
-            console.log(JSON.stringify(user))
-            return res.json()
-        })
-        .then(resJSON => this.props.handleLogin(resJSON))
-    }
-
-    handleFormSubmit = e => {
-        e.preventDefault(e)
-        const logUser = {
-        email: this.state.logUser.email.value,
-        password: this.state.logUser.password.value,
-        }
-        if (logUser.email === '0') {
-            this.setState({
-                error: 'Please enter email address'
-            })
-        }
-        if (logUser.password === '0') {
-            this.setState({
-                error: 'Please enter password'
-            })
-        } else {
-        this.loginUser(logUser)
-        this.props.history.push('/log');
-        }
-    }*/
-
     render() {
         return (
             <div>
                 <form className='login-form' onSubmit={this.handleSubmitJwtAuth}>
                     <fieldset>
-                    <legend>Log In</legend>
+                    <legend>Log In:</legend>
                     <ul>
                         <li>
                             <label htmlFor='login-username'>Email:  </label>
