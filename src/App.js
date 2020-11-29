@@ -22,15 +22,16 @@ class App extends React.Component {
       height: '',
       weight: '',
       age: '',
-      calories: '',
       bmr: '',
-      caloricDeficit: '',
       hasError: false,
     },
-    newCalories: {
+    calories: {
       hasError: false,
       touched: false,
       value: '',
+    },
+    caloricDeficit: {
+      value: ''
     },
     results: [],
   }
@@ -52,7 +53,7 @@ class App extends React.Component {
     this.props.history.push('/log')
   }
 
-  handleFoodForm = newCalories => {
+  /*handleFoodForm = newCalories => {
     this.handleAddCalories(newCalories)
     this.props.history.push('/log')
   }
@@ -63,7 +64,7 @@ class App extends React.Component {
       error: null,
     })
     this.props.history.push('/log')
-  }
+  }*/
 
   handleCaloricDeficit = (caloricDeficit) => {
     this.setState({
@@ -96,10 +97,10 @@ class App extends React.Component {
     })
   }
 
-  handleCalorieInput(e) {
+  /*handleCalorieInput(e) {
     e.preventDefault()
     this.props.history.push('/results')
-  }
+  }*/
 
   handleDeleteUser = userId => {
     const newUsers = this.state.userProfile.filter(up => up.id !== userId);
@@ -123,8 +124,8 @@ renderRoutes() {
 
         <Route path='/log'>
           <EntryPage handleResultsVariety={this.handleResultsVariety.bind(this)}
-                     handleFoodForm={this.handleFoodForm.bind(this)}
-                     handleCalorieInput={this.handleCalorieInput.bind(this)}
+                     /*handleFoodForm={this.handleFoodForm.bind(this)}
+                     handleCalorieInput={this.handleCalorieInput.bind(this)}*/
           />
         </Route>
 
@@ -160,11 +161,11 @@ renderRoutes() {
       handleCreateProfile: this.handleCreateProfile,
       handleLogin: this.handleLogin,
       handleUserForm: this.handleUserForm,
-      handleFoodForm: this.handleFoodForm,
-      handleAddCalories: this.handleAddCalories,
+      //handleFoodForm: this.handleFoodForm,
+      //handleAddCalories: this.handleAddCalories,
       handleCaloricDeficit: this.handleCaloricDeficit,
       handleUserHistory: this.handleUserHistory,
-      handleCalorieInput: this.handleCalorieInput,
+      //handleCalorieInput: this.handleCalorieInput,
       handleVideoFetch: this.handleVideoFetch,
       handleResultsVariety: this.handleResultsVariety
     }

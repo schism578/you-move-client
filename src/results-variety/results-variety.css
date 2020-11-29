@@ -1,6 +1,24 @@
+.results-variety-form {
+    display: block;
+}
+
+.results-variety-list {
+    list-style-type: none;
+}
+
+.results-variety-list-item {
+    margin: 0.5em auto;
+}
+
+.results-variety-radio {
+    margin: 0.5em auto;
+}
+
 .nav_link {
     font-size: 18px;
     color: rgb(255, 225, 225);
+    display: flex; 
+    justify-content: center;
 }
 
 .nav_link:hover {
