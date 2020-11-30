@@ -1,18 +1,18 @@
 import React from 'react';
-//import config from '../config';
 import Context from '../context';
+import config from '../config';
 import { withRouter } from 'react-router-dom';
 import TokenService from '../services/token-service';
 import AuthApiService from '../services/auth-api-service';
-//import { Button, Input } from '../Utils/Utils'
 //import PropTypes from 'prop-types';
 
 class Login extends React.Component {
-    //props or context needs to live here
     static defaultProps = {
         onLoginSuccess: () => {}
       }
     static contextType = Context;
+    calories = this.context.setUserCalories;
+    user_id = this.context.userProfile.user_id;
 
     state = {
         logUser: {
@@ -40,9 +40,24 @@ class Login extends React.Component {
         })
     }
 
+    getCalories = calories => {
+        fetch(`${config.USER_API_ENDPOINT}/log/${this.user_id}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${TokenService.getAuthToken()}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(calories),
+        })
+        .then(res => {
+       console.log(res)
+       return res.json()
+        })
+    }
+
     handleSubmitJwtAuth = e => {
         e.preventDefault()
-    
+        const calories = this.calories.value;
         AuthApiService.postLogin({
             email: this.state.logUser.email.value,
             password: this.state.logUser.password.value,
@@ -51,7 +66,10 @@ class Login extends React.Component {
                 TokenService.saveAuthToken(res.authToken)
                 this.props.onLoginSuccess()
                 this.context.setUserProfile(res.user)
-                this.props.history.push('/log');
+                console.log(this.user_id)
+                this.getCalories(calories)
+                console.log(calories)
+                this.props.history.push('/log')
             })
             .catch(res => {
                 this.setState({ error: res.error })

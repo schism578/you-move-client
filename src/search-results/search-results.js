@@ -4,7 +4,6 @@ import './search-results.css';
 //import PropTypes from 'prop-types';
 
 export default class SearchResults extends React.Component {
-  //props or context needs to live here
   static contextType = Context;
   results = this.context.results;
 

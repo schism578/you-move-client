@@ -14,6 +14,7 @@ import './App.css';
 class App extends React.Component {
   state = {
     userProfile: {
+      user_id: '',
       first_name: '',
       last_name: '',
       email: '',
@@ -39,6 +40,13 @@ class App extends React.Component {
   setUserProfile = profile => {
     this.setState({
       userProfile: profile,
+      error: null,
+    })
+  }
+
+  setUserCalories = value => {
+    this.setState({
+      calories: value,
       error: null,
     })
   }
@@ -157,6 +165,7 @@ renderRoutes() {
       newUser: this.state.newUser,
       deleteUser: this.handleDeleteUser,
       setUserProfile: this.setUserProfile,
+      setUserCalories: this.setUserCalories,
       updateNewUserData: this.updateNewUserData,
       handleCreateProfile: this.handleCreateProfile,
       handleLogin: this.handleLogin,
