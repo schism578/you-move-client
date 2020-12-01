@@ -8,8 +8,8 @@ import AuthApiService from '../services/auth-api-service';
 
 class Login extends React.Component {
     static defaultProps = {
-        onLoginSuccess: () => {}
-      }
+        onLoginSuccess: () => { }
+    }
     static contextType = Context;
     calories = this.context.setUserCalories;
     user_id = this.context.userProfile.user_id;
@@ -40,19 +40,31 @@ class Login extends React.Component {
         })
     }
 
-    getCalories = calories => {
-        fetch(`${config.USER_API_ENDPOINT}/log/${this.user_id}`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${TokenService.getAuthToken()}`,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(calories),
+    componentDidUpdate() {
+        if (`${this.state.user_id}` !== `${this.context.userProfile.user_id}`) {
+            this.setState({
+                user_id: this.context.userProfile.user_id
+            })
+        }
+    }
+
+
+    getCalories = (id) => {
+        fetch(`${config.USER_API_ENDPOINT}/log/${id}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`,
+                'Content-Type': 'application/json',
+            },
         })
-        .then(res => {
-       console.log(res)
-       return res.json()
-        })
+            .then(res => {
+                console.log(res)
+                return res.json()
+            })
+            .then(res => {
+                console.log(res)
+                this.context.setUserCalories(res)
+            })
     }
 
     handleSubmitJwtAuth = e => {
@@ -67,7 +79,7 @@ class Login extends React.Component {
                 this.props.onLoginSuccess()
                 this.context.setUserProfile(res.user)
                 console.log(this.user_id)
-                this.getCalories(calories)
+                this.getCalories(res.user.user_id)
                 console.log(calories)
                 this.props.history.push('/log')
             })
@@ -81,29 +93,29 @@ class Login extends React.Component {
             <div>
                 <form className='login-form' onSubmit={this.handleSubmitJwtAuth}>
                     <fieldset>
-                    <legend>Log In:</legend>
-                    <ul>
-                        <li>
-                            <label htmlFor='login-username'>Email:  </label>
-                            <input 
-                                type='text' 
-                                name='login-username' 
-                                id='login-username' 
-                                onChange={(e) => this.initiateUserLogin('email', e.target.value)}
-                            />
-                        </li>
-                        <li>
-                            <label htmlFor='login-password'>Password:  </label>
-                            <input 
-                                type='password' 
-                                name='login-password' 
-                                id='login-password'
-                                onChange={(e) => this.initiateUserLogin('password', e.target.value)}
-                            />
-                        </li>
-                    </ul>
-                    <br></br>
-                    <button type='submit'>Log In</button>
+                        <legend>Log In:</legend>
+                        <ul>
+                            <li>
+                                <label htmlFor='login-username'>Email:  </label>
+                                <input
+                                    type='text'
+                                    name='login-username'
+                                    id='login-username'
+                                    onChange={(e) => this.initiateUserLogin('email', e.target.value)}
+                                />
+                            </li>
+                            <li>
+                                <label htmlFor='login-password'>Password:  </label>
+                                <input
+                                    type='password'
+                                    name='login-password'
+                                    id='login-password'
+                                    onChange={(e) => this.initiateUserLogin('password', e.target.value)}
+                                />
+                            </li>
+                        </ul>
+                        <br></br>
+                        <button type='submit'>Log In</button>
                     </fieldset>
                 </form>
             </div>

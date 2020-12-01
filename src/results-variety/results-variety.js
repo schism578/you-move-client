@@ -38,9 +38,9 @@ class ResultsVariety extends React.Component {
     }
 
     //POST user calories to the API 
-    caloriePost = () => {
+    caloriePost = (id) => {
         console.log({ calories: this.state.calories.value })
-        return fetch(`${config.USER_API_ENDPOINT}/log`, {
+        return fetch(`${config.USER_API_ENDPOINT}/log/${id}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${TokenService.getAuthToken()}`,
@@ -79,7 +79,6 @@ class ResultsVariety extends React.Component {
     }
 
     updateUserCalories = (e) => {
-        console.log(this.state.calories.value)
         this.setState({
             calories: {
                     value: e.target.value,
@@ -108,11 +107,11 @@ class ResultsVariety extends React.Component {
         const searchCalories = ((caloricDeficit / 100).toFixed() * 100);
         const params = {
             key: `${config.VIDEO_API_KEY}`,
-            q: `${searchCalories} calorie ${caloricDeficit > 0 ? 'workout' : 'recipe'}`,
+            q: `${searchCalories} calorie ${caloricDeficit > 0 ? `workout ${this.state.selectedOption}` : 'recipe'}`,
             part: 'snippet',
             maxResults: 3,
             type: 'video',
-            list: `${caloricDeficit}` > 0 ? `${this.state.selectedOption}` : 'cooking'
+            list: `${caloricDeficit}` > 0 ? 'exercise' : 'cooking'
         }
 
         const queryString = this.formatQueryParams(params)
@@ -126,7 +125,7 @@ class ResultsVariety extends React.Component {
                 throw new Error(response.statusText);
             })
             .then(responseJson => {
-                this.context.handleVideoFetch(responseJson);
+                this.context.handleVideoFetch(responseJson, caloricDeficit);
                 this.props.history.push('/results');
             })
             .catch(error => this.setState({ error }))
@@ -187,15 +186,15 @@ class ResultsVariety extends React.Component {
                                     onChange={this.onValueChange}
                                 />
                                 <label htmlFor='crossfit'>Crossfit</label>
-                                {/*<input
+                                <input
                                 type='radio'
                                 name='workout-type'
                                 id='workout-type'
-                                value='all'
-                                checked={this.state.selectedOption === 'weights' && 'cardio' && 'crossfit'}
+                                value={'weights cardio crossfit'}
+                                checked={this.state.selectedOption === 'all'}
                                 onChange={this.onValueChange}
                             />               
-                            <label htmlFor='all'>All</label>*/}
+                            <label htmlFor='all'>All</label>
                             </li>
                         </ul>
                     </fieldset>

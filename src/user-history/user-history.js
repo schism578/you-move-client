@@ -2,6 +2,7 @@ import React from 'react';
 import config from '../config';
 import Context from '../context';
 import { NavLink, withRouter } from 'react-router-dom';
+import moment from 'moment';
 import Calendar from 'react-calendar';
 //import 'react-calendar/dist/Calendar.css';
 import './user-history.css';
@@ -35,7 +36,12 @@ class UserHistory extends React.Component {
       }
 
     render() {
-        const { first_name, last_name, email, gender, height, weight, age, bmr, calories } = this.context.userProfile
+        const { first_name, last_name, email, gender, height, weight, age, bmr } = this.context.userProfile;
+        const calories = this.context.calories.map((calorie) => {
+          const date = moment(calorie.date)
+          calorie.date = date.format('ddd MMM DD YYYY')
+          return calorie
+        });
         return (
             <>
               <form>
@@ -68,7 +74,14 @@ class UserHistory extends React.Component {
                 <Calendar 
                     calendarType='US'
                     defaultView='month'
-                    tileContent={calories}
+                    tileContent={({activeStartDate, date, view}) => {
+                      const current = calories.find(logDate => moment(logDate.date).isSame(date))
+                      if (current) {
+                        return <div>{current.calories} <br></br> calories</div>
+                      } else {
+                        return ''
+                      }
+                    }}
                 />
                 <NavLink to='/log' className='profile_return'>Go Back</NavLink>
             </>

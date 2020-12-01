@@ -2,8 +2,8 @@ import React from 'react';
 
 const Context = React.createContext({
     calories: [],
-    caloricDeficit: [],
-    results: [],
+    caloricDeficit: 0,
+    results: {},
     userProfile: {},
     newUser: {},
     addUser: () => {},

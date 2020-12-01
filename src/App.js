@@ -31,10 +31,10 @@ class App extends React.Component {
       touched: false,
       value: '',
     },
-    caloricDeficit: {
-      value: ''
+    caloricDeficit: 0,
+    results: {
+      items: [],
     },
-    results: [],
   }
 
   setUserProfile = profile => {
@@ -49,6 +49,8 @@ class App extends React.Component {
       calories: value,
       error: null,
     })
+    console.log('setting calories')
+    console.log(value)
   }
 
   handleCreateProfile(e) {
@@ -99,9 +101,10 @@ class App extends React.Component {
     this.props.history.push('/results')
   }
 
-  handleVideoFetch = responseJson => {
+  handleVideoFetch = (responseJson, caloricDeficit) => {
     this.setState({
-      results: responseJson
+      results: responseJson,
+      caloricDeficit: caloricDeficit
     })
   }
 
@@ -117,23 +120,23 @@ class App extends React.Component {
     })
   }
 
-renderRoutes() {
+  renderRoutes() {
     return (
       <>
-        <Route exact path='/'> 
+        <Route exact path='/'>
           <HomePage />
         </Route>
 
-        <Route path='/login'> 
+        <Route path='/login'>
           <ProfilePage handleCreateProfile={this.handleCreateProfile.bind(this)}
-                       handleLogin={this.handleLogin.bind(this)}
+            handleLogin={this.handleLogin.bind(this)}
           />
         </Route>
 
         <Route path='/log'>
           <EntryPage handleResultsVariety={this.handleResultsVariety.bind(this)}
-                     /*handleFoodForm={this.handleFoodForm.bind(this)}
-                     handleCalorieInput={this.handleCalorieInput.bind(this)}*/
+          /*handleFoodForm={this.handleFoodForm.bind(this)}
+          handleCalorieInput={this.handleCalorieInput.bind(this)}*/
           />
         </Route>
 
@@ -151,7 +154,7 @@ renderRoutes() {
 
         <Route path='/results'>
           <ResultsPage />
-        </Route> 
+        </Route>
       </>
     )
   }
@@ -182,15 +185,15 @@ renderRoutes() {
       <Context.Provider value={value}>
         <div className='App'>
           <ErrorBoundary>
-          <>
-          <header className='App__header'>
-            <img src={require('./images/youmove_icon.png')} alt='you move icon' id='app_icon'/>
-            <h1>
-              <Link to='/' style={{color: 'white'}}>YouMove</Link>{' '}
-            </h1>
-          </header>
-          <main className='App__main'>{this.renderRoutes()}</main>
-          </>
+            <>
+              <header className='App__header'>
+                <img src={require('./images/youmove_icon.png')} alt='you move icon' id='app_icon' />
+                <h1>
+                  <Link to='/' style={{ color: 'white' }}>YouMove</Link>{' '}
+                </h1>
+              </header>
+              <main className='App__main'>{this.renderRoutes()}</main>
+            </>
           </ErrorBoundary>
         </div>
       </Context.Provider>

@@ -7,7 +7,7 @@ export default class SearchResults extends React.Component {
   static contextType = Context;
   results = this.context.results;
 
-  videoResults = this.results.items.map(item => (
+  videoResults = () => this.results.items.map(item => (
     <li key={item.id.videoId}>
         <h4>{item.snippet.title}</h4>
         <p>{item.snippet.description}</p>
@@ -21,11 +21,12 @@ export default class SearchResults extends React.Component {
 ))
   
   render() {
+    const results = this.context.results;
     return (
       <div>
         <h2>Search Results:</h2>
         <ul className='results-list'>
-          {this.videoResults}
+          {this.videoResults(results)}
         </ul>
       </div>
     )
