@@ -95,7 +95,7 @@ class UpdateProfile extends React.Component {
             <div>
                 <header role='banner'>
                 </header>
-                <form className='update-profile-form' onSubmit={this.props.handleUpdateProfile}>
+                <form className='update-profile-form' onSubmit={this.handleFormSubmit}>
                     <fieldset>
                         <legend>Update Your Profile:</legend>
                         <ul>
@@ -106,7 +106,7 @@ class UpdateProfile extends React.Component {
                                     name='update-first-name'
                                     id='update-first-name'
                                     value={first_name}
-                                    onChange={(e) => this.updateCurrentUser('first_name', e.target.value)}
+                                    onChange={(e) => this.updateProfileInfo('first_name', e.target.value)}
                                 />
                             </li>
                             <li>
@@ -116,7 +116,7 @@ class UpdateProfile extends React.Component {
                                     name='update-last-name'
                                     id='update-last-name'
                                     value={last_name}
-                                    onChange={(e) => this.updateCurrentUser('last_name', e.target.value)}
+                                    onChange={(e) => this.updateProfileInfo('last_name', e.target.value)}
                                 />
                             </li>
                             <li>
@@ -126,7 +126,7 @@ class UpdateProfile extends React.Component {
                                     name='update-username'
                                     id='update-username'
                                     value={email}
-                                    onChange={(e) => this.updateCurrentUser('email', e.target.value)}
+                                    onChange={(e) => this.updateProfileInfo('email', e.target.value)}
                                 />
                             </li>
                             <li>
@@ -136,7 +136,7 @@ class UpdateProfile extends React.Component {
                                     name='update-password'
                                     id='update-password'
                                     value={password}
-                                    onChange={(e) => this.updateCurrentUser('password', e.target.value)}
+                                    onChange={(e) => this.updateProfileInfo('password', e.target.value)}
                                 />
                             </li>
                         </ul>

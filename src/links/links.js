@@ -1,6 +1,5 @@
 import React from 'react';
 import './links.css';
-//import PropTypes from 'prop-types';
 
 export default function Links() {
     return (

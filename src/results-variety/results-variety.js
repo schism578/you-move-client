@@ -7,7 +7,6 @@ import './results-variety.css';
 //import PropTypes from 'prop-types';
 
 class ResultsVariety extends React.Component {
-    //props or context needs to live here
     static contextType = Context;
 
     constructor(props) {
@@ -81,8 +80,8 @@ class ResultsVariety extends React.Component {
     updateUserCalories = (e) => {
         this.setState({
             calories: {
-                    value: e.target.value,
-                },
+                value: e.target.value,
+            },
         })
     }
 
@@ -186,15 +185,6 @@ class ResultsVariety extends React.Component {
                                     onChange={this.onValueChange}
                                 />
                                 <label htmlFor='crossfit'>Crossfit</label>
-                                <input
-                                type='radio'
-                                name='workout-type'
-                                id='workout-type'
-                                value={'weights cardio crossfit'}
-                                checked={this.state.selectedOption === 'all'}
-                                onChange={this.onValueChange}
-                            />               
-                            <label htmlFor='all'>All</label>
                             </li>
                         </ul>
                     </fieldset>

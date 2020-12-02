@@ -4,7 +4,6 @@ import config from '../config';
 import { withRouter } from 'react-router-dom';
 import TokenService from '../services/token-service';
 import AuthApiService from '../services/auth-api-service';
-//import PropTypes from 'prop-types';
 
 class Login extends React.Component {
     static defaultProps = {
@@ -69,7 +68,6 @@ class Login extends React.Component {
 
     handleSubmitJwtAuth = e => {
         e.preventDefault()
-        const calories = this.calories.value;
         AuthApiService.postLogin({
             email: this.state.logUser.email.value,
             password: this.state.logUser.password.value,
@@ -78,9 +76,7 @@ class Login extends React.Component {
                 TokenService.saveAuthToken(res.authToken)
                 this.props.onLoginSuccess()
                 this.context.setUserProfile(res.user)
-                console.log(this.user_id)
                 this.getCalories(res.user.user_id)
-                console.log(calories)
                 this.props.history.push('/log')
             })
             .catch(res => {

@@ -8,11 +8,11 @@ const LogApiService = {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
             },
         })
-        .then(res =>
-            (!res.ok)
-                ? res.json().then(e => Promise.reject(e))
-                : res.json()
-        )
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
     },
 
     getFoodCalories(foodId, calories) {
@@ -21,17 +21,17 @@ const LogApiService = {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
             },
         })
-        .then(res =>
-            (!res.ok)
-                ? res.json().then(e => Promise.reject(e))
-                : res.json()
-        )
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
     },
 
     postFoodCalories(foodId, calories) {
         return fetch(`${config.USER_API_ENDPOINT}/food/${foodId}/${calories}`, {
             method: 'POST',
-            headers: { 
+            headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
             },
             body: JSON.stringify({
@@ -39,11 +39,11 @@ const LogApiService = {
                 calories,
             }),
         })
-        .then(res =>
-            (!res.ok)
-                ? res.json().then(e => Promise.reject(e))
-                : res.json()
-        )
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
     }
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import ErrorBoundary from './error-boundary';
 import HomePage from './home/home';
 import ProfilePage from './profile-page/profile-page';
@@ -8,6 +8,8 @@ import UserHistory from './user-history/user-history';
 import UpdateProfile from './update-profile/update-profile';
 import UpdateInfo from './update-info/update-info';
 import ResultsPage from './results-page/results-page';
+import PrivateRoute from './utils/private-route';
+import PublicOnlyRoute from './utils/public-only-route';
 import Context from './context';
 import './App.css';
 
@@ -49,7 +51,6 @@ class App extends React.Component {
       calories: value,
       error: null,
     })
-    console.log('setting calories')
     console.log(value)
   }
 
@@ -63,18 +64,6 @@ class App extends React.Component {
     this.props.history.push('/log')
   }
 
-  /*handleFoodForm = newCalories => {
-    this.handleAddCalories(newCalories)
-    this.props.history.push('/log')
-  }
-
-  handleAddCalories = (calories) => {
-    this.setState({
-      calories,
-      error: null,
-    })
-    this.props.history.push('/log')
-  }*/
 
   handleCaloricDeficit = (caloricDeficit) => {
     this.setState({
@@ -108,11 +97,6 @@ class App extends React.Component {
     })
   }
 
-  /*handleCalorieInput(e) {
-    e.preventDefault()
-    this.props.history.push('/results')
-  }*/
-
   handleDeleteUser = userId => {
     const newUsers = this.state.userProfile.filter(up => up.id !== userId);
     this.setState({
@@ -123,38 +107,36 @@ class App extends React.Component {
   renderRoutes() {
     return (
       <>
-        <Route exact path='/'>
+        <PublicOnlyRoute exact path='/'>
           <HomePage />
-        </Route>
+        </PublicOnlyRoute>
 
-        <Route path='/login'>
+        <PublicOnlyRoute path='/login'>
           <ProfilePage handleCreateProfile={this.handleCreateProfile.bind(this)}
             handleLogin={this.handleLogin.bind(this)}
           />
-        </Route>
+        </PublicOnlyRoute>
 
-        <Route path='/log'>
+        <PrivateRoute path='/log'>
           <EntryPage handleResultsVariety={this.handleResultsVariety.bind(this)}
-          /*handleFoodForm={this.handleFoodForm.bind(this)}
-          handleCalorieInput={this.handleCalorieInput.bind(this)}*/
           />
-        </Route>
+        </PrivateRoute>
 
-        <Route path='/profile'>
+        <PrivateRoute path='/profile'>
           <UserHistory handleUserHistory={this.handleUserHistory.bind(this)} />
-        </Route>
+        </PrivateRoute>
 
-        <Route path='/update-profile'>
+        <PrivateRoute path='/update-profile'>
           <UpdateProfile handleUpdateProfile={this.handleUpdateProfile.bind(this)} />
-        </Route>
+        </PrivateRoute>
 
-        <Route path='/update-info'>
+        <PrivateRoute path='/update-info'>
           <UpdateInfo handleUpdateInfo={this.handleUpdateInfo.bind(this)} />
-        </Route>
+        </PrivateRoute>
 
-        <Route path='/results'>
+        <PrivateRoute path='/results'>
           <ResultsPage />
-        </Route>
+        </PrivateRoute>
       </>
     )
   }
@@ -173,11 +155,8 @@ class App extends React.Component {
       handleCreateProfile: this.handleCreateProfile,
       handleLogin: this.handleLogin,
       handleUserForm: this.handleUserForm,
-      //handleFoodForm: this.handleFoodForm,
-      //handleAddCalories: this.handleAddCalories,
       handleCaloricDeficit: this.handleCaloricDeficit,
       handleUserHistory: this.handleUserHistory,
-      //handleCalorieInput: this.handleCalorieInput,
       handleVideoFetch: this.handleVideoFetch,
       handleResultsVariety: this.handleResultsVariety
     }
@@ -200,6 +179,5 @@ class App extends React.Component {
     );
   }
 }
-
 
 export default withRouter(App);

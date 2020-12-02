@@ -1,11 +1,8 @@
 import React from 'react';
-//import config from '../config';
 import Context from '../context';
 import { withRouter } from 'react-router-dom';
 import AuthApiService from '../services/auth-api-service';
 import './create-profile.css'
-//import PropTypes from 'prop-types';
-
 
 class CreateProfile extends React.Component {
     static defaultProps = {
@@ -65,21 +62,6 @@ class CreateProfile extends React.Component {
         })
     }
 
-    /*addNewUser = user => {
-        fetch(`${config.USER_API_ENDPOINT}/user`, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${config.USER_API_KEY}`,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-        })
-        .then(res => {
-       console.log(res)
-       return res.json()
-        })
-    }*/
-
     handleFormSubmit = e => {
         e.preventDefault(e)
         const newUser = {
@@ -130,14 +112,14 @@ class CreateProfile extends React.Component {
             this.setState({
                 error: 'Please enter weight'
             })
-        } 
-            AuthApiService.postUser(newUser)
-                .then(() => {
-                    this.props.onRegistrationSuccess()
-                    console.log(newUser.bmr)
-                    this.context.setUserProfile(newUser)
-                    this.props.history.push('/log')
-                })
+        }
+        AuthApiService.postUser(newUser)
+            .then(() => {
+                this.props.onRegistrationSuccess()
+                console.log(newUser.bmr)
+                this.context.setUserProfile(newUser)
+                this.props.history.push('/log')
+            })
     }
 
     calculateBMR = () => {
