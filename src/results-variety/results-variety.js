@@ -147,10 +147,8 @@ class ResultsVariety extends React.Component {
                                     min='1'
                                     step='1'
                                     onChange={e => this.updateUserCalories(e)}
-                                    //value={this.state.calories}
                                     required
                                 />
-                                {/*<button type='submit' onClick={this.caloriePost}>Save Calories</button>*/}
 
                             </li>
                             <br></br>

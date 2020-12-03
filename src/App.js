@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 import ErrorBoundary from './error-boundary';
 import HomePage from './home/home';
 import ProfilePage from './profile-page/profile-page';
@@ -54,13 +54,15 @@ class App extends React.Component {
     console.log(value)
   }
 
-  handleCreateProfile(e) {
-    e.preventDefault()
+  handleProfilePage = () => {
+    this.props.history.push('/login')
+  }
+
+  handleCreateProfile() {
     this.props.history.push('/log')
   }
 
-  handleLogin(e) {
-    e.preventDefault()
+  handleLogin() {
     this.props.history.push('/log')
   }
 
@@ -107,36 +109,19 @@ class App extends React.Component {
   renderRoutes() {
     return (
       <>
-        <PublicOnlyRoute exact path='/'>
-          <HomePage />
-        </PublicOnlyRoute>
+        <Route exact path={'/'} component={HomePage}/>
+          
+        <PublicOnlyRoute path={'/login'} component={ProfilePage}/>
 
-        <PublicOnlyRoute path='/login'>
-          <ProfilePage handleCreateProfile={this.handleCreateProfile.bind(this)}
-            handleLogin={this.handleLogin.bind(this)}
-          />
-        </PublicOnlyRoute>
+        <PrivateRoute path={'/log'} component={EntryPage}/>
 
-        <PrivateRoute path='/log'>
-          <EntryPage handleResultsVariety={this.handleResultsVariety.bind(this)}
-          />
-        </PrivateRoute>
+        <PrivateRoute path={'/profile'} component={UserHistory}/>
 
-        <PrivateRoute path='/profile'>
-          <UserHistory handleUserHistory={this.handleUserHistory.bind(this)} />
-        </PrivateRoute>
+        <PrivateRoute path={'/update-profile'} component={UpdateProfile}/>
 
-        <PrivateRoute path='/update-profile'>
-          <UpdateProfile handleUpdateProfile={this.handleUpdateProfile.bind(this)} />
-        </PrivateRoute>
+        <PrivateRoute path={'/update-info'} component={UpdateInfo}/>
 
-        <PrivateRoute path='/update-info'>
-          <UpdateInfo handleUpdateInfo={this.handleUpdateInfo.bind(this)} />
-        </PrivateRoute>
-
-        <PrivateRoute path='/results'>
-          <ResultsPage />
-        </PrivateRoute>
+        <PrivateRoute path={'/results'} component={ResultsPage}/>
       </>
     )
   }
