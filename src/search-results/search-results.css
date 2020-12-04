@@ -7,6 +7,6 @@ h2 {
     font-size: 24px;
 }
 
-li {
+.results-list-item {
     text-align: center;
 }

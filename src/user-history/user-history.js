@@ -44,23 +44,23 @@ class UserHistory extends React.Component {
     return (
       <>
         <form>
-          <fieldset>
+          <fieldset className='history-field'>
             <h2>Your Profile</h2>
-            <ul className='user-history-list'>
+            <ul className='profile-list'>
               <li>First Name: {first_name}</li>
               <li>Last Name:  {last_name}</li>
               <li>Email:  {email}</li>
               <li>Password:  </li>
+              <NavLink to='/update-profile' className='profile_nav'>Edit</NavLink>
             </ul>
-            <NavLink to='/update-profile' className='profile_nav'>Edit</NavLink>
-            <ul className='user-history-list'>
+            <ul className='info-list'>
               <li>Gender:  {gender}</li>
               <li>Height:  {height}</li>
               <li>Weight:  {weight}</li>
               <li>Age:  {age}</li>
               <li>BMR: {bmr}</li>
+              <NavLink to='/update-info' className='profile_nav'>Edit</NavLink>
             </ul>
-            <NavLink to='/update-info' className='profile_nav'>Edit</NavLink>
           </fieldset>
         </form>
         <div className='user-button'>

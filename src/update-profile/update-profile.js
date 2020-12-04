@@ -95,9 +95,9 @@ class UpdateProfile extends React.Component {
                 <header role='banner'>
                 </header>
                 <form className='update-profile-form' onSubmit={this.handleFormSubmit}>
-                    <fieldset>
+                    <fieldset className='update-profile-field'>
                         <legend>Update Your Profile:</legend>
-                        <ul>
+                        <ul className='update-profile-list'>
                             <li>
                                 <label htmlFor='update-first-name'>First Name  </label>
                                 <input

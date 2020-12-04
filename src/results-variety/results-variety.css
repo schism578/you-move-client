@@ -1,5 +1,6 @@
 .results-variety-form {
-    display: block;
+    display: inline-block;
+    width: 100%;
 }
 
 .results-variety-list {
@@ -11,7 +12,12 @@
 }
 
 .results-variety-radio {
-    margin: 0.5em auto;
+    margin: 1em auto;
+}
+
+#workout-type {
+    margin: 1em 1em;
+    padding: 0.5em;
 }
 
 .nav_link {

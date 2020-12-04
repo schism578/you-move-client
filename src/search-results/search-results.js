@@ -6,7 +6,7 @@ export default class SearchResults extends React.Component {
   static contextType = Context;
 
   videoResults = () => this.context.results.items.map(item => (
-    <li key={`${item.id.videoId}`}>
+    <li key={`${item.id.videoId}`} className='results-list-item'>
       <h4>{item.snippet.title}</h4>
       <p>{item.snippet.description}</p>
       <div className="videoWrapper">

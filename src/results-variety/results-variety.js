@@ -127,7 +127,7 @@ class ResultsVariety extends React.Component {
         return (
             <div>
                 <form className='results-variety-form' onSubmit={this.resultsVarietyFormSubmit}>
-                    <fieldset>
+                    <fieldset className='results-variety-field'>
                         <legend>Enter Your Daily Calories:</legend>
                         <ul className='results-variety-list'>
                             <li className='results-variety-list-item'>
@@ -147,8 +147,9 @@ class ResultsVariety extends React.Component {
                             <br></br>
                             <NavLink to='/profile' className='nav_link'>View Your History</NavLink>
                             <br></br>
-                            <li className='results-variety-list-item'>
+                            <li className='results-variety-radio-item'>
                                 <label htmlFor='results-variety' className='results-variety-radio'>Select a Type of Workout:  </label>
+                                <br></br>
                                 <input
                                     type='radio'
                                     name='workout-type'

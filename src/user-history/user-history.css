@@ -3,16 +3,19 @@ h2 {
     font-size: 24px;
 }
 
-fieldset {
+.history-field {
     text-align: center;
 }
 
-.user-history-list { 
+.profile-list, .info-list { 
     list-style-type: none;
-	display: block; 
+	display: inline-block; 
     text-align: left; 
     padding: 0;
-    margin: 1em 0;
+}
+
+.profile-list {
+    margin: 0 1em 1em 1em;
 }
 
 .profile_nav, .profile_return {

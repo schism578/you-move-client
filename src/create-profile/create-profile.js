@@ -142,52 +142,48 @@ class CreateProfile extends React.Component {
                     <h2>Create a Profile</h2>
                 </header>
                 <form className='signup-form' onSubmit={this.handleFormSubmit}>
-                    <fieldset>
+                    <fieldset className='create-field'>
                         <legend>Enter Your Info:  </legend>
-                        <ul>
-                            <li>
-                                <label htmlFor='create-first-name'>First Name:  </label>
+                        <ul className='create-list'>
+                            <li className='create-list-item'>
                                 <input
                                     type='text'
-                                    name='create-first-name'
+                                    className='create-inputs'
                                     id='create-first-name'
                                     placeholder='First Name'
                                     onChange={(e) => this.updateNewUserData('first_name', e.target.value)}
                                 />
                             </li>
-                            <li>
-                                <label htmlFor='create-last-name'>Last Name:  </label>
+                            <li className='create-list-item'>
                                 <input
                                     type='text'
-                                    name='create-last-name'
+                                    className='create-inputs'
                                     id='create-last-name'
                                     placeholder='Last Name'
                                     onChange={(e) => this.updateNewUserData('last_name', e.target.value)}
                                 />
                             </li>
-                            <li>
-                                <label htmlFor='create-username'>Email:  </label>
+                            <li className='create-list-item'>
                                 <input
                                     type='text'
-                                    name='create-username'
+                                    className='create-inputs'
                                     id='create-username'
                                     placeholder='Email'
                                     onChange={(e) => this.updateNewUserData('email', e.target.value)}
                                 />
                             </li>
-                            <li>
-                                <label htmlFor='create-password'>Password:  </label>
+                            <li className='create-list-item'>
                                 <input
                                     type='password'
-                                    name='create-password'
+                                    className='create-inputs'
                                     id='create-password'
+                                    placeholder='Password: 8 character minimum'
                                     onChange={(e) => this.updateNewUserData('password', e.target.value)}
                                 />
                             </li>
-                            <li>
-                                <label htmlFor='gender'>Gender:  </label>
+                            <li className='create-list-item'>
                                 <select
-                                    name='gender'
+                                    className='create-inputs'
                                     id='gender'
                                     onChange={(e) => this.updateNewUserData('gender', e.target.value)}
                                 >
@@ -195,39 +191,36 @@ class CreateProfile extends React.Component {
                                     <option value='male'>Male</option>
                                 </select>
                             </li>
-                            <li>
-                                <label htmlFor='height'>Height:  </label>
+                            <li className='create-list-item'>
                                 <input
                                     type='number'
                                     id='height'
-                                    name='height'
-                                    placeholder='70 (inches)'
+                                    className='create-inputs'
+                                    placeholder='Height: 70 (inches)'
                                     min='1'
                                     step='1'
                                     onChange={(e) => this.updateNewUserData('height', e.target.value)}
                                     required
                                 />
                             </li>
-                            <li>
-                                <label htmlFor='weight'>Weight:  </label>
+                            <li className='create-list-item'>
                                 <input
                                     type='number'
                                     id='weight'
-                                    name='weight'
-                                    placeholder='170 (pounds)'
+                                    className='create-inputs'
+                                    placeholder='Weight: 170 (pounds)'
                                     min='1'
                                     step='1'
                                     onChange={(e) => this.updateNewUserData('weight', e.target.value)}
                                     required
                                 />
                             </li>
-                            <li>
-                                <label htmlFor='age'>Age:  </label>
+                            <li className='create-list-item'>
                                 <input
                                     type='number'
                                     id='age'
-                                    name='age'
-                                    placeholder='23 (years)'
+                                    className='create-inputs'
+                                    placeholder='Age: 23 (years)'
                                     min='1'
                                     step='1'
                                     onChange={(e) => this.updateNewUserData('age', e.target.value)}

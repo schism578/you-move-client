@@ -4,6 +4,7 @@ import config from '../config';
 import { withRouter } from 'react-router-dom';
 import TokenService from '../services/token-service';
 import AuthApiService from '../services/auth-api-service';
+import './login.css';
 
 class Login extends React.Component {
     static defaultProps = {
@@ -86,24 +87,24 @@ class Login extends React.Component {
         return (
             <div>
                 <form className='login-form' onSubmit={this.handleSubmitJwtAuth}>
-                    <fieldset>
+                    <fieldset className='login-field'>
                         <legend>Log In:</legend>
-                        <ul>
+                        <ul className='login-list'>
                             <li>
-                                <label htmlFor='login-username'>Email:  </label>
                                 <input
                                     type='text'
-                                    name='login-username'
+                                    className='login-creds'
                                     id='login-username'
+                                    placeholder='Email'
                                     onChange={(e) => this.initiateUserLogin('email', e.target.value)}
                                 />
                             </li>
                             <li>
-                                <label htmlFor='login-password'>Password:  </label>
                                 <input
                                     type='password'
-                                    name='login-password'
+                                    className='login-creds'
                                     id='login-password'
+                                    placeholder='Password'
                                     onChange={(e) => this.initiateUserLogin('password', e.target.value)}
                                 />
                             </li>

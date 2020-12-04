@@ -3,12 +3,23 @@ h2 {
     font-size: 24px;
 }
 
-fieldset {
+.login-field {
     text-align: center;
 }
 
-ul { 
+.login-list { 
 	display: inline-block; 
     text-align: left; 
-    margin: 0 auto;
+    padding: 0;
+}
+
+.login-creds {
+    min-width: 40vw;
+    height: 24px;
+    border-radius: 5px;
+    margin: 0.3em 0;
+}
+
+button {
+    height: 24px;
 }

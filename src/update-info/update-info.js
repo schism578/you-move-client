@@ -95,9 +95,9 @@ class UpdateInfo extends React.Component {
         return (
             <div>
                 <form className='update-info-form' onSubmit={this.handleFormSubmit}>
-                    <fieldset>
+                    <fieldset className='update-info-field'>
                         <legend>Enter Your Info:</legend>
-                        <ul>
+                        <ul className='update-info-list'>
                             <li>
                                 <label htmlFor='gender'>Gender:  </label>
                                 <select

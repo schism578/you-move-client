@@ -9,7 +9,6 @@ import UpdateProfile from './update-profile/update-profile';
 import UpdateInfo from './update-info/update-info';
 import ResultsPage from './results-page/results-page';
 import PrivateRoute from './utils/private-route';
-import PublicOnlyRoute from './utils/public-only-route';
 import Context from './context';
 import './App.css';
 
