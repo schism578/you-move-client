@@ -51,7 +51,6 @@ class App extends React.Component {
       calories: value,
       error: null,
     })
-    console.log(value)
   }
 
   handleProfilePage = () => {
@@ -111,7 +110,7 @@ class App extends React.Component {
       <>
         <Route exact path={'/'} component={HomePage}/>
           
-        <PublicOnlyRoute path={'/login'} component={ProfilePage}/>
+        <Route path={'/login'} component={ProfilePage}/>
 
         <PrivateRoute path={'/log'} component={EntryPage}/>
 

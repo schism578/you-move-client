@@ -53,7 +53,6 @@ class UpdateInfo extends React.Component {
             body: JSON.stringify(info),
         })
             .then(res => {
-                console.log(JSON.stringify(info))
                 return res.json()
             })
             .then(resJSON => this.props.handleUpdateInfo(resJSON))

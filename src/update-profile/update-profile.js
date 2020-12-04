@@ -50,7 +50,6 @@ class UpdateProfile extends React.Component {
             body: JSON.stringify(user),
         })
             .then(res => {
-                console.log(JSON.stringify(user))
                 return res.json()
             })
             .then(resJSON => this.props.handleUpdateProfile(resJSON))

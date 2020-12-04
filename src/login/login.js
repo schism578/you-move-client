@@ -57,11 +57,9 @@ class Login extends React.Component {
             },
         })
             .then(res => {
-                console.log(res)
                 return res.json()
             })
             .then(res => {
-                console.log(res)
                 this.context.setUserCalories(res)
             })
     }

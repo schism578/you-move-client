@@ -33,12 +33,10 @@ class ResultsVariety extends React.Component {
 
     resultsVarietyFormSubmit(e) {
         e.preventDefault();
-        console.log(this.state.selectedOption)
     }
 
     //POST user calories to the API 
     caloriePost = (id) => {
-        console.log({ calories: this.state.calories.value })
         return fetch(`${config.USER_API_ENDPOINT}/log/${id}`, {
             method: 'POST',
             headers: {
@@ -53,9 +51,6 @@ class ResultsVariety extends React.Component {
                 }
                 return resJson.json()
             })
-            .then(res => {
-                console.log(res)
-            })
     }
 
     handleFormSubmit = e => {
@@ -63,8 +58,6 @@ class ResultsVariety extends React.Component {
         const searchCalories = {
             calories: parseInt(this.state.calories.value),
         }
-        console.log({ searchCalories })
-
         if (searchCalories.calories === '0') {
             this.setState({
                 error: 'Please enter your daily calories'

@@ -76,7 +76,6 @@ class CreateProfile extends React.Component {
             bmr: parseInt(this.state.newUser.bmr.value),
         }
         newUser.bmr = ((this.calculateBMR() / 100).toFixed() * 100);
-        console.log(newUser)
         this.setState({ error: null })
         if (newUser.first_name === '0') {
             this.setState({
@@ -116,7 +115,6 @@ class CreateProfile extends React.Component {
         AuthApiService.postUser(newUser)
             .then(() => {
                 this.props.onRegistrationSuccess()
-                console.log(newUser.bmr)
                 this.context.setUserProfile(newUser)
                 this.props.history.push('/log')
             })
