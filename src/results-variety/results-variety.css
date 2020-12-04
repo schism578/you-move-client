@@ -5,6 +5,7 @@
 
 .results-variety-list {
     list-style-type: none;
+    padding: 0;
 }
 
 .results-variety-list-item {
