@@ -2,6 +2,7 @@ import React from 'react';
 import Context from '../context';
 import { withRouter } from 'react-router-dom';
 import AuthApiService from '../services/auth-api-service';
+import ValidationError from '../validation-error';
 import './create-profile.css'
 
 class CreateProfile extends React.Component {
@@ -62,6 +63,10 @@ class CreateProfile extends React.Component {
         })
     }
 
+    formFeedback = () => {
+        alert(`Profile created, ${this.context.userProfile.first_name}!`)
+    }
+
     handleFormSubmit = e => {
         e.preventDefault(e)
         const newUser = {
@@ -116,6 +121,7 @@ class CreateProfile extends React.Component {
             .then(() => {
                 this.props.onRegistrationSuccess()
                 this.context.setUserProfile(newUser)
+                this.formFeedback()
                 this.props.history.push('/log')
             })
     }
@@ -135,7 +141,70 @@ class CreateProfile extends React.Component {
         }
     }
 
+    validateFirstName = () => {
+        if (this.state.newUser.first_name.value.length === 0) {
+            return 'First name is required'
+        }
+    }
+
+    validateLastName = () => {
+        if (this.state.newUser.last_name.value.length === 0) {
+            return 'Last name is required'
+        }
+    }
+
+    validateEmail = () => {
+        if (this.state.newUser.email.value.length === 0) {
+            return 'Email is required'
+        }
+    }
+
+    validatePassword() {
+        const password = this.state.newUser.password.value.trim();
+        if (password.length === 0) {
+            return 'Password is required';
+        } else if (password.length < 8) {
+            return 'Password must be 8 characters long';
+        } else if (!password.match(/[0-9]/)) {
+            return 'Password must contain at least one number';
+        } else if (!password.match(/[$&+,:;=?@#|'<>.^*()%!-]/)) {
+            return 'Password must contain one special character';
+        }
+    }
+
+    validateGender = () => {
+        if (this.state.newUser.gender.value.length === 0) {
+            return 'Gender is required'
+        }
+    }
+
+    validateHeight = () => {
+        if (this.state.newUser.height.value.length === 0) {
+            return 'Height is required'
+        }
+    }
+
+    validateWeight = () => {
+        if (this.state.newUser.weight.value.length === 0) {
+            return 'Weight is required'
+        }
+    }
+
+    validateAge = () => {
+        if (this.state.newUser.age.value.length === 0) {
+            return 'Age is required'
+        }
+    }
+
     render() {
+        const firstNameError = this.validateFirstName();
+        const lastNameError = this.validateLastName();
+        const emailError = this.validateEmail();
+        const passwordError = this.validatePassword();
+        const genderError = this.validateGender();
+        const heightError = this.validateHeight();
+        const weightError = this.validateWeight();
+        const ageError = this.validateAge();
         return (
             <div>
                 <header role='banner'>
@@ -152,7 +221,11 @@ class CreateProfile extends React.Component {
                                     id='create-first-name'
                                     placeholder='First Name'
                                     onChange={(e) => this.updateNewUserData('first_name', e.target.value)}
+                                    required
                                 />
+                                {this.state.newUser.first_name.touched && (
+                                    <ValidationError message={firstNameError} />
+                                )}
                             </li>
                             <li className='create-list-item'>
                                 <input
@@ -161,7 +234,11 @@ class CreateProfile extends React.Component {
                                     id='create-last-name'
                                     placeholder='Last Name'
                                     onChange={(e) => this.updateNewUserData('last_name', e.target.value)}
+                                    required
                                 />
+                                {this.state.newUser.last_name.touched && (
+                                    <ValidationError message={lastNameError} />
+                                )}
                             </li>
                             <li className='create-list-item'>
                                 <input
@@ -170,26 +247,39 @@ class CreateProfile extends React.Component {
                                     id='create-username'
                                     placeholder='Email'
                                     onChange={(e) => this.updateNewUserData('email', e.target.value)}
+                                    required
                                 />
+                                {this.state.newUser.email.touched && (
+                                    <ValidationError message={emailError} />
+                                )}
                             </li>
                             <li className='create-list-item'>
                                 <input
                                     type='password'
                                     className='create-inputs'
                                     id='create-password'
-                                    placeholder='Password: 8 character minimum'
+                                    placeholder='Password: 8 characters, one caps, one number, one symbol'
                                     onChange={(e) => this.updateNewUserData('password', e.target.value)}
+                                    required
                                 />
+                                {this.state.newUser.password.touched && (
+                                    <ValidationError message={passwordError} />
+                                )}
                             </li>
                             <li className='create-list-item'>
                                 <select
                                     className='create-inputs'
                                     id='gender'
                                     onChange={(e) => this.updateNewUserData('gender', e.target.value)}
+                                    required
                                 >
+                                    <option value='' hidden>Select your gender</option>
                                     <option value='female'>Female</option>
                                     <option value='male'>Male</option>
                                 </select>
+                                {this.state.newUser.gender.touched && (
+                                    <ValidationError message={genderError} />
+                                )}
                             </li>
                             <li className='create-list-item'>
                                 <input
@@ -202,6 +292,9 @@ class CreateProfile extends React.Component {
                                     onChange={(e) => this.updateNewUserData('height', e.target.value)}
                                     required
                                 />
+                                {this.state.newUser.height.touched && (
+                                    <ValidationError message={heightError} />
+                                )}
                             </li>
                             <li className='create-list-item'>
                                 <input
@@ -214,6 +307,9 @@ class CreateProfile extends React.Component {
                                     onChange={(e) => this.updateNewUserData('weight', e.target.value)}
                                     required
                                 />
+                                {this.state.newUser.weight.touched && (
+                                    <ValidationError message={weightError} />
+                                )}
                             </li>
                             <li className='create-list-item'>
                                 <input
@@ -226,6 +322,9 @@ class CreateProfile extends React.Component {
                                     onChange={(e) => this.updateNewUserData('age', e.target.value)}
                                     required
                                 />
+                                {this.state.newUser.age.touched && (
+                                    <ValidationError message={ageError} />
+                                )}
                             </li>
                         </ul>
                         <br></br>
