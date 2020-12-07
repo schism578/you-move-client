@@ -1,6 +1,7 @@
 import React from 'react';
 import Context from '../context';
 import { withRouter } from 'react-router-dom';
+import TokenService from '../services/token-service';
 import AuthApiService from '../services/auth-api-service';
 import ValidationError from '../validation-error';
 import './create-profile.css'
@@ -118,7 +119,8 @@ class CreateProfile extends React.Component {
             })
         }
         AuthApiService.postUser(newUser)
-            .then(() => {
+            .then((res) => {
+                TokenService.saveAuthToken(res.authToken)
                 this.props.onRegistrationSuccess()
                 this.context.setUserProfile(newUser)
                 this.formFeedback()

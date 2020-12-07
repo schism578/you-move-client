@@ -3,6 +3,7 @@ import config from '../config';
 import Context from '../context';
 import { withRouter, NavLink } from 'react-router-dom';
 import TokenService from '../services/token-service';
+import ValidationError from '../validation-error';
 import './results-variety.css';
 //import PropTypes from 'prop-types';
 
@@ -35,41 +36,6 @@ class ResultsVariety extends React.Component {
         e.preventDefault();
     }
 
-    //POST user calories to the API 
-    caloriePost = (id) => {
-        return fetch(`${config.USER_API_ENDPOINT}/log/${id}`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${TokenService.getAuthToken()}`,
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({ calories: this.state.calories.value })
-        })
-            .then(resJson => {
-                if (!resJson.ok) {
-                    throw new Error(resJson.status)
-                }
-                return resJson.json()
-            })
-    }
-
-    handleFormSubmit = e => {
-        e.preventDefault(e)
-        const searchCalories = {
-            calories: parseInt(this.state.calories.value),
-        }
-        if (searchCalories.calories === '0') {
-            this.setState({
-                error: 'Please enter your daily calories'
-            })
-        } else {
-            this.caloriePost().then(() => {
-                this.getVideos(this.state.calories.value)
-                this.props.history.push('/results')
-            })
-        }
-    }
-
     updateUserCalories = (e) => {
         this.setState({
             calories: {
@@ -85,6 +51,25 @@ class ResultsVariety extends React.Component {
             }
         })
     }
+
+    //POST user calories to the API 
+    caloriePost = (id) => {
+        return fetch(`${config.USER_API_ENDPOINT}/log/${id}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({ calories: this.state.calories.value })
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error(response.error);
+            })
+    }
+
 
     formatQueryParams(params) {
         const queryItems = Object.keys(params)
@@ -123,33 +108,56 @@ class ResultsVariety extends React.Component {
             .catch(error => this.setState({ error }))
     }
 
+    handleFormSubmit = e => {
+        e.preventDefault(e)
+        const searchCalories = {
+            calories: parseInt(this.state.calories.value),
+        }
+        if (searchCalories.calories === '0') {
+            this.setState({
+                error: 'Please enter your daily calories'
+            })
+        } else {
+            this.caloriePost().then(() => {
+                this.getVideos(this.state.calories.value)
+                this.props.history.push('/results')
+            })
+        }
+    }
+
+    validateCalories = () => {
+        if (this.state.calories.value.length === 0) {
+            return 'An entry is required'
+        }
+    }
+
     render() {
+        const caloriesError = this.validateCalories()
         return (
             <div>
                 <form className='results-variety-form' onSubmit={this.resultsVarietyFormSubmit}>
                     <fieldset className='results-variety-field'>
                         <legend>Enter Your Daily Calories:</legend>
-                        <ul className='results-variety-list'>
-                            <li className='results-variety-list-item'>
+                            <span className='results-variety-list-item'>
                                 <label htmlFor='calorie-query'>Calories:  </label>
                                 <input
                                     type='number'
                                     id='calorie-query'
                                     className='calorie-query'
                                     placeholder='2000'
-                                    min='1'
-                                    step='1'
                                     onChange={e => this.updateUserCalories(e)}
                                     required
                                 />
-
-                            </li>
+                                {this.state.calories.touched && (
+                                    <ValidationError message={caloriesError} />
+                                )}
+                                </span>
                             <br></br>
-                            <NavLink to='/profile' className='nav_link'>View Your History</NavLink>
-                            <br></br>
-                            <li className='results-variety-radio-item'>
+                            <NavLink to='/profile' className='nav_link'>View Your Profile</NavLink>
+                            <ul className='results-variety-list'>
                                 <label htmlFor='results-variety' className='results-variety-radio'>Select a Type of Workout:  </label>
                                 <br></br>
+                                <li className='results-variety-radio-item'>
                                 <input
                                     type='radio'
                                     name='workout-type'
@@ -159,6 +167,8 @@ class ResultsVariety extends React.Component {
                                     onChange={this.onValueChange}
                                 />
                                 <label htmlFor='weights'>Weights</label>
+                                </li>
+                                <li className='results-variety-radio-item'>
                                 <input
                                     type='radio'
                                     name='workout-type'
@@ -168,6 +178,8 @@ class ResultsVariety extends React.Component {
                                     onChange={this.onValueChange}
                                 />
                                 <label htmlFor='cardio'>Cardio</label>
+                                </li>
+                                <li className='results-variety-radio-item'>
                                 <input
                                     type='radio'
                                     name='workout-type'
@@ -177,8 +189,8 @@ class ResultsVariety extends React.Component {
                                     onChange={this.onValueChange}
                                 />
                                 <label htmlFor='crossfit'>Crossfit</label>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
                     </fieldset>
                     <button type='submit' onClick={this.handleFormSubmit}>Submit</button>
                 </form>

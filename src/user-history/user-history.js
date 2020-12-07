@@ -11,7 +11,7 @@ class UserHistory extends React.Component {
 
   handleClickDelete = e => {
     e.preventDefault()
-    const userId = this.props.userProfile.user_id
+    const userId = this.context.userProfile.user_id
     const { history } = this.props;
 
     fetch(`${config.USER_API_ENDPOINT}/${this.props.userProfile.user_id}`, {

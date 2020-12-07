@@ -49,7 +49,6 @@ class Login extends React.Component {
         }
     }
 
-
     getCalories = (id) => {
         fetch(`${config.USER_API_ENDPOINT}/log/${id}`, {
             method: 'GET',
@@ -76,14 +75,14 @@ class Login extends React.Component {
             email: this.state.logUser.email.value,
             password: this.state.logUser.password.value,
         }
-        if (logUser.email === '0') {
+        if (logUser.email !== this.context.userProfile.email) {
             this.setState({
-                error: 'Please enter email address'
+                error: 'Please enter valid email address'
             })
         }
-        if (logUser.password === '0') {
+        if (logUser.password !== this.context.userProfile.password) {
             this.setState({
-                error: 'Please enter password'
+                error: 'Please enter valid password'
             })
         }
         AuthApiService.postLogin({
@@ -105,13 +104,13 @@ class Login extends React.Component {
 
     validateEmail = () => {
         if (this.state.logUser.email.value.length === 0) {
-          return 'Email is required'
+            return 'Email is required'
         }
     }
 
     validatePassword = () => {
         if (this.state.logUser.password.value.length === 0) {
-          return 'Password is required'
+            return 'Password is required'
         }
     }
 
@@ -131,10 +130,11 @@ class Login extends React.Component {
                                     id='login-username'
                                     placeholder='Email'
                                     onChange={(e) => this.initiateUserLogin('email', e.target.value)}
+                                    required
                                 />
                                 {this.state.logUser.email.touched && (
-                                <ValidationError message={emailError} />
-                            )}
+                                    <ValidationError message={emailError} />
+                                )}
                             </li>
                             <li>
                                 <input
@@ -143,10 +143,11 @@ class Login extends React.Component {
                                     id='login-password'
                                     placeholder='Password'
                                     onChange={(e) => this.initiateUserLogin('password', e.target.value)}
+                                    required
                                 />
                                 {this.state.logUser.password.touched && (
-                                <ValidationError message={passwordError} />
-                            )}
+                                    <ValidationError message={passwordError} />
+                                )}
                             </li>
                         </ul>
                         <br></br>

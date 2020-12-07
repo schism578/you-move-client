@@ -5,15 +5,23 @@
 
 .results-variety-list {
     list-style-type: none;
+    margin: 2em auto 0 auto;
     padding: 0;
+    text-align: center;
 }
 
 .results-variety-list-item {
-    margin: 0.5em auto;
+    margin: 1em auto;
 }
 
 .results-variety-radio {
     margin: 1em auto;
+}
+
+.results-variety-radio-item {
+    display: inline-block;
+    text-align: left;
+    margin: 0.5em auto 0 auto;
 }
 
 #workout-type {
@@ -24,6 +32,7 @@
 .nav_link {
     font-size: 18px;
     color: rgb(255, 225, 225);
+    margin: 2em auto 0.5em auto;
     display: flex; 
     justify-content: center;
 }
