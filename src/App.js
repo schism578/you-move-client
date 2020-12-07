@@ -95,7 +95,7 @@ class App extends React.Component {
   }
 
   handleDeleteUser = userId => {
-    const newUsers = this.state.userProfile.filter(up => up.id !== userId);
+    const newUsers = this.state.userProfile.filter(up => up.userId !== userId);
     this.setState({
       user: newUsers
     })
@@ -104,19 +104,19 @@ class App extends React.Component {
   renderRoutes() {
     return (
       <>
-        <Route exact path={'/'} component={HomePage}/>
-          
-        <Route path={'/login'} component={ProfilePage}/>
+        <Route exact path={'/'} component={HomePage} />
 
-        <PrivateRoute path={'/log'} component={EntryPage}/>
+        <Route path={'/login'} component={ProfilePage} />
 
-        <PrivateRoute path={'/profile'} component={UserHistory}/>
+        <PrivateRoute path={'/log'} component={EntryPage} />
 
-        <PrivateRoute path={'/update-profile'} component={UpdateProfile}/>
+        <PrivateRoute path={'/profile'} component={UserHistory} />
 
-        <PrivateRoute path={'/update-info'} component={UpdateInfo}/>
+        <PrivateRoute path={'/update-profile'} component={UpdateProfile} />
 
-        <PrivateRoute path={'/results'} component={ResultsPage}/>
+        <PrivateRoute path={'/update-info'} component={UpdateInfo} />
+
+        <PrivateRoute path={'/results'} component={ResultsPage} />
       </>
     )
   }

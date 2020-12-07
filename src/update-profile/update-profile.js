@@ -1,7 +1,7 @@
 import React from 'react';
 import config from '../config';
 import Context from '../context';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 import './update-profile.css'
 
 class UpdateProfile extends React.Component {

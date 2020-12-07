@@ -5,6 +5,7 @@ import './header.css';
 
 export default class Header extends Component {
     handleLogoutClick = () => {
+        //TokenService.clearAuthToken()
     }
 
     renderLogoutLink() {
@@ -14,22 +15,7 @@ export default class Header extends Component {
                     onClick={this.handleLogoutClick}
                     to='/login'>
                     Logout
-        </Link>
-            </div>
-        )
-    }
-
-    renderLoginLink() {
-        return (
-            <div className='Header__not-logged-in'>
-                <Link
-                    to='/login'>
-                    Register
-        </Link>
-                <Link
-                    to='/login'>
-                    Log In
-        </Link>
+                </Link>
             </div>
         )
     }
@@ -48,7 +34,7 @@ export default class Header extends Component {
                 </nav>
                 {TokenService.hasAuthToken()
                     ? this.renderLogoutLink()
-                    : this.renderLoginLink()}
+                    : ''}
             </div>
         )
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import config from '../config';
 import Context from '../context';
 import { NavLink, withRouter } from 'react-router-dom';
+import TokenService from '../services/token-service';
 import moment from 'moment';
 import Calendar from 'react-calendar';
 import './user-history.css';
@@ -14,10 +15,10 @@ class UserHistory extends React.Component {
     const userId = this.context.userProfile.user_id
     const { history } = this.props;
 
-    fetch(`${config.USER_API_ENDPOINT}/${this.props.userProfile.user_id}`, {
+    fetch(`${config.USER_API_ENDPOINT}/user/${userId}`, {
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer ${config.USER_API_TOKEN}`,
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`,
         'content-type': 'application/json'
       },
     })
