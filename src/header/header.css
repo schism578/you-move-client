@@ -1,0 +1,51 @@
+#app_icon {
+    width: 1.9em;
+    height: 1.4em;
+    border-radius: 35%;
+  }
+  
+.Header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.Header h1 a {
+text-decoration: none;
+}
+
+.Header a {
+color: #444;
+}
+
+.Header__logged-in, .Header__not-logged-in {
+    font-size: 18px;
+}
+
+.Header__not-logged-in {
+display: flex;
+flex-direction: column;
+}
+
+.Header__not-logged-in .Hyph {
+display: none;
+}
+
+/*@media screen and (min-width: 450px) {
+.Header {
+    align-items: baseline;
+}
+
+.Header h1 {
+    font-size: 22pt;
+}
+
+.Header__not-logged-in {
+    flex-direction: column;
+}
+
+.Header__not-logged-in .Hyph {
+    display: initial;
+}
+}*/

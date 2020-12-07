@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, Link, withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import ErrorBoundary from './error-boundary';
+import Header from './header/header';
 import HomePage from './home/home';
 import ProfilePage from './profile-page/profile-page';
 import EntryPage from './entry-page/entry-page';
@@ -27,11 +28,7 @@ class App extends React.Component {
       bmr: '',
       hasError: false,
     },
-    calories: {
-      hasError: false,
-      touched: false,
-      value: '',
-    },
+    calories: [],
     caloricDeficit: 0,
     results: {
       items: [],
@@ -56,11 +53,11 @@ class App extends React.Component {
     this.props.history.push('/login')
   }
 
-  handleCreateProfile() {
+  handleCreateProfile = () => {
     this.props.history.push('/log')
   }
 
-  handleLogin() {
+  handleLogin = () => {
     this.props.history.push('/log')
   }
 
@@ -72,20 +69,20 @@ class App extends React.Component {
     })
   }
 
-  handleUserHistory(e) {
+  handleUserHistory = (e) => {
     e.preventDefault()
     this.props.history.push('/log')
   }
 
-  handleUpdateProfile() {
+  handleUpdateProfile = () => {
     this.props.history.push('/profile')
   }
 
-  handleUpdateInfo() {
+  handleUpdateInfo = () => {
     this.props.history.push('/profile')
   }
 
-  handleResultsVariety(e) {
+  handleResultsVariety = (e) => {
     e.preventDefault()
     this.props.history.push('/results')
   }
@@ -149,9 +146,8 @@ class App extends React.Component {
           <ErrorBoundary>
             <>
               <header className='App__header'>
-                <img src={require('./images/youmove_icon.png')} alt='you move icon' id='app_icon' />
                 <h1>
-                  <Link to='/' style={{ color: 'white' }}>YouMove</Link>{' '}
+                  <Header />
                 </h1>
               </header>
               <main className='App__main'>{this.renderRoutes()}</main>

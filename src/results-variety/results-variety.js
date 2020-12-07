@@ -128,6 +128,8 @@ class ResultsVariety extends React.Component {
     validateCalories = () => {
         if (this.state.calories.value.length === 0) {
             return 'An entry is required'
+        } else if (this.state.calories.value > 8000) {
+            return 'That number is too large'
         }
     }
 

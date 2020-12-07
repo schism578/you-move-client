@@ -14,17 +14,3 @@ body {
 h1 {
   text-decoration: none;
 }
-
-#app_icon {
-  width: 2.4em;
-  height: 1.8em;
-  border-radius: 35%;
-}
-
-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
