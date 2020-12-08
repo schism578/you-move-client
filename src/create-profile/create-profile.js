@@ -65,7 +65,7 @@ class CreateProfile extends React.Component {
     }
 
     formFeedback = () => {
-        alert(`Profile created, ${this.context.userProfile.first_name}!`)
+        alert(`Profile created, ${this.context.userProfile.first_name}! Please log in below.`)
     }
 
     handleFormSubmit = e => {
@@ -120,11 +120,9 @@ class CreateProfile extends React.Component {
         }
         AuthApiService.postUser(newUser)
             .then((res) => {
-                TokenService.saveAuthToken(res.authToken)
                 this.props.onRegistrationSuccess()
                 this.context.setUserProfile(newUser)
                 this.formFeedback()
-                this.props.history.push('/log')
             })
     }
 

@@ -5,7 +5,7 @@ import './header.css';
 
 export default class Header extends Component {
     handleLogoutClick = () => {
-        //TokenService.clearAuthToken()
+        TokenService.clearAuthToken()
     }
 
     renderLogoutLink() {
@@ -28,8 +28,8 @@ export default class Header extends Component {
                     <h1>
                         <Link to='/' style={{ color: 'white' }}>
                             {' '}
-            YouMove
-          </Link>
+                            YouMove
+                        </Link>
                     </h1>
                 </nav>
                 {TokenService.hasAuthToken()
