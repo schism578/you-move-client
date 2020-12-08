@@ -15,7 +15,4 @@ Check out the app here!
 
 Screenshots:
 
-<img src='./src/home-page.png' alt='screenshot of home page'>
-<img src='./src/login-page.png' alt='screenshot of login page'>
-<img src='./src/entry-page.png' alt='screenshot of entry page'>
-<img src='./src/results-page.png' alt='screenshot of results page'>
+<img src='./src/home-page.png' alt='screenshot of home page'><img src='./src/login-page.png' alt='screenshot of login page'><img src='./src/entry-page.png' alt='screenshot of entry page'><img src='./src/results-page.png' alt='screenshot of results page'>
