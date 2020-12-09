@@ -20,9 +20,9 @@
 #### [API Repository](https://github.com/schism578/you-move-api.git)
 
 ### Technologies:  
-&nbsp;&nbsp;&nbsp;[React](https://reactjs.org/)
-&nbsp;&nbsp;&nbsp;[CSS](https://www.w3.org/Style/CSS/Overview.en.html)
-&nbsp;&nbsp;&nbsp;[YouTube API](https://developers.google.com/youtube/v3)
+&nbsp;&nbsp;&nbsp;[React](https://reactjs.org/)  
+&nbsp;&nbsp;&nbsp;[CSS](https://www.w3.org/Style/CSS/Overview.en.html)  
+&nbsp;&nbsp;&nbsp;[YouTube API](https://developers.google.com/youtube/v3)  
 &nbsp;&nbsp;&nbsp;[Jest](https://jestjs.io/)
 
 ### Screenshots:
