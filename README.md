@@ -16,10 +16,10 @@ Check out the app here!
 Screenshots:
 
 <p float='left'>
-<img src='./src/home-page.png' alt='screenshot of home page' width='225' height='325'>
-<img src='./src/login-page.png' alt='screenshot of login page' width='225' height='325'>
+<img src='./src/home-page.png' alt='screenshot of home page' width='300' height='400'>
+<img src='./src/login-page.png' alt='screenshot of login page' width='300' height='400'>
 </p>
 <p float='left'>
-<img src='./src/entry-page.png' alt='screenshot of entry page' width='225' height='325'>
-<img src='./src/results-page.png' alt='screenshot of results page' width='225' height='325'>
+<img src='./src/entry-page.png' alt='screenshot of entry page' width='300' height='400'>
+<img src='./src/results-page.png' alt='screenshot of results page' width='300' height='400'>
 </p>
