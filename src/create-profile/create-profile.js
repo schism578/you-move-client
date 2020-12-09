@@ -242,7 +242,7 @@ class CreateProfile extends React.Component {
                             </li>
                             <li className='create-list-item'>
                                 <input
-                                    type='text'
+                                    type='email'
                                     className='create-inputs'
                                     id='create-username'
                                     placeholder='Email'
