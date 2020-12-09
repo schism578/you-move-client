@@ -14,7 +14,7 @@
 
 ### [Check out the app here!](https://you-move-client-akjxxxxuu.vercel.app)
 &nbsp;Demo Credentials:  
-&nbsp;email: user@gmail.com
+&nbsp;email: user@gmail.com  
 &nbsp;password: Useracc3!
 #### [Client Repository](https://github.com/schism578/you-move-client.git)
 #### [API Repository](https://github.com/schism578/you-move-api.git)
