@@ -1,7 +1,8 @@
 <img src='./src/images/favicon.jpg' alt='app icon' width='150'/>
-YouMove  
 
-Quarantine Weight? Wait...
+# YouMove  
+
+## *Quarantine Weight? Wait...*
 
     Enter your details and get results. Powered by the YouTube API and your  
     determination, access workout videos based on your basal metabolic rate  
@@ -11,10 +12,9 @@ Quarantine Weight? Wait...
     off the amount of calories in excess of your BMR. The only way you lose  
     is by doing nothing. Your choice. YouMove.
 
-Check out the app here!
-    https://you-move-client-akjxxxxuu.vercel.app
+### [Check out the app here!] (https://you-move-client-akjxxxxuu.vercel.app)
 
-Screenshots:
+### Screenshots:
 
 <p float='left'>
 <img src='./src/home-page.png' alt='screenshot of home page' width='300' height='450'>
@@ -24,3 +24,4 @@ Screenshots:
 <img src='./src/entry-page.png' alt='screenshot of entry page' width='300' height='450'>
 <img src='./src/results-page.png' alt='screenshot of results page' width='300' height='450'>
 </p>
+
