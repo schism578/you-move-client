@@ -19,6 +19,12 @@
 #### [Client Repository](https://github.com/schism578/you-move-client.git)
 #### [API Repository](https://github.com/schism578/you-move-api.git)
 
+### Technologies:  
+#### [React](https://reactjs.org/)
+#### [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
+#### [YouTube API](https://developers.google.com/youtube/v3)
+#### [Jest](https://jestjs.io/)
+
 ### Screenshots:
 
 <p float='left'>
