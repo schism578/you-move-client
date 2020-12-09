@@ -1,14 +1,15 @@
 import React from 'react';
 import Context from '../context';
 import { withRouter } from 'react-router-dom';
-//import TokenService from '../services/token-service';
+import TokenService from '../services/token-service';
 import AuthApiService from '../services/auth-api-service';
 import ValidationError from '../validation-error';
 import './create-profile.css'
 
 class CreateProfile extends React.Component {
     static defaultProps = {
-        onRegistrationSuccess: () => { }
+        onRegistrationSuccess: () => { },
+        onLoginSuccess: () => { }
     }
     static contextType = Context;
 
@@ -65,7 +66,7 @@ class CreateProfile extends React.Component {
     }
 
     formFeedback = () => {
-        alert(`Profile created, ${this.context.userProfile.first_name}! Please log in below.`)
+        return `Profile created, ${this.context.userProfile.first_name}!`
     }
 
     handleFormSubmit = e => {
@@ -83,46 +84,14 @@ class CreateProfile extends React.Component {
         }
         newUser.bmr = ((this.calculateBMR() / 100).toFixed() * 100);
         this.setState({ error: null })
-        if (newUser.first_name === '0') {
-            this.setState({
-                error: 'Please enter first name'
-            })
-        }
-        if (newUser.last_name === '0') {
-            this.setState({
-                error: 'Please enter last name'
-            })
-        }
-        if (newUser.email === '0') {
-            this.setState({
-                error: 'Please enter email address'
-            })
-        }
-        if (newUser.password === '0') {
-            this.setState({
-                error: 'Please enter password'
-            })
-        }
-        if (newUser.gender === '0') {
-            this.setState({
-                error: 'Please select gender'
-            })
-        }
-        if (newUser.height === '0') {
-            this.setState({
-                error: 'Please enter height'
-            })
-        }
-        if (newUser.weight === '0') {
-            this.setState({
-                error: 'Please enter weight'
-            })
-        }
         AuthApiService.postUser(newUser)
-            .then((res) => {
+            .then(res => {
                 this.props.onRegistrationSuccess()
+                TokenService.saveAuthToken(res.authToken)
+                this.props.onLoginSuccess()
                 this.context.setUserProfile(newUser)
                 this.formFeedback()
+                this.props.history.push('/log')
             })
     }
 
@@ -258,10 +227,11 @@ class CreateProfile extends React.Component {
                                     type='password'
                                     className='create-inputs'
                                     id='create-password'
-                                    placeholder='Password: 8 characters, one caps, one number, one symbol'
+                                    placeholder='Password'
                                     onChange={(e) => this.updateNewUserData('password', e.target.value)}
                                     required
                                 />
+                                <div id='password-constraints'>Eight characters long, at least one number, one special character</div>
                                 {this.state.newUser.password.touched && (
                                     <ValidationError message={passwordError} />
                                 )}

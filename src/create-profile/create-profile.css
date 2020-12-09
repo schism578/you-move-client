@@ -28,6 +28,10 @@ legend, label, li {
     margin: 0.3em 0;
 }
 
+#password-constraints {
+    font-size: 12px;
+}
+
 button {
     height: 24px;
     margin: 10px auto;

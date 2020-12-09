@@ -35,4 +35,3 @@
 <img src='./src/images/entry-page.png' alt='screenshot of entry page' width='300' height='450'>
 <img src='./src/images/results-page.png' alt='screenshot of results page' width='300' height='450'>
 </p>
-

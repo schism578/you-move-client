@@ -4,7 +4,6 @@ import config from '../config';
 import { withRouter } from 'react-router-dom';
 import TokenService from '../services/token-service';
 import AuthApiService from '../services/auth-api-service';
-import ValidationError from '../validation-error';
 import './login.css';
 
 class Login extends React.Component {
@@ -65,26 +64,8 @@ class Login extends React.Component {
             })
     }
 
-    formFeedback = () => {
-        alert(`Login successful, ${this.context.userProfile.first_name}!`)
-    }
-
     handleSubmitJwtAuth = e => {
         e.preventDefault()
-        const logUser = {
-            email: this.state.logUser.email.value,
-            password: this.state.logUser.password.value,
-        }
-        if (logUser.email !== this.context.userProfile.email) {
-            this.setState({
-                error: 'Please enter valid email address'
-            })
-        }
-        if (logUser.password !== this.context.userProfile.password) {
-            this.setState({
-                error: 'Please enter valid password'
-            })
-        }
         AuthApiService.postLogin({
             email: this.state.logUser.email.value,
             password: this.state.logUser.password.value,
@@ -94,7 +75,6 @@ class Login extends React.Component {
                 this.props.onLoginSuccess()
                 this.context.setUserProfile(res.user)
                 this.getCalories(res.user.user_id)
-                this.formFeedback()
                 this.props.history.push('/log')
             })
             .catch(res => {
@@ -102,26 +82,14 @@ class Login extends React.Component {
             })
     }
 
-    validateEmail = () => {
-        if (this.state.logUser.email.value.length === 0) {
-            return 'Email is required'
-        }
-    }
-
-    validatePassword = () => {
-        if (this.state.logUser.password.value.length === 0) {
-            return 'Password is required'
-        }
-    }
-
     render() {
-        const emailError = this.validateEmail();
-        const passwordError = this.validatePassword();
         return (
             <div>
                 <form className='login-form' onSubmit={this.handleSubmitJwtAuth}>
                     <fieldset className='login-field'>
                         <legend>Log In:</legend>
+                        {this.state.error &&
+                            <h3 className='error'> {this.state.error} </h3>}
                         <ul className='login-list'>
                             <li>
                                 <input
@@ -132,9 +100,6 @@ class Login extends React.Component {
                                     onChange={(e) => this.initiateUserLogin('email', e.target.value)}
                                     required
                                 />
-                                {this.state.logUser.email.touched && (
-                                    <ValidationError message={emailError} />
-                                )}
                             </li>
                             <li>
                                 <input
@@ -145,9 +110,6 @@ class Login extends React.Component {
                                     onChange={(e) => this.initiateUserLogin('password', e.target.value)}
                                     required
                                 />
-                                {this.state.logUser.password.touched && (
-                                    <ValidationError message={passwordError} />
-                                )}
                             </li>
                         </ul>
                         <br></br>
