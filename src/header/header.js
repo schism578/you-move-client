@@ -24,7 +24,7 @@ export default class Header extends Component {
         return (
             <div>
                 <nav className='Header'>
-                    <img src={require('../images/youmove_icon.png')} alt='you move icon' id='app_icon' />
+                    <img src={require('../images/favicon.jpg')} alt='you move icon' id='app_icon' />
                     <h1>
                         <Link to='/' style={{ color: 'white' }}>
                             {' '}
