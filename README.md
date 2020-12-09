@@ -12,7 +12,7 @@
     off the amount of calories in excess of your BMR. The only way you lose  
     is by doing nothing. Your choice. YouMove.
 
-### [Check out the app here!] (https://you-move-client-akjxxxxuu.vercel.app)
+### [Check out the app here!](https://you-move-client-akjxxxxuu.vercel.app)
 
 ### Screenshots:
 
