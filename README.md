@@ -1,4 +1,4 @@
-<img src='./src/images/youmove_icon.png' alt='app icon' width='75' height='50'/>YouMove
+<img src='./src/images/favicon.jpg' alt='app icon' width='75' height='50'/>YouMove
 
 Quarantine Weight? Wait...
 
