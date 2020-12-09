@@ -1,4 +1,4 @@
-YouMove
+<img src='./src/images/youmove_icon.png' alt='app icon'/>YouMove
 
 Quarantine Weight? Wait...
 
