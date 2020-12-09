@@ -1,5 +1,5 @@
 <img src='./src/images/favicon.jpg' alt='app icon' width='150'/>
-YouMove
+YouMove  
 
 Quarantine Weight? Wait...
 
