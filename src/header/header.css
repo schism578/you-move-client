@@ -1,5 +1,5 @@
 #app_icon {
-    width: 1.5em;
+    width: 1.4em;
     height: 1em;
     border-radius: 35%;
 }
@@ -23,36 +23,10 @@
 
 .Header a {
     height: 1.4em;
+    font-size: 32px;
     color: #444;
 }
 
-.Header__logged-in, .Header__not-logged-in {
+.Header__logged-in {
     font-size: 18px;
 }
-
-.Header__not-logged-in {
-display: flex;
-flex-direction: column;
-}
-
-.Header__not-logged-in .Hyph {
-display: none;
-}
-
-/*@media screen and (min-width: 450px) {
-.Header {
-    align-items: baseline;
-}
-
-.Header h1 {
-    font-size: 22pt;
-}
-
-.Header__not-logged-in {
-    flex-direction: column;
-}
-
-.Header__not-logged-in .Hyph {
-    display: initial;
-}
-}*/

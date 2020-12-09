@@ -1,7 +1,7 @@
 import React from 'react';
 import Context from '../context';
 import { withRouter } from 'react-router-dom';
-import TokenService from '../services/token-service';
+//import TokenService from '../services/token-service';
 import AuthApiService from '../services/auth-api-service';
 import ValidationError from '../validation-error';
 import './create-profile.css'
