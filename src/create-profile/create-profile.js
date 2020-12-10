@@ -51,6 +51,7 @@ class CreateProfile extends React.Component {
                 value: '',
             },
         },
+        error: null,
     }
 
     updateNewUserData = (input, value) => {
@@ -63,10 +64,6 @@ class CreateProfile extends React.Component {
                 },
             },
         })
-    }
-
-    formFeedback = () => {
-        return `Profile created, ${this.context.userProfile.first_name}!`
     }
 
     handleFormSubmit = e => {
@@ -83,7 +80,6 @@ class CreateProfile extends React.Component {
             bmr: parseInt(this.state.newUser.bmr.value),
         }
         newUser.bmr = ((this.calculateBMR() / 100).toFixed() * 100);
-        this.setState({ error: null })
         AuthApiService.postUser(newUser)
             .then(res => {
                 this.props.onRegistrationSuccess()
@@ -92,6 +88,9 @@ class CreateProfile extends React.Component {
                 this.context.setUserProfile(newUser)
                 this.formFeedback()
                 this.props.history.push('/log')
+            })
+            .catch(res => {
+                this.setState({ error: res.error })
             })
     }
 
@@ -231,7 +230,7 @@ class CreateProfile extends React.Component {
                                     onChange={(e) => this.updateNewUserData('password', e.target.value)}
                                     required
                                 />
-                                <div id='password-constraints'>Eight characters long, at least one number, one special character</div>
+                                <div id='password-constraints'>Eight characters, one number, one special character</div>
                                 {this.state.newUser.password.touched && (
                                     <ValidationError message={passwordError} />
                                 )}

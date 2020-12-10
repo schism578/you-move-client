@@ -27,11 +27,11 @@ class UserHistory extends React.Component {
           return res.json().then(e => Promise.reject(e))
       })
       .then(() => {
-        history.push('/')
+        history.push('/login')
         this.context.deleteUser(userId)
       })
-      .catch(error => {
-        console.error({ error })
+      .catch(res => {
+        this.setState({ error: res.error })
       })
   }
 

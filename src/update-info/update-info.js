@@ -28,7 +28,8 @@ class UpdateInfo extends React.Component {
             bmr: {
                 value: '',
             },
-        }
+        },
+        error: null,
     }
 
     updateCurrentUserInfo = (input, value) => {

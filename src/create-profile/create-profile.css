@@ -16,7 +16,6 @@ legend, label, li {
 
 .create-list { 
 	display: inline-block; 
-    text-align: left; 
     margin: 0;
     padding: 0;
 }
@@ -28,8 +27,17 @@ legend, label, li {
     margin: 0.3em 0;
 }
 
+.error {
+    font-size: 14px;
+}
+
+#gender {
+    height: 30px;
+}
+
 #password-constraints {
     font-size: 12px;
+    color: lightgray;
 }
 
 button {

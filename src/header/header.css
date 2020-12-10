@@ -12,21 +12,32 @@
     height: 1.4em;
 }
 
-.Header h1 {
-    font-size: 40px;
-    margin: 0;
+
+
+.app-link {
+    height: 1.4em;
+    font-size: 32px;
+    color: white;
+}
+
+.app-link:hover {
+    cursor: pointer;
+    color: red;
 }
 
 .Header h1 a {
     text-decoration: none;
 }
 
-.Header a {
-    height: 1.4em;
-    font-size: 32px;
-    color: #444;
-}
-
 .Header__logged-in {
     font-size: 18px;
+}
+
+.logout-link {
+    color: white;
+}
+
+.logout-link:hover {
+    cursor: pointer;
+    color: red;
 }

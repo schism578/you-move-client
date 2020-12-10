@@ -26,6 +26,7 @@ class UpdateProfile extends React.Component {
                 value: '',
             },
         },
+        error: null,
     }
 
     updateProfileInfo = (input, value) => {

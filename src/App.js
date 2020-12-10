@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import ErrorBoundary from './error-boundary';
 import Header from './header/header';
 import HomePage from './home/home';
@@ -9,6 +9,7 @@ import UserHistory from './user-history/user-history';
 import UpdateProfile from './update-profile/update-profile';
 import UpdateInfo from './update-info/update-info';
 import ResultsPage from './results-page/results-page';
+import PublicOnlyRoute from './utils/public-only-route';
 import PrivateRoute from './utils/private-route';
 import Context from './context';
 import './App.css';
@@ -104,9 +105,9 @@ class App extends React.Component {
   renderRoutes() {
     return (
       <>
-        <Route exact path={'/'} component={HomePage} />
+        <PublicOnlyRoute exact path={'/'} component={HomePage} />
 
-        <Route path={'/login'} component={ProfilePage} />
+        <PublicOnlyRoute path={'/login'} component={ProfilePage} />
 
         <PrivateRoute path={'/log'} component={EntryPage} />
 
