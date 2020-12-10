@@ -38,6 +38,7 @@ export default class Header extends Component {
                             to='/'
                             className='app-link'
                         >
+                            {' '}
                             YouMove
                         </Link>
                     </h1>

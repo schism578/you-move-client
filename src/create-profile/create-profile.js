@@ -51,7 +51,6 @@ class CreateProfile extends React.Component {
                 value: '',
             },
         },
-        error: null,
     }
 
     updateNewUserData = (input, value) => {
@@ -67,7 +66,7 @@ class CreateProfile extends React.Component {
     }
 
     handleFormSubmit = e => {
-        e.preventDefault(e)
+        e.preventDefault()
         const newUser = {
             first_name: this.state.newUser.first_name.value,
             last_name: this.state.newUser.last_name.value,
@@ -86,7 +85,6 @@ class CreateProfile extends React.Component {
                 TokenService.saveAuthToken(res.authToken)
                 this.props.onLoginSuccess()
                 this.context.setUserProfile(newUser)
-                this.formFeedback()
                 this.props.history.push('/log')
             })
             .catch(res => {
@@ -181,6 +179,8 @@ class CreateProfile extends React.Component {
                 <form className='signup-form' onSubmit={this.handleFormSubmit}>
                     <fieldset className='create-field'>
                         <legend>Enter Your Info:  </legend>
+                        {this.state.error &&
+                            <h3 className='error'> {this.state.error} </h3>}
                         <ul className='create-list'>
                             <li className='create-list-item'>
                                 <input
@@ -226,7 +226,7 @@ class CreateProfile extends React.Component {
                                     type='password'
                                     className='create-inputs'
                                     id='create-password'
-                                    placeholder='Password'
+                                    placeholder='Password: 8 characters, one caps, one number, one symbol'
                                     onChange={(e) => this.updateNewUserData('password', e.target.value)}
                                     required
                                 />

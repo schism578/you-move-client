@@ -75,12 +75,20 @@ class App extends React.Component {
     this.props.history.push('/log')
   }
 
-  handleUpdateProfile = () => {
-    this.props.history.push('/profile')
+  handleUpdateProfile = profile => {
+    this.setState({
+      userProfile: profile,
+      error: null,
+    })
+    this.props.history.push('/update-profile')
   }
 
-  handleUpdateInfo = () => {
-    this.props.history.push('/profile')
+  handleUpdateInfo = profile => {
+    this.setState({
+      userProfile: profile,
+      error: null,
+    })
+    this.props.history.push('/update-info')
   }
 
   handleResultsVariety = (e) => {

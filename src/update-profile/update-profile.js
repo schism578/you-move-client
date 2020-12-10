@@ -2,6 +2,7 @@ import React from 'react';
 import config from '../config';
 import Context from '../context';
 import { withRouter, NavLink } from 'react-router-dom';
+import TokenService from '../services/token-service';
 import './update-profile.css'
 
 class UpdateProfile extends React.Component {
@@ -41,28 +42,28 @@ class UpdateProfile extends React.Component {
         })
     }
 
-    updateCurrentUser = user => {
-        fetch(`${config.USER_API_ENDPOINT}/user/:user_id`, {
+    updateCurrentUser = id => {
+        fetch(`${config.USER_API_ENDPOINT}/user/${id}`, {
             method: 'PATCH',
             headers: {
-                'Authorization': `Bearer ${config.USER_API_KEY}`,
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify({currentUser: this.state.currentUser}),
         })
             .then(res => {
                 return res.json()
             })
-            .then(resJSON => this.props.handleUpdateProfile(resJSON))
+            .then(res => this.props.handleUpdateProfile(res))
     }
 
     handleFormSubmit = e => {
         e.preventDefault(e)
         const currentUser = {
-            first_name: e.target.first_name.value,
-            last_name: e.target.last_name.value,
-            email: e.target.email.value,
-            password: e.target.password.value,
+            first_name: e.target.first_name,
+            last_name: e.target.last_name,
+            email: e.target.email,
+            password: e.target.password,
         }
         if (currentUser.first_name === '0') {
             this.setState({
@@ -105,7 +106,7 @@ class UpdateProfile extends React.Component {
                                     type='text'
                                     name='update-first-name'
                                     id='update-first-name'
-                                    value={first_name}
+                                    placeholder={first_name}
                                     onChange={(e) => this.updateProfileInfo('first_name', e.target.value)}
                                 />
                             </li>

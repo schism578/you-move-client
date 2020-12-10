@@ -2,6 +2,7 @@ import React from 'react';
 import config from '../config';
 import Context from '../context';
 import { NavLink, withRouter } from 'react-router-dom';
+import TokenService from '../services/token-service';
 import './update-info.css';
 
 class UpdateInfo extends React.Component {
@@ -44,14 +45,14 @@ class UpdateInfo extends React.Component {
         })
     }
 
-    updateUserInfo = info => {
-        fetch(`${config.USER_API_ENDPOINT}/user/:user_id`, {
+    updateUserInfo = id => {
+        fetch(`${config.USER_API_ENDPOINT}/user/${id}`, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${config.USER_API_KEY}`,
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(info),
+            body: JSON.stringify({currentInfo: this.state.currentInfo}),
         })
             .then(res => {
                 return res.json()

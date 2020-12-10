@@ -21,7 +21,6 @@ class ResultsVariety extends React.Component {
                 value: ''
             },
             selectedOption: '',
-            error: null,
         };
         this.onValueChange = this.onValueChange.bind(this);
         this.resultsVarietyFormSubmit = this.resultsVarietyFormSubmit.bind(this);
@@ -67,10 +66,9 @@ class ResultsVariety extends React.Component {
                 if (response.ok) {
                     return response.json();
                 }
-                throw new Error(response.error);
             })
-            .catch(error => {
-                this.setState({ error })
+            .catch(res => {
+                this.setState({ error: res.error })
             })
     }
 
@@ -109,8 +107,8 @@ class ResultsVariety extends React.Component {
                 this.context.handleVideoFetch(responseJson, caloricDeficit);
                 this.props.history.push('/results');
             })
-            .catch(error => {
-                this.setState({ error })
+            .catch(res => {
+                this.setState({ error: res.error })
             })
     }
 
@@ -124,10 +122,11 @@ class ResultsVariety extends React.Component {
                 error: 'Please enter your daily calories'
             })
         } else {
-            this.caloriePost().then(() => {
-                this.getVideos(this.state.calories.value)
-                this.props.history.push('/results')
-            })
+            this.caloriePost()
+                .then(() => {
+                    this.getVideos(this.state.calories.value)
+                    this.props.history.push('/results')
+                })
         }
     }
 
@@ -157,6 +156,8 @@ class ResultsVariety extends React.Component {
                                 required
                             />
                         </span>
+                        {this.state.error &&
+                            <h3 className='error'> {this.state.error} </h3>}
                         <br></br>
                         <ul className='results-variety-list'>
                             <label htmlFor='results-variety' className='results-variety-radio'>Select a Type of Workout:  </label>
