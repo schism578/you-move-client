@@ -46,7 +46,8 @@ class UpdateInfo extends React.Component {
     }
 
     updateUserInfo = (user_id) => {
-        return fetch(`${config.USER_API_ENDPOINT}/user/${user_id}`, {
+        const userId = this.context.userProfile.user_id
+        return fetch(`${config.USER_API_ENDPOINT}/user/${userId}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${TokenService.getAuthToken()}`,
