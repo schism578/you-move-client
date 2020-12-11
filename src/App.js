@@ -50,6 +50,12 @@ class App extends React.Component {
     })
   }
 
+  addNewUserCalories = value => {
+    this.setState({
+      calories: [...this.state.calories, value]
+    })
+  }
+
   handleProfilePage = () => {
     this.props.history.push('/login')
   }
@@ -80,7 +86,7 @@ class App extends React.Component {
       userProfile: profile,
       error: null,
     })
-    this.props.history.push('/update-profile')
+    this.props.history.push('/profile')
   }
 
   handleUpdateInfo = profile => {
@@ -88,7 +94,7 @@ class App extends React.Component {
       userProfile: profile,
       error: null,
     })
-    this.props.history.push('/update-info')
+    this.props.history.push('/profile')
   }
 
   handleResultsVariety = (e) => {
@@ -140,12 +146,15 @@ class App extends React.Component {
       deleteUser: this.handleDeleteUser,
       setUserProfile: this.setUserProfile,
       setUserCalories: this.setUserCalories,
+      addNewUserCalories: this.addNewUserCalories,
       updateNewUserData: this.updateNewUserData,
       handleCreateProfile: this.handleCreateProfile,
       handleLogin: this.handleLogin,
       handleUserForm: this.handleUserForm,
       handleCaloricDeficit: this.handleCaloricDeficit,
       handleUserHistory: this.handleUserHistory,
+      handleUpdateProfile: this.handleUpdateProfile,
+      handleUpdateInfo: this.handleUpdateInfo,
       handleVideoFetch: this.handleVideoFetch,
       handleResultsVariety: this.handleResultsVariety
     }

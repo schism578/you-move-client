@@ -42,8 +42,9 @@ class UpdateProfile extends React.Component {
         })
     }
 
-    updateCurrentUser = id => {
-        fetch(`${config.USER_API_ENDPOINT}/user/${id}`, {
+    updateCurrentUser = () => {
+        const userId = this.context.userProfile.user_id
+        return fetch(`${config.USER_API_ENDPOINT}/user/${userId}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${TokenService.getAuthToken()}`,
@@ -54,7 +55,7 @@ class UpdateProfile extends React.Component {
             .then(res => {
                 return res.json()
             })
-            .then(res => this.props.handleUpdateProfile(res))
+            .then(res => this.context.handleUpdateProfile(res))
     }
 
     handleFormSubmit = e => {
@@ -116,7 +117,7 @@ class UpdateProfile extends React.Component {
                                     type='text'
                                     name='update-last-name'
                                     id='update-last-name'
-                                    value={last_name}
+                                    placeholder={last_name}
                                     onChange={(e) => this.updateProfileInfo('last_name', e.target.value)}
                                 />
                             </li>
@@ -126,7 +127,7 @@ class UpdateProfile extends React.Component {
                                     type='text'
                                     name='update-username'
                                     id='update-username'
-                                    value={email}
+                                    placeholder={email}
                                     onChange={(e) => this.updateProfileInfo('email', e.target.value)}
                                 />
                             </li>
@@ -136,7 +137,7 @@ class UpdateProfile extends React.Component {
                                     type='password'
                                     name='update-password'
                                     id='update-password'
-                                    value={password}
+                                    placeholder={password}
                                     onChange={(e) => this.updateProfileInfo('password', e.target.value)}
                                 />
                             </li>

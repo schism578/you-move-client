@@ -45,9 +45,9 @@ class UpdateInfo extends React.Component {
         })
     }
 
-    updateUserInfo = id => {
-        fetch(`${config.USER_API_ENDPOINT}/user/${id}`, {
-            method: 'POST',
+    updateUserInfo = (user_id) => {
+        return fetch(`${config.USER_API_ENDPOINT}/user/${user_id}`, {
+            method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${TokenService.getAuthToken()}`,
                 'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ class UpdateInfo extends React.Component {
             .then(res => {
                 return res.json()
             })
-            .then(resJSON => this.props.handleUpdateInfo(resJSON))
+            .then(resJSON => this.context.handleUpdateInfo(resJSON))
     }
 
     handleFormSubmit = e => {
@@ -105,7 +105,7 @@ class UpdateInfo extends React.Component {
                                 <select
                                     name='gender'
                                     id='gender'
-                                    value={gender}
+                                    placeholder={gender}
                                     onChange={(e) => this.updateCurrentUserInfo('gender', e.target.value)}
                                 >
                                     <option value='female'>female</option>
@@ -120,7 +120,7 @@ class UpdateInfo extends React.Component {
                                     name='height'
                                     min='1'
                                     step='1'
-                                    value={height}
+                                    placeholder={height}
                                     onChange={(e) => this.updateCurrentUserInfo('height', e.target.value)}
                                     required
                                 />
@@ -133,7 +133,7 @@ class UpdateInfo extends React.Component {
                                     name='weight'
                                     min='1'
                                     step='1'
-                                    value={weight}
+                                    placeholder={weight}
                                     onChange={(e) => this.updateCurrentUserInfo('weight', e.target.value)}
                                     required
                                 />
@@ -146,7 +146,7 @@ class UpdateInfo extends React.Component {
                                     name='age'
                                     min='1'
                                     step='1'
-                                    value={age}
+                                    placeholder={age}
                                     onChange={(e) => this.updateCurrentUserInfo('age', e.target.value)}
                                     required
                                 />

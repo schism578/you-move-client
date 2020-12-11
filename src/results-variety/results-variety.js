@@ -53,8 +53,8 @@ class ResultsVariety extends React.Component {
     }
 
     //POST user calories to the API 
-    caloriePost = (id) => {
-        return fetch(`${config.USER_API_ENDPOINT}/log/${id}`, {
+    caloriePost = (user_id) => {
+        return fetch(`${config.USER_API_ENDPOINT}/log/${user_id}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${TokenService.getAuthToken()}`,
@@ -66,6 +66,10 @@ class ResultsVariety extends React.Component {
                 if (response.ok) {
                     return response.json();
                 }
+            })
+            .then(value => {
+                this.context.addNewUserCalories(value)
+                return value
             })
             .catch(res => {
                 this.setState({ error: res.error })

@@ -48,8 +48,8 @@ class Login extends React.Component {
         }
     }
 
-    getCalories = (id) => {
-        fetch(`${config.USER_API_ENDPOINT}/log/${id}`, {
+    getCalories = (user_id) => {
+        return fetch(`${config.USER_API_ENDPOINT}/log/${user_id}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${TokenService.getAuthToken()}`,
