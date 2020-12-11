@@ -35,7 +35,9 @@ export default class Header extends Component {
                     <img src={require('../images/favicon.jpg')} alt='you move icon' id='app_icon' />
                     <h1>
                         <Link 
-                            to='/'
+                            to={TokenService.hasAuthToken() 
+                                    ? '/log' 
+                                    : '/'}
                             className='app-link'
                         >
                             {' '}
