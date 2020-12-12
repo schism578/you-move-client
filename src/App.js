@@ -11,6 +11,7 @@ import UpdateInfo from './update-info/update-info';
 import ResultsPage from './results-page/results-page';
 import PublicOnlyRoute from './utils/public-only-route';
 import PrivateRoute from './utils/private-route';
+import TokenService from './services/token-service';
 import Context from './context';
 import './App.css';
 
@@ -109,6 +110,10 @@ class App extends React.Component {
     })
   }
 
+  handleLogoutClick = () => {
+    TokenService.clearAuthToken()
+}
+
   handleDeleteUser = userId => {
     const newUsers = this.state.userProfile.filter(up => up.userId !== userId);
     this.setState({
@@ -156,7 +161,9 @@ class App extends React.Component {
       handleUpdateProfile: this.handleUpdateProfile,
       handleUpdateInfo: this.handleUpdateInfo,
       handleVideoFetch: this.handleVideoFetch,
-      handleResultsVariety: this.handleResultsVariety
+      handleResultsVariety: this.handleResultsVariety,
+      handleLogoutClick: this.handleLogoutClick,
+      handleDeleteUser: this.handleDeleteUser,
     }
     return (
       <Context.Provider value={value}>
