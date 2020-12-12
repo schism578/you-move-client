@@ -52,7 +52,7 @@ class UserHistory extends React.Component {
               <li>Last Name:  {last_name}</li>
               <li>Email:  {email}</li>
               <li>Password:  </li>
-              <NavLink to='/update-profile' className='profile_nav'>Edit</NavLink>
+              {/*<NavLink to='/update-profile' className='profile_nav'>Edit</NavLink>*/}
             </ul>
             <ul className='info-list'>
               <li>Gender:  {gender}</li>
@@ -60,7 +60,7 @@ class UserHistory extends React.Component {
               <li>Weight:  {weight}</li>
               <li>Age:  {age}</li>
               <li>BMR: {bmr}</li>
-              <NavLink to='/update-info' className='profile_nav'>Edit</NavLink>
+              {/*<NavLink to='/update-info' className='profile_nav'>Edit</NavLink>*/}
             </ul>
           </fieldset>
         </form>

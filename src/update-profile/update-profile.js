@@ -42,7 +42,18 @@ class UpdateProfile extends React.Component {
         })
     }
 
+    getReqBody = (currentUser) => {
+        const reqBody = {}
+        for (let user in currentUser) {
+            if (currentUser[user].value) {
+                reqBody[user] = currentUser[user]
+            }
+        }
+    }
+
     updateCurrentUser = () => {
+        console.log(this.state.currentUser.first_name.value)
+
         const userId = this.context.userProfile.user_id
         return fetch(`${config.USER_API_ENDPOINT}/user/${userId}`, {
             method: 'PATCH',
@@ -50,7 +61,7 @@ class UpdateProfile extends React.Component {
                 'Authorization': `Bearer ${TokenService.getAuthToken()}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({currentUser: this.state.currentUser}),
+            body: JSON.stringify(this.getReqBody()),
         })
             .then(res => {
                 return res.json()
