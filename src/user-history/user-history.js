@@ -12,7 +12,7 @@ class UserHistory extends React.Component {
 
   handleClickDelete = e => {
     e.preventDefault()
-    const userId = this.context.userProfile.user_id
+    const userId = this.context.userProfile.user_id.value
     const { history } = this.props;
 
     fetch(`${config.USER_API_ENDPOINT}/user/${userId}`, {
@@ -27,8 +27,8 @@ class UserHistory extends React.Component {
           return res.json().then(e => Promise.reject(e))
       })
       .then(() => {
-        history.push('/login')
         this.context.deleteUser(userId)
+        history.push('/login')
       })
       .catch(res => {
         this.setState({ error: res.error })

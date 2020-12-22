@@ -71,7 +71,7 @@ class CreateProfile extends React.Component {
     handleFormSubmit = e => {
         e.preventDefault()
         const newUser = {
-            user_id: this.state.newUser.user_id,
+            user_id: this.state.newUser.user_id.value,
             first_name: this.state.newUser.first_name.value,
             last_name: this.state.newUser.last_name.value,
             email: this.state.newUser.email.value,
@@ -184,7 +184,7 @@ class CreateProfile extends React.Component {
                     <fieldset className='create-field'>
                         <legend>Enter Your Info:  </legend>
                         {this.state.error &&
-                            <h3 className='error'> {this.state.error.message} </h3>}
+                            <h3 className='error'> {this.state.error} </h3>}
                         <ul className='create-list'>
                             <li className='create-list-item'>
                                 <input

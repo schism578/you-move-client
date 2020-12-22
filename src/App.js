@@ -12,6 +12,7 @@ import ResultsPage from './results-page/results-page';
 import PublicOnlyRoute from './utils/public-only-route';
 import PrivateRoute from './utils/private-route';
 import TokenService from './services/token-service';
+import AuthApiService from './services/auth-api-service';
 import Context from './context';
 import './App.css';
 
@@ -35,6 +36,17 @@ class App extends React.Component {
     results: {
       items: [],
     },
+  }
+
+  componentDidMount(user) {
+    if (TokenService.hasAuthToken()) {
+      AuthApiService.getUser(user)
+        .then(
+          (user) => {
+            this.setUserProfile(user);
+            this.setUserCalories(user);
+          })
+    }
   }
 
   setUserProfile = profile => {
@@ -112,7 +124,7 @@ class App extends React.Component {
 
   handleLogoutClick = () => {
     TokenService.clearAuthToken()
-}
+  }
 
   handleDeleteUser = userId => {
     const newUsers = this.state.userProfile.filter(up => up.userId !== userId);

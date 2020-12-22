@@ -10,7 +10,7 @@ export default class UserResultsInfo extends React.Component {
         const caloricDeficit = this.context.caloricDeficit
         return (
             <div>
-                <p className='user-results-info'>{first_name} your BMR is {bmr} calories. Based on your entered
+                <p className='user-results-info'>{first_name}, your BMR is {bmr} calories. Based on your entered
                 daily calories, you want to have a caloric deficit of {caloricDeficit} {''}
                 calories. Here are the results based on your caloric deficit:</p>
             </div>
