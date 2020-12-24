@@ -12,10 +12,9 @@ class UserHistory extends React.Component {
 
   handleClickDelete = e => {
     e.preventDefault()
-    const userId = this.context.userProfile.user_id.value
     const { history } = this.props;
 
-    fetch(`${config.USER_API_ENDPOINT}/user/${userId}`, {
+    fetch(`${config.USER_API_ENDPOINT}/user`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${TokenService.getAuthToken()}`,
@@ -27,7 +26,7 @@ class UserHistory extends React.Component {
           return res.json().then(e => Promise.reject(e))
       })
       .then(() => {
-        this.context.deleteUser(userId)
+        TokenService.clearAuthToken()
         history.push('/login')
       })
       .catch(res => {

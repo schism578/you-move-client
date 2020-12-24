@@ -184,7 +184,7 @@ class CreateProfile extends React.Component {
                     <fieldset className='create-field'>
                         <legend>Enter Your Info:  </legend>
                         {this.state.error &&
-                            <h3 className='error'> {this.state.error} </h3>}
+                            <h3 className='error'> {this.state.error.message} </h3>}
                         <ul className='create-list'>
                             <li className='create-list-item'>
                                 <input

@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import config from './config';
 import ErrorBoundary from './error-boundary';
 import Header from './header/header';
 import HomePage from './home/home';
@@ -38,13 +39,13 @@ class App extends React.Component {
     },
   }
 
-  componentDidMount(user) {
+  componentDidMount() {
     if (TokenService.hasAuthToken()) {
-      AuthApiService.getUser(user)
+      AuthApiService.getUser()
         .then(
           (user) => {
             this.setUserProfile(user);
-            this.setUserCalories(user);
+            this.getCalories(user.user_id)
           })
     }
   }
@@ -55,6 +56,22 @@ class App extends React.Component {
       error: null,
     })
   }
+
+  getCalories = (user_id) => {
+    return fetch(`${config.USER_API_ENDPOINT}/log/${user_id}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${TokenService.getAuthToken()}`,
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(res => {
+            return res.json()
+        })
+        .then(res => {
+            this.setUserCalories(res)
+        })
+}
 
   setUserCalories = value => {
     this.setState({
@@ -162,6 +179,7 @@ class App extends React.Component {
       newUser: this.state.newUser,
       deleteUser: this.handleDeleteUser,
       setUserProfile: this.setUserProfile,
+      getCalories: this.getCalories,
       setUserCalories: this.setUserCalories,
       addNewUserCalories: this.addNewUserCalories,
       updateNewUserData: this.updateNewUserData,

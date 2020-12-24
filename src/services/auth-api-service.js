@@ -30,14 +30,13 @@ const AuthApiService = {
           : res.json()
       )
   },
-  getUser(user) {
+  getUser() {
     return fetch(`${config.USER_API_ENDPOINT}/user`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
         'Authorization': `bearer ${TokenService.getAuthToken()}`
       },
-      body: JSON.stringify(user),
     })
       .then(res =>
         (!res.ok)

@@ -1,6 +1,5 @@
 import React from 'react';
 import Context from '../context';
-import config from '../config';
 import { withRouter } from 'react-router-dom';
 import TokenService from '../services/token-service';
 import AuthApiService from '../services/auth-api-service';
@@ -40,29 +39,13 @@ class Login extends React.Component {
         })
     }
 
-    componentDidUpdate() {
+    /*componentDidUpdate() {
         if (`${this.state.user_id}` !== `${this.context.userProfile.user_id}`) {
             this.setState({
                 user_id: this.context.userProfile.user_id
             })
         }
-    }
-
-    getCalories = (user_id) => {
-        return fetch(`${config.USER_API_ENDPOINT}/log/${user_id}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${TokenService.getAuthToken()}`,
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(res => {
-                return res.json()
-            })
-            .then(res => {
-                this.context.setUserCalories(res)
-            })
-    }
+    }*/
 
     handleSubmitJwtAuth = e => {
         e.preventDefault()
@@ -74,7 +57,7 @@ class Login extends React.Component {
                 TokenService.saveAuthToken(res.authToken)
                 this.props.onLoginSuccess()
                 this.context.setUserProfile(res.user)
-                this.getCalories(res.user.user_id)
+                this.context.getCalories(res.user.user_id)
                 this.props.history.push('/log')
             })
             .catch(res => {
@@ -89,7 +72,7 @@ class Login extends React.Component {
                     <fieldset className='login-field'>
                         <legend>Log In:</legend>
                         {this.state.error &&
-                            <h3 className='error'> {this.state.error} </h3>}
+                            <h3 className='error'> {this.state.error.message} </h3>}
                         <ul className='login-list'>
                             <li>
                                 <input
