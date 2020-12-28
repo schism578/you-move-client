@@ -34,8 +34,8 @@ const AuthApiService = {
     return fetch(`${config.USER_API_ENDPOINT}/user`, {
       method: 'GET',
       headers: {
-        'content-type': 'application/json',
-        'Authorization': `bearer ${TokenService.getAuthToken()}`
+        'Authorization': `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json'
       },
     })
       .then(res =>
