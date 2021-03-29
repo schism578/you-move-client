@@ -1,4 +1,4 @@
-/*import React from 'react';
+import React from 'react';
 import config from '../config';
 import Context from '../context';
 //import TokenService from '../services/token-service';
@@ -97,10 +97,10 @@ export default class FoodForm extends React.Component {
                             if (data.foods[0].foodNutrients.nutrientId === 1008) {
                                 return data.foods[0].foodNutrients.nutrientName.value
                             }
-                            //let servingSize = data.servingSize;
-                            //let itemCalories = (this.state.newFood.serving * 28.35)/servingSize * calories;
-                            //this.context.handleAddCalories(itemCalories)
-                .catch(error => this.setState({ error }))}
+                            let servingSize = data.servingSize;
+                            let itemCalories = (this.state.newFood.serving * 28.35)/servingSize * calories;
+                            this.context.handleAddCalories(itemCalories)
+                        .catch(error => this.setState({ error }))}
 
     render() {
         return (
@@ -139,4 +139,4 @@ export default class FoodForm extends React.Component {
     }
 }
 
-FoodForm.propTypes = {}*/
+//FoodForm.propTypes = {}
